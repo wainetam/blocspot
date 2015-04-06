@@ -1,0 +1,491 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		123E776A5557843C3588AB40 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA75CCA703F4820C0F6B9FF /* libPods.a */; };
+		B67CFF2A1AD22D0F00151FEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF291AD22D0F00151FEA /* main.m */; };
+		B67CFF2D1AD22D0F00151FEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF2C1AD22D0F00151FEA /* AppDelegate.m */; };
+		B67CFF301AD22D0F00151FEA /* Blocspot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF2E1AD22D0F00151FEA /* Blocspot.xcdatamodeld */; };
+		B67CFF331AD22D0F00151FEA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF321AD22D0F00151FEA /* ViewController.m */; };
+		B67CFF381AD22D0F00151FEA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67CFF371AD22D0F00151FEA /* Images.xcassets */; };
+		B67CFF471AD22D1000151FEA /* BlocspotTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF461AD22D1000151FEA /* BlocspotTests.m */; };
+		B67CFF511AD22DCD00151FEA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B67CFF501AD22DCD00151FEA /* MapKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B67CFF411AD22D0F00151FEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B67CFF1C1AD22D0F00151FEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B67CFF231AD22D0F00151FEA;
+			remoteInfo = Blocspot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0DA75CCA703F4820C0F6B9FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4ABDEA9126646839DF36C8F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7C9E65C0DBC431A86CAB1F16 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B67CFF241AD22D0F00151FEA /* Blocspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67CFF281AD22D0F00151FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B67CFF291AD22D0F00151FEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B67CFF2B1AD22D0F00151FEA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B67CFF2C1AD22D0F00151FEA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B67CFF2F1AD22D0F00151FEA /* Blocspot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blocspot.xcdatamodel; sourceTree = "<group>"; };
+		B67CFF311AD22D0F00151FEA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B67CFF321AD22D0F00151FEA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B67CFF371AD22D0F00151FEA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		B67CFF401AD22D0F00151FEA /* BlocspotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlocspotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B67CFF451AD22D1000151FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B67CFF461AD22D1000151FEA /* BlocspotTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlocspotTests.m; sourceTree = "<group>"; };
+		B67CFF501AD22DCD00151FEA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B67CFF211AD22D0F00151FEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67CFF511AD22DCD00151FEA /* MapKit.framework in Frameworks */,
+				123E776A5557843C3588AB40 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67CFF3D1AD22D0F00151FEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		32FF4B695C41759A91903BC4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DA75CCA703F4820C0F6B9FF /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C8CCB9EC80DBF6C4B39C7A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4ABDEA9126646839DF36C8F6 /* Pods.debug.xcconfig */,
+				7C9E65C0DBC431A86CAB1F16 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B67CFF1B1AD22D0F00151FEA = {
+			isa = PBXGroup;
+			children = (
+				B67CFF501AD22DCD00151FEA /* MapKit.framework */,
+				B67CFF261AD22D0F00151FEA /* Blocspot */,
+				B67CFF431AD22D1000151FEA /* BlocspotTests */,
+				B67CFF251AD22D0F00151FEA /* Products */,
+				7C8CCB9EC80DBF6C4B39C7A4 /* Pods */,
+				32FF4B695C41759A91903BC4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B67CFF251AD22D0F00151FEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF241AD22D0F00151FEA /* Blocspot.app */,
+				B67CFF401AD22D0F00151FEA /* BlocspotTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B67CFF261AD22D0F00151FEA /* Blocspot */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF2B1AD22D0F00151FEA /* AppDelegate.h */,
+				B67CFF2C1AD22D0F00151FEA /* AppDelegate.m */,
+				B67CFF311AD22D0F00151FEA /* ViewController.h */,
+				B67CFF321AD22D0F00151FEA /* ViewController.m */,
+				B67CFF371AD22D0F00151FEA /* Images.xcassets */,
+				B67CFF2E1AD22D0F00151FEA /* Blocspot.xcdatamodeld */,
+				B67CFF271AD22D0F00151FEA /* Supporting Files */,
+			);
+			path = Blocspot;
+			sourceTree = "<group>";
+		};
+		B67CFF271AD22D0F00151FEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF281AD22D0F00151FEA /* Info.plist */,
+				B67CFF291AD22D0F00151FEA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B67CFF431AD22D1000151FEA /* BlocspotTests */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF461AD22D1000151FEA /* BlocspotTests.m */,
+				B67CFF441AD22D1000151FEA /* Supporting Files */,
+			);
+			path = BlocspotTests;
+			sourceTree = "<group>";
+		};
+		B67CFF441AD22D1000151FEA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF451AD22D1000151FEA /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B67CFF231AD22D0F00151FEA /* Blocspot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B67CFF4A1AD22D1000151FEA /* Build configuration list for PBXNativeTarget "Blocspot" */;
+			buildPhases = (
+				C2E0A824B6A1CB2E5ED17B52 /* Check Pods Manifest.lock */,
+				B67CFF201AD22D0F00151FEA /* Sources */,
+				B67CFF211AD22D0F00151FEA /* Frameworks */,
+				B67CFF221AD22D0F00151FEA /* Resources */,
+				6C08A81526568480FD64603D /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Blocspot;
+			productName = Blocspot;
+			productReference = B67CFF241AD22D0F00151FEA /* Blocspot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B67CFF3F1AD22D0F00151FEA /* BlocspotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B67CFF4D1AD22D1000151FEA /* Build configuration list for PBXNativeTarget "BlocspotTests" */;
+			buildPhases = (
+				B67CFF3C1AD22D0F00151FEA /* Sources */,
+				B67CFF3D1AD22D0F00151FEA /* Frameworks */,
+				B67CFF3E1AD22D0F00151FEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B67CFF421AD22D0F00151FEA /* PBXTargetDependency */,
+			);
+			name = BlocspotTests;
+			productName = BlocspotTests;
+			productReference = B67CFF401AD22D0F00151FEA /* BlocspotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B67CFF1C1AD22D0F00151FEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = Bloc;
+				TargetAttributes = {
+					B67CFF231AD22D0F00151FEA = {
+						CreatedOnToolsVersion = 6.2;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					B67CFF3F1AD22D0F00151FEA = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = B67CFF231AD22D0F00151FEA;
+					};
+				};
+			};
+			buildConfigurationList = B67CFF1F1AD22D0F00151FEA /* Build configuration list for PBXProject "Blocspot" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B67CFF1B1AD22D0F00151FEA;
+			productRefGroup = B67CFF251AD22D0F00151FEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B67CFF231AD22D0F00151FEA /* Blocspot */,
+				B67CFF3F1AD22D0F00151FEA /* BlocspotTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B67CFF221AD22D0F00151FEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67CFF381AD22D0F00151FEA /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67CFF3E1AD22D0F00151FEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C08A81526568480FD64603D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C2E0A824B6A1CB2E5ED17B52 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B67CFF201AD22D0F00151FEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67CFF2D1AD22D0F00151FEA /* AppDelegate.m in Sources */,
+				B67CFF301AD22D0F00151FEA /* Blocspot.xcdatamodeld in Sources */,
+				B67CFF331AD22D0F00151FEA /* ViewController.m in Sources */,
+				B67CFF2A1AD22D0F00151FEA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B67CFF3C1AD22D0F00151FEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B67CFF471AD22D1000151FEA /* BlocspotTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B67CFF421AD22D0F00151FEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B67CFF231AD22D0F00151FEA /* Blocspot */;
+			targetProxy = B67CFF411AD22D0F00151FEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B67CFF481AD22D1000151FEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B67CFF491AD22D1000151FEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B67CFF4B1AD22D1000151FEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4ABDEA9126646839DF36C8F6 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Blocspot/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B67CFF4C1AD22D1000151FEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C9E65C0DBC431A86CAB1F16 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Blocspot/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B67CFF4E1AD22D1000151FEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BlocspotTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocspot.app/Blocspot";
+			};
+			name = Debug;
+		};
+		B67CFF4F1AD22D1000151FEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = BlocspotTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Blocspot.app/Blocspot";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B67CFF1F1AD22D0F00151FEA /* Build configuration list for PBXProject "Blocspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67CFF481AD22D1000151FEA /* Debug */,
+				B67CFF491AD22D1000151FEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B67CFF4A1AD22D1000151FEA /* Build configuration list for PBXNativeTarget "Blocspot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67CFF4B1AD22D1000151FEA /* Debug */,
+				B67CFF4C1AD22D1000151FEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B67CFF4D1AD22D1000151FEA /* Build configuration list for PBXNativeTarget "BlocspotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B67CFF4E1AD22D1000151FEA /* Debug */,
+				B67CFF4F1AD22D1000151FEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B67CFF2E1AD22D0F00151FEA /* Blocspot.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B67CFF2F1AD22D0F00151FEA /* Blocspot.xcdatamodel */,
+			);
+			currentVersion = B67CFF2F1AD22D0F00151FEA /* Blocspot.xcdatamodel */;
+			path = Blocspot.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B67CFF1C1AD22D0F00151FEA /* Project object */;
+}
