@@ -87,8 +87,10 @@
     // TBD
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void) tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
+//    cell.resultItem = poi;
+    
     cell.backgroundColor = [UIColor yellowColor];
     // TBD
 //    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
@@ -130,9 +132,16 @@
     
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
-    cell.poi = [DataSource sharedInstance].poiResults[indexPath.row];
+    cell.resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
+//    cell.backgroundColor = [UIColor yellowColor];
 
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    POI *resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
+    
+    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];
 }
 
 #pragma mark - Handling key-value notifications

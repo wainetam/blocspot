@@ -25,12 +25,23 @@
     
     [DataSource sharedInstance];
     
+    // QUESTION: how to create a singleton for navVC? navVC and tabbarcontroller coexist?
     UINavigationController *navVC = [[UINavigationController alloc] init];
 
     MapViewController *mapVC = [[MapViewController alloc] init];
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+
     ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
     
+    NSArray *tabArray = @[mapVC, resultsVC];
+    
+//    [tabBarVC setViewControllers:tabArray];
+    
+    
+    
+    
 //    [navVC setViewControllers:@[resultsVC] animated:YES];
+
     [navVC setViewControllers:@[mapVC] animated:YES];
     
 //    if (![DataSource sharedInstance].accessToken) {
@@ -46,8 +57,10 @@
 //        [navVC setViewControllers:@[imagesVC] animated:YES];
 //    }
     
-    self.window.rootViewController = navVC;
     
+//    self.window.rootViewController = tabBarVC;
+    self.window.rootViewController = navVC;
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

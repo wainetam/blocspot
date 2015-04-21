@@ -20,7 +20,7 @@
 @property (nonatomic, strong) MKLocalSearch *localSearch;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic) CLLocationCoordinate2D userLocation;
-@property (nonatomic, strong) NSArray *places;
+@property (nonatomic, strong) NSMutableArray *poiResults;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic) MKCoordinateRegion boundingRegion;
 @property (nonatomic, strong) ResultsTableViewController *tableVC;
@@ -28,6 +28,12 @@
 @end
 
 @implementation MapViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    self.tableVC = [[ResultsTableViewController alloc] init];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -60,8 +66,6 @@
     self.searchBar.delegate = self;
 
     [self.view addSubview:self.searchBar];
-    
-    self.tableVC = [[ResultsTableViewController alloc] init]; // QUESTION where do I init this?
 
 }
 
@@ -70,13 +74,15 @@
     [super viewDidAppear:animated];
 
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.parentViewController.title = @"Search";
+//    self.parentViewController.navigationItem.title = @"Search";
     
     // adjust the map to zoom/center to the annotations we want to show
 //    [self.mapView setRegion:self.boundingRegion];
     
-    if (self.places.count == 1)  // [DataSource sharedInstance].poiResults
+    if (self.poiResults.count == 1)  // [DataSource sharedInstance].poiResults
     {
-        MKMapItem *mapItem = [self.places objectAtIndex:0];
+        MKMapItem *mapItem = [self.poiResults objectAtIndex:0];
         
         self.title = mapItem.name;
         
@@ -202,7 +208,16 @@
         }
         else
         {
-            [DataSource sharedInstance].poiResults = [response mapItems];
+            NSArray *responseItems = [response mapItems];
+            self.poiResults = [[NSMutableArray alloc] init];
+            
+            for (MKMapItem *mapItem in responseItems) {
+                NSDictionary *mapItemDict = [self parseMapItemProperties:mapItem];
+                POI *poi = [[POI alloc] initWithDictionary:mapItemDict];
+                [self.poiResults addObject:poi];
+            }
+            
+            [DataSource sharedInstance].poiResults = self.poiResults; // fix
             
             [self.navigationController pushViewController:self.tableVC animated:YES];
 //            [self presentViewController:self.tableVC animated:YES completion:^{
@@ -228,6 +243,21 @@
     
     [self.localSearch startWithCompletionHandler:completionHandler];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (NSDictionary *)parseMapItemProperties:(MKMapItem *)mapItem {
+    NSString *name = (NSString *)mapItem.name != nil ? (NSString *)mapItem.name : @"";
+    NSString *url = (NSString *)mapItem.url != nil ? (NSString *)mapItem.url : @"";
+    
+    NSString *phoneNumber = (NSString *)mapItem.phoneNumber != nil ? (NSString *)mapItem.phoneNumber : @"";
+    CLLocation *location = (CLLocation *)mapItem.placemark.location != nil ? (CLLocation *)mapItem.placemark.location : [CLLocation new];
+    NSDictionary *addressDict = (NSDictionary *)mapItem.placemark.addressDictionary != nil ? mapItem.placemark.addressDictionary : [NSDictionary new];
+    
+    NSArray *mapItemValues = @[name, url, phoneNumber, location, addressDict];
+    
+    NSArray *mapItemKeys = @[@"name", @"url", @"phoneNumber", @"location", @"addressDict"];
+    
+    return [[NSDictionary alloc] initWithObjects:mapItemValues forKeys:mapItemKeys];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar

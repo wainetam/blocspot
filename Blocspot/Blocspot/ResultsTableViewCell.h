@@ -13,7 +13,7 @@
 // custom delegate
 @protocol ResultsTableViewCellDelegate <NSObject>
 
-//- (void) cell:(MediaTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
+//- (void) cell:(ResultsTableViewCell *)cell didTapImageView:(UIImageView *)imageView;
 //- (void) cell:(MediaTableViewCell *)cell didLongPressImageView:(UIImageView *)imageView;
 //- (void) cell:(MediaTableViewCell *)cell didTwoFingerTapImageView:(UIImageView *)imageView;
 //- (void) cellDidPressLikeButton:(MediaTableViewCell *)cell;
@@ -26,6 +26,12 @@
 @interface ResultsTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) id <ResultsTableViewCellDelegate> delegate;
-@property (nonatomic, strong) POI *poi;
+@property (nonatomic, strong) POI *resultItem; // encapsulate from POI
+
++ (CGFloat)heightForResultItem:(POI *)resultItem width:(CGFloat)width;
+
+- (POI *)resultItem;
+// set a new media item
+- (void)setResultItem:(POI *)resultItem;
 
 @end

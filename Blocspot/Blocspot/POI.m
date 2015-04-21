@@ -15,10 +15,10 @@
 //    self.distanceTo = poiDict[@"distanceTo"];
     self.note = poiDict[@"note"];
     self.category = poiDict[@"category"];
-    self.visited = poiDict[@"visited"];
-    self.address = poiDict[@"address"];
+//    self.visited = poiDict[@"visited"];
+    self.addressDict = poiDict[@"addressDict"];
     self.phoneNumber = poiDict[@"phoneNumber"];
-    self.website = poiDict[@"website"];
+    self.url = poiDict[@"url"];
 
     return self;
 }
