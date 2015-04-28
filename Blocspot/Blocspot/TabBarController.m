@@ -7,6 +7,8 @@
 //
 
 #import "TabBarController.h"
+#import "MapViewController.h"
+#import "ResultsTableViewController.h"
 
 @interface TabBarController ()
 
@@ -14,16 +16,41 @@
 
 @implementation TabBarController
 
+- (id)init {
+    self = [super init];
+    if(self) {
+        MapViewController *mapVC = [[MapViewController alloc] init];
+        
+        UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
+        [mapVC setTabBarItem:mapViewBarItem];
+        
+        ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
+        
+        UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
+        [resultsVC setTabBarItem:listViewBarItem];
+        
+        NSArray *tabArray = @[mapVC, resultsVC];
+        
+        [self setViewControllers:tabArray];
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.delegate = self;
+//    self.delegate = self;
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)didCompleteSearch {
+    self.selectedIndex = 1; // go to list view!
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

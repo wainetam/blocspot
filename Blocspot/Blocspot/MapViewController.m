@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "TabBarController.h"
 #import "POI.h"
 #import "DataSource.h"
 #import "User.h"
@@ -24,6 +25,7 @@
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic) MKCoordinateRegion boundingRegion;
 @property (nonatomic, strong) ResultsTableViewController *tableVC;
+@property (nonatomic, strong) id delegate; // may refactor later if subclass Search
 
 @end
 
@@ -217,12 +219,20 @@
             
             [DataSource sharedInstance].poiResults = self.poiResults; // fix
             
-            [self.navigationController pushViewController:self.tableVC animated:YES];
+            
+//            [self.navigationController pushViewController:self.tableVC animated:YES];
+            
+            
+            
+//            [self.navigationController pushViewController: self.tabBarController animated:YES];
             // add refernce to tab
             // separate and add callback to tabbar 
             
             // used for later when setting the map's region in "prepareForSegue"
             self.boundingRegion = response.boundingRegion;
+            
+            self.delegate = self.tabBarController;
+            [self.delegate didCompleteSearch];
             
 //            self.viewAllButton.enabled = self.places != nil ? YES : NO;
             

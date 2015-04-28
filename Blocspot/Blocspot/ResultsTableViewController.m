@@ -106,6 +106,11 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    
+    CGFloat width = CGRectGetWidth(self.view.bounds);
+    CGFloat height = CGRectGetHeight(self.view.bounds);
+    
+    self.view.frame = CGRectMake(0, self.topLayoutGuide.length, width, height - self.topLayoutGuide.length);
 }
 
 #pragma mark - Table view data source

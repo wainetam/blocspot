@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ResultsTableViewController.h"
 #import "MapViewController.h"
+#import "TabBarController.h"
 //#import "LoginViewController.h"
 #import "DataSource.h"
 
@@ -26,22 +27,8 @@
     [DataSource sharedInstance];
     
     UINavigationController *navVC = [[UINavigationController alloc] init];
-
-    MapViewController *mapVC = [[MapViewController alloc] init];
     
-    UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
-    [mapVC setTabBarItem:mapViewBarItem];
-    
-    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
-    
-    ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
-
-    UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
-    [resultsVC setTabBarItem:listViewBarItem];
-    
-    NSArray *tabArray = @[mapVC, resultsVC];
-    
-    [tabBarVC setViewControllers:tabArray];
+    TabBarController *tabBarVC = [[TabBarController alloc] init];
     
 //    tabBarVC.delegate = self;
 //    [navVC setViewControllers:@[resultsVC] animated:YES];

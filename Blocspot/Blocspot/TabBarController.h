@@ -10,4 +10,7 @@
 
 @interface TabBarController : UITabBarController <UITabBarControllerDelegate>
 
+- (void)didCompleteSearch;
+
+
 @end
