@@ -141,14 +141,12 @@
     [super viewWillLayoutSubviews];
     
     CGFloat width = CGRectGetWidth(self.view.bounds);
-    CGFloat height = CGRectGetHeight(self.view.bounds);
+    CGFloat height = CGRectGetHeight(self.view.bounds); // QUESTION: how to get height of tabBar
 //    CGFloat heightNavHeader = self.navigationController.navigationBar.frame.size.height;
     
     CGFloat heightSearchBar = 44;
     
     self.mapView.frame = CGRectMake(0, self.topLayoutGuide.length + heightSearchBar, width, height - self.topLayoutGuide.length - heightSearchBar);
-    
-    
     
     self.searchBar.frame = CGRectMake(0, self.topLayoutGuide.length, width, heightSearchBar);
 }
@@ -220,9 +218,8 @@
             [DataSource sharedInstance].poiResults = self.poiResults; // fix
             
             [self.navigationController pushViewController:self.tableVC animated:YES];
-//            [self presentViewController:self.tableVC animated:YES completion:^{
-//                NSLog(@"table VC here");
-//            }];
+            // add refernce to tab
+            // separate and add callback to tabbar 
             
             // used for later when setting the map's region in "prepareForSegue"
             self.boundingRegion = response.boundingRegion;

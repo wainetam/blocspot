@@ -25,42 +25,31 @@
     
     [DataSource sharedInstance];
     
-    // QUESTION: how to create a singleton for navVC? navVC and tabbarcontroller coexist?
     UINavigationController *navVC = [[UINavigationController alloc] init];
 
     MapViewController *mapVC = [[MapViewController alloc] init];
+    
+    UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
+    [mapVC setTabBarItem:mapViewBarItem];
+    
     UITabBarController *tabBarVC = [[UITabBarController alloc] init];
-
+    
     ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
+
+    UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
+    [resultsVC setTabBarItem:listViewBarItem];
     
     NSArray *tabArray = @[mapVC, resultsVC];
     
-//    [tabBarVC setViewControllers:tabArray];
+    [tabBarVC setViewControllers:tabArray];
     
-    
-    
-    
+//    tabBarVC.delegate = self;
 //    [navVC setViewControllers:@[resultsVC] animated:YES];
 
-    [navVC setViewControllers:@[mapVC] animated:YES];
+    [navVC setViewControllers:@[tabBarVC] animated:YES];
     
-//    if (![DataSource sharedInstance].accessToken) {
-//        LoginViewController *loginVC = [[LoginViewController alloc] init];
-//        [navVC setViewControllers:@[loginVC] animated:YES];
-//        
-//        [[NSNotificationCenter defaultCenter] addObserverForName:LoginViewControllerDidGetAccessTokenNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-//            ImagesTableViewController *imagesVC = [[ImagesTableViewController alloc] init];
-//            [navVC setViewControllers:@[imagesVC] animated:YES];
-//        }];
-//    } else {
-//        ImagesTableViewController *imagesVC = [[ImagesTableViewController alloc] init];
-//        [navVC setViewControllers:@[imagesVC] animated:YES];
-//    }
-    
-    
-//    self.window.rootViewController = tabBarVC;
     self.window.rootViewController = navVC;
-
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
@@ -89,6 +78,15 @@
 //    // Saves changes in the application's managed object context before the application terminates.
 //    [self saveContext];
 //}
+
+#pragma mark - UITabBarControllerDelegate
+
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if(viewController) {
+        NSLog(@"delegate works");
+    }
+}
 
 #pragma mark - Core Data stack
 

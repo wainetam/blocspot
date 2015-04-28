@@ -34,6 +34,7 @@
     if (self) {
         self = [super init];
         self.results = [DataSource sharedInstance].poiResults;
+//        self.title = @"List View";
     }
     
     return self;
@@ -87,11 +88,10 @@
     // TBD
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
-//    cell.resultItem = poi;
+    cell.resultItem = poi;
     
-    cell.backgroundColor = [UIColor yellowColor];
     // TBD
 //    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
 //        
@@ -101,12 +101,6 @@
 //        }
 //    }
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    Media *item = [self items][indexPath.row];
-//    
-//    return [MediaTableViewCell heightForMediaItem:item width:CGRectGetWidth(self.view.frame)];
-//}
 
 #pragma mark - Layout
 

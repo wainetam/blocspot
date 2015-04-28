@@ -173,7 +173,9 @@ static NSParagraphStyle *paragraphStyle;
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address);
 //    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headline]|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headline]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headline][_address]" options:kNilOptions metrics:nil views:viewDictionary]];
+    
+//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_address]|" options:kNilOptions metrics:nil views:viewDictionary]];
     
     self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
                                                                  attribute:NSLayoutAttributeHeight
@@ -181,7 +183,7 @@ static NSParagraphStyle *paragraphStyle;
                                                                     toItem:nil
                                                                  attribute:NSLayoutAttributeNotAnAttribute
                                                                 multiplier:1
-                                                                  constant:[UIScreen mainScreen].bounds.size.width];
+                                                                  constant:50];
     
     self.addressHeightConstraint = [NSLayoutConstraint constraintWithItem:_address
                                                                    attribute:NSLayoutAttributeHeight
