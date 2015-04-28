@@ -88,11 +88,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     ResultsTableViewCell *cell = (ResultsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    ResultViewController *resultVC = [[ResultViewController alloc] initWithTableViewCell:cell];
+    ResultViewController *resultModalVC = [[ResultViewController alloc] initWithTableViewCell:cell];
 
-    [self presentViewController:resultVC animated:YES completion:^{
-        NSLog(@"presenting resultVC");
-    }];
+    self.navigationController.navigationBarHidden = YES;
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromRight;
+    [self.view.window.layer addAnimation:transition forKey:nil];
+    [self presentViewController:resultModalVC animated:NO completion:nil];
+    
+//    [self presentViewController:resultModalVC animated:YES completion:^{
+//        NSLog(@"presenting resultVC");
+//    }];
     
 }
 

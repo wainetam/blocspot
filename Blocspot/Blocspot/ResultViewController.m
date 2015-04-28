@@ -43,12 +43,25 @@
 #pragma mark - Swipe Left to Close
                                            
 - (void) leftSwipeHandler:(UISwipeGestureRecognizer *)sender {
-    // how to create smooth slide transition
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        nil;
-    }];
-}
+//    self.presentingViewController.navigationController.navigationBarHidden = NO;
+//QUESTION: why is presentingVC here UINav?
+    
+    
+    // QUESTION optimal way to create smooth slide transition?
+    // how to do page slide?
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromLeft;
+    [self.view.window.layer addAnimation:transition forKey:nil];
+    
+    //QUESTION: why is presentingVC here UINav?
+    ((UINavigationController *)self.presentingViewController).navigationBarHidden = NO;
+    
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 
+}
 /*
 #pragma mark - Navigation
 
