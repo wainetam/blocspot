@@ -12,6 +12,7 @@
 #import "User.h"
 #import "Search.h"
 #import "ResultsTableViewCell.h"
+#import "ResultViewController.h"
 
 @interface ResultsTableViewController ()
 
@@ -69,6 +70,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    self.parentViewController.title = @"Points of Interest";
     
 }
 
@@ -84,8 +86,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     ResultsTableViewCell *cell = (ResultsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    // TBD
+    ResultViewController *resultVC = [[ResultViewController alloc] initWithTableViewCell:cell];
+
+    [self presentViewController:resultVC animated:YES completion:^{
+        NSLog(@"presenting resultVC");
+    }];
+    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

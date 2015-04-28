@@ -68,7 +68,7 @@ static NSParagraphStyle *paragraphStyle;
     [layoutCell layoutIfNeeded];
     
 //    return CGRectGetMaxY(layoutCell.contentView.frame);
-    return 150;
+    return 100;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -90,6 +90,7 @@ static NSParagraphStyle *paragraphStyle;
         self.address = [[UILabel alloc] init];
 //        self.category = ""; // add category
         self.visited = NO;
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
         // QUESTION how to change attributes of POI?
 //        
