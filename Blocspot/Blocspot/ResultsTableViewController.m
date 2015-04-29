@@ -23,24 +23,16 @@
 
 @implementation ResultsTableViewController
 
-//- (id)initWithStyle:(UITableViewStyle)style {
-//    self = [super initWithStyle:style];
-//    if (self) {
-//        // custom initialization
-//    }
-//    return self;
-//}
-
 - (id)init {
     if (self) {
         self = [super init];
         self.results = [DataSource sharedInstance].poiResults;
-//        self.title = @"List View";
     }
     
     return self;
 }
 
+    // QUESTION why is table jittery?
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -99,10 +91,6 @@
     [self.view.window.layer addAnimation:transition forKey:nil];
     [self presentViewController:resultModalVC animated:NO completion:nil];
     
-//    [self presentViewController:resultModalVC animated:YES completion:^{
-//        NSLog(@"presenting resultVC");
-//    }];
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -149,7 +137,6 @@
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
     cell.resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
-//    cell.backgroundColor = [UIColor yellowColor];
 
     return cell;
 }

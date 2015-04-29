@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Search;
+
 @interface TabBarController : UITabBarController <UITabBarControllerDelegate>
 
-- (void)didCompleteSearch;
-
+//- (void)didCompleteSearch;
 
 @end

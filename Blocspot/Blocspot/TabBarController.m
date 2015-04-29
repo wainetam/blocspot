@@ -9,8 +9,9 @@
 #import "TabBarController.h"
 #import "MapViewController.h"
 #import "ResultsTableViewController.h"
+#import "Search.h"
 
-@interface TabBarController ()
+@interface TabBarController () <SearchDelegate>
 
 @end
 
@@ -31,6 +32,8 @@
         
         NSArray *tabArray = @[mapVC, resultsVC];
         
+        
+        
         [self setViewControllers:tabArray];
     }
     
@@ -49,15 +52,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)didCompleteSearch {
-    self.selectedIndex = 1; // go to list view!
-}
-
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     NSUInteger indexOfTab = [tabBarController.viewControllers indexOfObject:viewController];
     NSLog(@"Tab index = %lu", indexOfTab);
 }
 
+#pragma mark - SearchDelegate
+
+- (void)didCompleteSearch:(Search *)sender {
+    self.selectedIndex = 1; // go to list view!
+}
 
 /*
 #pragma mark - Navigation
