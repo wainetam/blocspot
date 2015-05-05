@@ -33,8 +33,28 @@
 //    tabBarVC.delegate = self;
 //    [navVC setViewControllers:@[resultsVC] animated:YES];
 
-    [navVC setViewControllers:@[tabBarVC] animated:YES];
     
+    
+    
+//    
+//    MapViewController *mapVC = [[MapViewController alloc] init];
+//    
+//    UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
+//    [mapVC setTabBarItem:mapViewBarItem];
+//    
+//    ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
+//    
+//    UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
+//    [resultsVC setTabBarItem:listViewBarItem];
+//    
+//    NSArray *tabArray = @[mapVC, resultsVC];
+//    
+//    
+//    
+//    [tabBarVC setViewControllers:tabArray];
+    
+    
+    [navVC setViewControllers:@[tabBarVC] animated:YES];
     self.window.rootViewController = navVC;
     
     self.window.backgroundColor = [UIColor whiteColor];

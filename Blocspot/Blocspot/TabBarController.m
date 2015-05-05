@@ -21,20 +21,19 @@
     self = [super init];
     if(self) {
         MapViewController *mapVC = [[MapViewController alloc] init];
-        
+    
         UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
         [mapVC setTabBarItem:mapViewBarItem];
-        
+    
         ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
-        
+    
         UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
         [resultsVC setTabBarItem:listViewBarItem];
-        
+    
         NSArray *tabArray = @[mapVC, resultsVC];
         
-        
-        
         [self setViewControllers:tabArray];
+        
     }
     
     return self;
@@ -42,6 +41,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    MapViewController *mapVC = [[MapViewController alloc] init];
+//    
+//    UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:nil selectedImage:nil];
+//    [mapVC setTabBarItem:mapViewBarItem];
+//    
+//    ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
+//    
+//    UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:nil selectedImage:nil];
+//    [resultsVC setTabBarItem:listViewBarItem];
+//    
+//    NSArray *tabArray = @[mapVC, resultsVC];
+//    
+//    
+//    
+//    [self setViewControllers:tabArray];
     
 //    self.delegate = self;
     // Do any additional setup after loading the view.

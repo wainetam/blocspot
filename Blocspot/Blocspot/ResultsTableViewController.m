@@ -82,20 +82,23 @@
     ResultsTableViewCell *cell = (ResultsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ResultViewController *resultModalVC = [[ResultViewController alloc] initWithTableViewCell:cell];
 
-    self.navigationController.navigationBarHidden = YES;
-    CATransition *transition = [CATransition animation];
-    transition.duration = 0.4;
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    transition.type = kCATransitionPush;
-    transition.subtype = kCATransitionFromRight;
-    [self.view.window.layer addAnimation:transition forKey:nil];
-    [self presentViewController:resultModalVC animated:NO completion:nil];
+    [self.tabBarController.navigationController pushViewController:resultModalVC animated:true];
+    
+//    self.navigationController.navigationBarHidden = YES;
+    
+//    CATransition *transition = [CATransition animation];
+//    transition.duration = 0.4;
+//    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    transition.type = kCATransitionPush;
+//    transition.subtype = kCATransitionFromRight;
+//    [self.view.window.layer addAnimation:transition forKey:nil];
+//    [self presentViewController:resultModalVC animated:NO completion:nil];
     
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
-    cell.resultItem = poi;
+//    POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
+//    cell.resultItem = poi;
     
     // TBD
 //    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
@@ -112,10 +115,31 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    CGFloat width = CGRectGetWidth(self.view.bounds);
-    CGFloat height = CGRectGetHeight(self.view.bounds);
+    CGFloat width = CGRectGetWidth(self.tableView.bounds);
+    CGFloat height = self.tabBarController.tabBar.frame.origin.y;
     
-    self.view.frame = CGRectMake(0, self.topLayoutGuide.length, width, height - self.topLayoutGuide.length);
+    CGFloat heightOfNavBar = self.tabBarController.navigationController.navigationBar.frame.size.height;
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    
+    
+    CGFloat yOffset = heightOfNavBar + statusBarHeight;
+    // window --> nav --> tabBar --> ResultViewController (top)
+//                            l
+//                            l
+//                            v
+//                            mapview & tableview
+    UIView* view = self.view;
+    UIView* superview = self.view.superview.superview;
+    NSLog(@"Results tableview controller: view frame %f", self.view.superview.superview.frame.origin.y);
+    
+    
+    if (self.tableView.frame.origin.y != yOffset){
+
+        NSLog(@"Results tableview controller: y Offset %f", yOffset);
+        NSLog(@"Results tableview controller: heightOfNavBar %f", heightOfNavBar);
+        self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
+    }
+
 }
 
 #pragma mark - Table view data source
@@ -142,9 +166,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    POI *resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
+    return 100;
+//    POI *resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
     
-    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];
+//    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];
 }
 
 #pragma mark - Handling key-value notifications
@@ -187,59 +212,6 @@
         }
     }
 }
-
-#pragma mark - UISearchBarDelegate
-
-//- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-//{
-//    [searchBar resignFirstResponder];
-//}
-//
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-//{
-//    [searchBar setShowsCancelButton:YES animated:YES];
-//}
-//
-//- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
-//{
-//    [searchBar setShowsCancelButton:NO animated:YES];
-//}
-//
-//- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-//{
-//    [searchBar resignFirstResponder];
-//    
-//    // check to see if Location Services is enabled, there are two state possibilities:
-//    // 1) disabled for entire device, 2) disabled just for this app
-//    //
-//    NSString *causeStr = nil;
-//    
-//    // check whether location services are enabled on the device
-//    if ([CLLocationManager locationServicesEnabled] == NO) {
-//        causeStr = @"device";
-//    }
-//    // check the application’s explicit authorization status:
-//    else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
-//        causeStr = @"app";
-//    }
-//    else {
-//        // we are good to go, start the search
-//        [self startSearch:searchBar.text];
-//    }
-//    
-//    if (causeStr != nil) {
-//        NSString *alertMessage = [NSString stringWithFormat:@"You currently have location services disabled for this %@. Please refer to \"Settings\" app to turn on Location Services.", causeStr];
-//        
-//        UIAlertView *servicesDisabledAlert = [[UIAlertView alloc] initWithTitle:@"Location Services Disabled"
-//                                                                        message:alertMessage
-//                                                                       delegate:nil
-//                                                              cancelButtonTitle:@"OK"
-//                                                              otherButtonTitles:nil];
-//        [servicesDisabledAlert show];
-//    }
-//}
-
-
 
 
 /*

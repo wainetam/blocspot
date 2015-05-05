@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *poiResults;
 @property (nonatomic, strong) MKMapView *mapView;
 @property (nonatomic) MKCoordinateRegion boundingRegion;
-@property (nonatomic, strong) ResultsTableViewController *tableVC;
+//@property (nonatomic, strong) ResultsTableViewController *tableVC;
 @property (nonatomic, strong) id delegate; // may refactor later if subclass Search
 
 @end
@@ -34,7 +34,7 @@
 - (void)loadView {
     [super loadView];
     
-    self.tableVC = [[ResultsTableViewController alloc] init];
+//    self.tableVC = [[ResultsTableViewController alloc] init];
     self.delegate = self.tabBarController;
 }
 
@@ -150,7 +150,7 @@
     CGFloat heightSearchBar = 44;
     
     self.mapView.frame = CGRectMake(0, self.topLayoutGuide.length + heightSearchBar, width, height - self.topLayoutGuide.length - heightSearchBar);
-    
+    NSLog(@"top layout guide length %f", self.topLayoutGuide.length);
     self.searchBar.frame = CGRectMake(0, self.topLayoutGuide.length, width, heightSearchBar);
 }
 
