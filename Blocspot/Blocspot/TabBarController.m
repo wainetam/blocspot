@@ -9,9 +9,9 @@
 #import "TabBarController.h"
 #import "MapViewController.h"
 #import "ResultsTableViewController.h"
-#import "Search.h"
+//#import "Search.h"
 
-@interface TabBarController () <SearchDelegate>
+@interface TabBarController ()
 
 @end
 

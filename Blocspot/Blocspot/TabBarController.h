@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Search.h"
+//@class Search;
+//QUESTION why need to import Search.h vs just the class to be able to recognize the SearchDelegate
 
-@class Search;
-
-@interface TabBarController : UITabBarController <UITabBarControllerDelegate>
+@interface TabBarController : UITabBarController <UITabBarControllerDelegate, SearchDelegate>
 
 //- (void)didCompleteSearch;
 

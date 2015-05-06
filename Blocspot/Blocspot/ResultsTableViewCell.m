@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UILabel *distance;
 @property (nonatomic, assign) BOOL visited;
 @property (nonatomic, strong) UIImageView *visitedImage;
+@property (nonatomic, strong) UIImageView *image;
 @property (nonatomic, strong) UILabel *category;
 @property (nonatomic, strong) UILabel *address;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGestureRecognizer;
@@ -48,34 +49,35 @@ static NSParagraphStyle *paragraphStyle;
     NSMutableParagraphStyle *mutableParagraphStyle = [[NSMutableParagraphStyle alloc] init];
     mutableParagraphStyle.headIndent = 20.0;
     mutableParagraphStyle.firstLineHeadIndent = 20.0;
-    mutableParagraphStyle.tailIndent = -20.0;
+//    mutableParagraphStyle.tailIndent = -20.0;
     mutableParagraphStyle.paragraphSpacingBefore = 5;
     mutableParagraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     
     paragraphStyle = mutableParagraphStyle;
 }
 
-+ (CGFloat)heightForResultItem:(POI *)resultItem width:(CGFloat)width {
+//+ (CGFloat)heightForResultItem:(POI *)resultItem width:(CGFloat)width {
     // make a cell
-    ResultsTableViewCell *layoutCell = [[ResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"layoutCell"];
-    
-    layoutCell.resultItem = resultItem;
-    
+//    ResultsTableViewCell *layoutCell = [[ResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"layoutCell"];
+
+//    layoutCell.resultItem = resultItem;
+
 //    layoutCell.frame = CGRectMake(0, 0, width, CGRectGetHeight(layoutCell.frame));
-    layoutCell.frame = CGRectMake(0, 0, width, 100);
-    [layoutCell setNeedsLayout];
+//    layoutCell.frame = CGRectMake(0, 0, width, 100);
+//    [layoutCell setNeedsLayout];
     
-    [layoutCell layoutIfNeeded];
+//    [layoutCell layoutIfNeeded];
     
 //    return CGRectGetMaxY(layoutCell.contentView.frame);
-    return 100;
-}
+//    return 100;
+//}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
         // initialization code
+        self.image = [[UIImageView alloc] init];
         self.visitedImage = [[UIImageView alloc] init];
         self.visitedImage.userInteractionEnabled = YES;
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
@@ -118,18 +120,18 @@ static NSParagraphStyle *paragraphStyle;
 - (void)setResultItem:(POI *)resultItem {
     _resultItem = resultItem;
 //    self.visited = _resultItem.visited;
-    self.headline.attributedText = [self headlineString];
-    self.address.attributedText = [self addressString];
+    self.headline.attributedText = [self headlineStringFrom:resultItem];
+    self.address.attributedText = [self addressStringFrom:resultItem];
     
 //    self.note = _poi.note;
 //    self.distance = _poi.distance;
 //    self.category = _poi.category;
 }
 
-- (NSAttributedString *)headlineString {
+- (NSAttributedString *)headlineStringFrom:(POI *)resultItem {
     CGFloat headlineFontSize = 15;
     
-    NSString *baseString = [NSString stringWithFormat:@"%@", self.resultItem.name];
+    NSString *baseString = [NSString stringWithFormat:@"%@", resultItem.name];
     
     NSMutableAttributedString *mutableHeadlineString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:headlineFontSize]}];
     
@@ -140,10 +142,10 @@ static NSParagraphStyle *paragraphStyle;
     return mutableHeadlineString;
 }
 
-- (NSAttributedString *)addressString {
+- (NSAttributedString *)addressStringFrom:(POI *)resultItem {
     CGFloat headlineFontSize = 13;
     
-    NSString *baseString = [NSString stringWithFormat:@"%@", self.resultItem.addressDict[@"Street"]];
+    NSString *baseString = [NSString stringWithFormat:@"%@", resultItem.addressDict[@"Street"]];
     
     NSMutableAttributedString *mutableAddressString = [[NSMutableAttributedString alloc] initWithString:baseString attributes:@{NSFontAttributeName : [lightFont fontWithSize:headlineFontSize]}];
     

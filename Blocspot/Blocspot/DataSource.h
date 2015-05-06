@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) NSMutableArray *searchHistory;
 @property (nonatomic, strong) NSArray *poiResults;
+@property (nonatomic, strong) NSArray *annotations; // QUESTION: should I store annotations here or with mapView?
 
 - (void)cancelActiveSearch:(Search *)search;
 - (void)deleteSearchHistory:(NSMutableArray *)searchHistory;

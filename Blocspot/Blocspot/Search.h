@@ -27,7 +27,7 @@
 @property (nonatomic) MKCoordinateRegion boundingRegion;
 @property (nonatomic, strong) id<SearchDelegate> delegate;
 
-- (void)executeSearch:(NSString *)searchString;
+- (void)executeSearch:(NSString *)searchString withMapView:(MKMapView*)mapView;
 - (NSDictionary *)parseMapItemProperties:(MKMapItem *)mapItem;
 
 @end

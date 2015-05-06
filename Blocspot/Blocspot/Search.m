@@ -9,6 +9,7 @@
 #import "Search.h"
 #import "DataSource.h"
 #import "POI.h"
+#import "Annotation.h"
 
 @interface Search ()
 
@@ -26,7 +27,7 @@
     return self;
 }
 
-- (void)executeSearch:(NSString *)searchString
+- (void)executeSearch:(NSString *)searchString withMapView:(MKMapView *)mapView
 {
     if (self.localSearch.searching)
     {
@@ -42,8 +43,8 @@
     // we use the delta values to indicate the desired zoom level of the map,
     //      (smaller delta values corresponding to a higher zoom level)
     //
-    currentRegion.span.latitudeDelta = 0.112872;
-    currentRegion.span.longitudeDelta = 0.109863;
+    currentRegion.span.latitudeDelta = 0.9;
+    currentRegion.span.longitudeDelta = 0.9;
     
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     
@@ -65,9 +66,20 @@
         else
         {
             NSArray *responseItems = [response mapItems];
+            NSMutableArray *placemarks = [NSMutableArray new];
+            NSMutableArray *annotations = [NSMutableArray new];
             self.poiResults = [[NSMutableArray alloc] init];
             
             for (MKMapItem *mapItem in responseItems) {
+//                if (MKMapRectContainsPoint(mapView.visibleMapRect, MKMapPointForCoordinate(mapItem.placemark.coordinate))) {
+//                    [placemarks addObject:mapItem.placemark];
+//                }
+//                [placemarks addObject:mapItem.placemark];
+                Annotation *annotation = [[Annotation alloc] initWithMapItem:mapItem];
+//                Annotation *annotation = [[Annotation alloc] initWithLocation:mapItem.placemark.location.coordinate];
+//                annotation.title = mapItem.name;
+                
+                [annotations addObject:annotation];
                 NSDictionary *mapItemDict = [self parseMapItemProperties:mapItem];
                 POI *poi = [[POI alloc] initWithDictionary:mapItemDict];
                 [self.poiResults addObject:poi];
@@ -76,22 +88,21 @@
             [DataSource sharedInstance].poiResults = self.poiResults; // fix
             
             
-            //            [self.navigationController pushViewController:self.tableVC animated:YES];
+            // add annotations
+            [DataSource sharedInstance].annotations = nil;
+            [mapView removeAnnotations:[mapView annotations]];
             
             
+//            MKMapRect visibleMapRect = mapView.visibleMapRect;
+//            NSArray *visibleAnnotations = [[mapView annotationsInMapRect:visibleMapRect] allObjects]; // convert NSSet to NSArray
             
-            //            [self.navigationController pushViewController: self.tabBarController animated:YES];
-            // add refernce to tab
-            // separate and add callback to tabbar
-            
+            [mapView showAnnotations:annotations animated:YES];
+            [DataSource sharedInstance].annotations = annotations;
             // used for later when setting the map's region in "prepareForSegue"
             self.boundingRegion = response.boundingRegion;
             
-            [self.delegate didCompleteSearch:self];
-            
-            //            self.viewAllButton.enabled = self.places != nil ? YES : NO;
-            
-            //            [self.tableView reloadData];
+            // callback to tabBar
+//            [self.delegate didCompleteSearch:self];
             
         }
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -122,15 +133,5 @@
     return [[NSDictionary alloc] initWithObjects:mapItemValues forKeys:mapItemKeys];
 }
 
-
-
-// searching property (boolean)
-
-//[search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error) {
-//    NSLog(@"Map Items: %@", response.mapItems);
-//}];
-
-//array of MKMapItem objects
-//placemark property
 
 @end

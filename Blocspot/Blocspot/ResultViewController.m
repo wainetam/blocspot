@@ -87,7 +87,9 @@
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    CGFloat width = CGRectGetWidth(self.view.bounds);
+    NSLog(@"resultView frame origin %f", self.view.frame.origin.y);
+    
+//    CGFloat width = CGRectGetWidth(self.view.bounds);
 //    self.topView.frame = CGRectMake(0, self.topLayoutGuide.length, width, 44);
 //    
 //    CGFloat yOriginOfBottomView = CGRectGetMaxY(self.topView.frame) + width;

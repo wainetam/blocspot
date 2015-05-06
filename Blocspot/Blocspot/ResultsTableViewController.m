@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MKLocalSearch *localSearch;
+@property (nonatomic) CGFloat savedContentOffsetY;
 
 @end
 
@@ -32,8 +33,8 @@
     return self;
 }
 
-    // QUESTION why is table jittery?
 - (void)viewDidLoad {
+    NSLog(@"contentOffsetY VDL1 %f", self.tableView.contentOffset.y);
     [super viewDidLoad];
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"poiResults" options:0 context:nil];
@@ -53,17 +54,30 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+//    NSLog(@"contentOffsetY VDL2 %f", self.tableView.contentOffset.y);
+    self.savedContentOffsetY = self.tableView.contentOffset.y;
+//    NSLog(@"contentOffsetY VDL3 %f", self.tableView.contentOffset.y);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-
-    
+//    NSLog(@"contentOffsetY VWA1 %f", self.tableView.contentOffset.y);
+//    [self performSelector:@selector(updateContentOffset) withObject:nil afterDelay:1.0];
+    self.tableView.contentOffset = CGPointMake(0, self.savedContentOffsetY);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -64, 0);
+//    NSLog(@"contentOffsetY VWA2 %f", self.tableView.contentOffset.y);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+//    NSLog(@"contentOffsetY VDA %f", self.savedContentOffsetY);
     [super viewDidAppear:animated];
+    [self.tableView setContentOffset: CGPointMake(0, self.savedContentOffsetY) animated:NO];
     self.parentViewController.title = @"Points of Interest";
-    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+//    NSLog(@"contentOffsetY VWD %f", self.tableView.contentOffset.y);
+//    self.savedContentOffsetY = self.tableView.contentOffset.y;
 }
 
 - (void)dealloc { // removes observer upon dealloc
@@ -113,7 +127,9 @@
 #pragma mark - Layout
 
 - (void)viewWillLayoutSubviews {
+
     [super viewWillLayoutSubviews];
+
     
     CGFloat width = CGRectGetWidth(self.tableView.bounds);
     CGFloat height = self.tabBarController.tabBar.frame.origin.y;
@@ -121,24 +137,26 @@
     CGFloat heightOfNavBar = self.tabBarController.navigationController.navigationBar.frame.size.height;
     CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     
-    
     CGFloat yOffset = heightOfNavBar + statusBarHeight;
     // window --> nav --> tabBar --> ResultViewController (top)
 //                            l
 //                            l
 //                            v
 //                            mapview & tableview
-    UIView* view = self.view;
-    UIView* superview = self.view.superview.superview;
-    NSLog(@"Results tableview controller: view frame %f", self.view.superview.superview.frame.origin.y);
+//    UIView* view = self.view;
+//    UIView* superview = self.view.superview.superview;
+    NSLog(@"frame origin %f", self.tableView.frame.origin.y);
     
+//    if (self.tableView.frame.origin.y != yOffset){
+//
+        NSLog(@"self.savedContentOffsetY %f", self.savedContentOffsetY);
+//        NSLog(@"Results tableview controller: heightOfNavBar %f", heightOfNavBar);
     
-    if (self.tableView.frame.origin.y != yOffset){
 
-        NSLog(@"Results tableview controller: y Offset %f", yOffset);
-        NSLog(@"Results tableview controller: heightOfNavBar %f", heightOfNavBar);
-        self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
-    }
+    self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
+
+//        self.tableView.contentOffset = CGPointMake(0,self.savedContentOffsetY);
+//    }
 
 }
 
@@ -156,12 +174,20 @@
 }
 
 - (ResultsTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultCell" forIndexPath:indexPath];
+    
+    static NSString *cellIdentifier = @"resultCell";
+    
+    ResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    
+    if (cell == nil) {
+        cell = [[ResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
     cell.resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
 
+    
     return cell;
 }
 

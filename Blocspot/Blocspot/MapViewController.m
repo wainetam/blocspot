@@ -13,6 +13,7 @@
 #import "User.h"
 #import "Search.h"
 #import "ResultsTableViewController.h"
+#import "Annotation.h"
 
 
 @interface MapViewController ()
@@ -116,6 +117,10 @@
 //            [self.mapView addAnnotation:annotation];
 //        }
     }
+    // load saved annotations
+    if ([DataSource sharedInstance].annotations != nil) {
+        [self.mapView showAnnotations:[DataSource sharedInstance].annotations animated:YES];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -134,7 +139,7 @@
         return;
     }
     
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLoc.coordinate, 750, 750);
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLoc.coordinate, 1000, 1000);
     [mapView setRegion:region animated:YES];
 }
 
@@ -196,8 +201,8 @@
         // we are good to go, start the search
 //        [self startSearch:searchBar.text];
         Search *search = [[Search alloc] init];
-        search.delegate = self.tabBarController; //let tab controller control where results go
-        [search executeSearch:searchBar.text];
+        search.delegate = (TabBarController *)self.tabBarController; //let tab controller control where results go
+        [search executeSearch:searchBar.text withMapView:self.mapView];
     }
     
     if (causeStr != nil)
@@ -239,6 +244,7 @@
 }
 
 #pragma mark - MKMapViewDelegate methods
+//- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 //- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
 //    self.userLocation = userLocation.location.coordinate;
 //    [self zoomToCurrentLocation:self.locationManager.location inMapView:self.mapView];
@@ -250,10 +256,61 @@
 //}
 
 //- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView {
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(currentLoc.coordinate, 1000, 1000);
+//    [mapView setRegion:region animated:YES];
 //    MKCoordinateRegion newRegion = MKCoordinateRegionMakeWithDistance(self.userLocation, 750, 750);
 //    [mapView setRegion:newRegion animated:YES];
-//
+
 //}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    // If the annotation is the user location, just return nil.
+    if ([annotation isKindOfClass:[MKUserLocation class]]) {
+        return nil; // to get default view for userLocation
+    }
+    
+    // Handle any custom annotations.
+    if ([annotation isKindOfClass:[Annotation class]]) {
+        // Try to dequeue an existing pin view first.
+        MKPinAnnotationView* pinView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotationView"];
+        
+        if (!pinView) {
+            // If an existing pin view was not available, create one.
+            pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+                                                      reuseIdentifier:@"CustomAnnotationView"];
+            pinView.pinColor = MKPinAnnotationColorRed;
+            pinView.animatesDrop = YES;
+            pinView.canShowCallout = YES;
+            
+            // customize callout
+            UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [rightButton addTarget:self action:@selector(rightButtonCalloutHandler:) forControlEvents:UIControlEventTouchUpInside];
+            pinView.rightCalloutAccessoryView = rightButton;
+            
+            // Add a custom image to the left side of the callout.
+            UIImageView *calloutImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"heart-unfilled-32.png"]];
+            // how to add target to image (if want to make it a button)
+            pinView.leftCalloutAccessoryView = calloutImage;
+            
+        } else {
+            pinView.annotation = annotation;
+        }
+        
+        return pinView;
+    }
+    
+    return nil;
+}
+- (void)rightButtonCalloutHandler:(id)sender {
+    NSLog(@"hello from moreInfo");
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    NSLog(@"hello");
+    
+//    QUESTION how to distinguish between right and left; why only right registers
+    
+}
 
 
 /*
