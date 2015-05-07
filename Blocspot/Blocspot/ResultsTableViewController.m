@@ -147,26 +147,18 @@
 //                            mapview & tableview
 //    UIView* view = self.view;
 //    UIView* superview = self.view.superview.superview;
-    NSLog(@"frame height %f", self.tableView.frame.size.height);
+//    NSLog(@"frame height %f", self.tableView.frame.size.height);
     
     self.tableView.contentInset = UIEdgeInsetsZero;
-    
-//    if (self.tableView.frame.origin.y != yOffset){
-//
-//        NSLog(@"self.savedContentOffsetY %f", self.tableView.contentOffset.top);
-//        NSLog(@"Results tableview controller: heightOfNavBar %f", heightOfNavBar);
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     
     self.tableView.layoutMargins = UIEdgeInsetsZero;
+    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
     
     self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
-
-//        self.tableView.contentOffset = CGPointMake(0,self.savedContentOffsetY);
-//    }
-
 }
 
 #pragma mark - Table view data source

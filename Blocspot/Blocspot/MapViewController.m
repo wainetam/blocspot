@@ -288,7 +288,7 @@
             pinView.rightCalloutAccessoryView = rightButton;
             
             // Add a custom image to the left side of the callout.
-            UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-32.png"];
+            UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-24.png"];
             UIButton *heartButton = [UIButton buttonWithType:UIButtonTypeCustom];
             heartButton.frame = CGRectMake(0, 0, 40, 40);
             [heartButton setImage:heartImage forState:UIControlStateNormal];
