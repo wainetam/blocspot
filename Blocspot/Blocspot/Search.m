@@ -66,7 +66,7 @@
         else
         {
             NSArray *responseItems = [response mapItems];
-            NSMutableArray *placemarks = [NSMutableArray new];
+//            NSMutableArray *placemarks = [NSMutableArray new];
             NSMutableArray *annotations = [NSMutableArray new];
             self.poiResults = [[NSMutableArray alloc] init];
             

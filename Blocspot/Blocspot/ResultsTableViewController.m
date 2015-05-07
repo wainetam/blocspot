@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) MKLocalSearch *localSearch;
-@property (nonatomic) CGFloat savedContentOffsetY;
+//@property (nonatomic) CGFloat savedContentOffsetY;
 
 @end
 
@@ -38,6 +38,7 @@
     [super viewDidLoad];
     
     [[DataSource sharedInstance] addObserver:self forKeyPath:@"poiResults" options:0 context:nil];
+//    self.automaticallyAdjustsScrollViewInsets = NO;
 //    [[DataSource sharedInstance] addObserver:self forKeyPath:@"searchHistoryItems" options:0 context:nil];
     
 //    self.refreshControl = [[UIRefreshControl alloc] init];
@@ -56,14 +57,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
 //    NSLog(@"contentOffsetY VDL2 %f", self.tableView.contentOffset.y);
-    self.savedContentOffsetY = self.tableView.contentOffset.y;
+//    self.savedContentOffsetY = self.tableView.contentOffset.y;
 //    NSLog(@"contentOffsetY VDL3 %f", self.tableView.contentOffset.y);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 //    NSLog(@"contentOffsetY VWA1 %f", self.tableView.contentOffset.y);
 //    [self performSelector:@selector(updateContentOffset) withObject:nil afterDelay:1.0];
-    self.tableView.contentOffset = CGPointMake(0, self.savedContentOffsetY);
+//    self.tableView.contentOffset = CGPointMake(0, self.savedContentOffsetY);
 //    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -64, 0);
 //    NSLog(@"contentOffsetY VWA2 %f", self.tableView.contentOffset.y);
 }
@@ -71,7 +72,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 //    NSLog(@"contentOffsetY VDA %f", self.savedContentOffsetY);
     [super viewDidAppear:animated];
-    [self.tableView setContentOffset: CGPointMake(0, self.savedContentOffsetY) animated:NO];
+//    [self.tableView setContentOffset: CGPointMake(0, self.savedContentOffsetY) animated:NO];
     self.parentViewController.title = @"Points of Interest";
 }
 
@@ -97,6 +98,8 @@
     ResultViewController *resultModalVC = [[ResultViewController alloc] initWithTableViewCell:cell];
 
     [self.tabBarController.navigationController pushViewController:resultModalVC animated:true];
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:false];
     
 //    self.navigationController.navigationBarHidden = YES;
     
@@ -129,7 +132,6 @@
 - (void)viewWillLayoutSubviews {
 
     [super viewWillLayoutSubviews];
-
     
     CGFloat width = CGRectGetWidth(self.tableView.bounds);
     CGFloat height = self.tabBarController.tabBar.frame.origin.y;
@@ -145,14 +147,21 @@
 //                            mapview & tableview
 //    UIView* view = self.view;
 //    UIView* superview = self.view.superview.superview;
-    NSLog(@"frame origin %f", self.tableView.frame.origin.y);
+    NSLog(@"frame height %f", self.tableView.frame.size.height);
+    
+    self.tableView.contentInset = UIEdgeInsetsZero;
     
 //    if (self.tableView.frame.origin.y != yOffset){
 //
-        NSLog(@"self.savedContentOffsetY %f", self.savedContentOffsetY);
+//        NSLog(@"self.savedContentOffsetY %f", self.tableView.contentOffset.top);
 //        NSLog(@"Results tableview controller: heightOfNavBar %f", heightOfNavBar);
     
-
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
+    
     self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
 
 //        self.tableView.contentOffset = CGPointMake(0,self.savedContentOffsetY);

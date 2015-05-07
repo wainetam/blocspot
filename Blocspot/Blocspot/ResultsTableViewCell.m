@@ -86,13 +86,17 @@ static NSParagraphStyle *paragraphStyle;
         
         self.headline = [[UILabel alloc] init];
         self.headline.numberOfLines = 1;
+//        self.headline.layoutMargins = UIEdgeInsetsMake(10, 10, 0, 0);
         self.note = [[UILabel alloc] init];
         self.note.numberOfLines = 0;
         self.distance = [[UILabel alloc] init];
         self.address = [[UILabel alloc] init];
+//        self.headline.layoutMargins = UIEdgeInsetsMake(0, 10, 10, 0);
 //        self.category = ""; // add category
         self.visited = NO;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
+        self.layoutMargins = UIEdgeInsetsZero; // makes divider between rows flush to edges
         
         // QUESTION how to change attributes of POI?
 //        
@@ -121,6 +125,9 @@ static NSParagraphStyle *paragraphStyle;
     _resultItem = resultItem;
 //    self.visited = _resultItem.visited;
     self.headline.attributedText = [self headlineStringFrom:resultItem];
+    
+//QUESTION: why can't put layoutMargins on attribText
+//    self.headline.attributedText.layoutMargins = UIEdgeInsetsMake(10, 10, 0, 0);
     self.address.attributedText = [self addressStringFrom:resultItem];
     
 //    self.note = _poi.note;
@@ -129,7 +136,7 @@ static NSParagraphStyle *paragraphStyle;
 }
 
 - (NSAttributedString *)headlineStringFrom:(POI *)resultItem {
-    CGFloat headlineFontSize = 15;
+    CGFloat headlineFontSize = 18;
     
     NSString *baseString = [NSString stringWithFormat:@"%@", resultItem.name];
     
@@ -174,11 +181,11 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) createCommonConstraints {
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address);
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_headline]|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_headline]-10-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_headline][_address]" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_headline][_address]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
-//    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_address]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_address]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
     self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
                                                                  attribute:NSLayoutAttributeHeight
@@ -186,7 +193,7 @@ static NSParagraphStyle *paragraphStyle;
                                                                     toItem:nil
                                                                  attribute:NSLayoutAttributeNotAnAttribute
                                                                 multiplier:1
-                                                                  constant:50];
+                                                                  constant:30];
     
     self.addressHeightConstraint = [NSLayoutConstraint constraintWithItem:_address
                                                                    attribute:NSLayoutAttributeHeight

@@ -284,13 +284,19 @@
             
             // customize callout
             UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            [rightButton addTarget:self action:@selector(rightButtonCalloutHandler:) forControlEvents:UIControlEventTouchUpInside];
+//            [rightButton addTarget:self action:@selector(rightButtonCalloutHandler:) forControlEvents:UIControlEventTouchUpInside];
             pinView.rightCalloutAccessoryView = rightButton;
             
             // Add a custom image to the left side of the callout.
-            UIImageView *calloutImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"heart-unfilled-32.png"]];
+            UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-32.png"];
+            UIButton *heartButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            heartButton.frame = CGRectMake(0, 0, 40, 40);
+            [heartButton setImage:heartImage forState:UIControlStateNormal];
+            [heartButton setImage:heartImage forState:UIControlStateHighlighted];
+
+//            UIImageView *calloutImage = [[UIImageView alloc] initWithImage:heartImage];
             // how to add target to image (if want to make it a button)
-            pinView.leftCalloutAccessoryView = calloutImage;
+            pinView.leftCalloutAccessoryView = heartButton;
             
         } else {
             pinView.annotation = annotation;
@@ -301,12 +307,18 @@
     
     return nil;
 }
-- (void)rightButtonCalloutHandler:(id)sender {
-    NSLog(@"hello from moreInfo");
-}
+//- (void)rightButtonCalloutHandler:(id)sender {
+//    NSLog(@"hello from moreInfo");
+//}
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    NSLog(@"hello");
+//    NSLog(@"hello");
+    if ([view.leftCalloutAccessoryView isEqual:control]) {
+        NSLog(@"left button");
+    }
+    else if ([view.rightCalloutAccessoryView isEqual:control]){
+        NSLog(@"right button");
+    }
     
 //    QUESTION how to distinguish between right and left; why only right registers
     

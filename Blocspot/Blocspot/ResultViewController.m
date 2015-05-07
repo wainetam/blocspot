@@ -14,7 +14,7 @@
 //@property (nonatomic, strong) UIView *resultView;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGestureRecognizer;
 @property (nonatomic, weak) POI *poiResult;
-@property (nonatomic, strong) UIView *image;
+@property (nonatomic, strong) UIView *image; // QUESTION: best way to get images? native to MKLocalSearch?
 @property (nonatomic, strong) UIView *map;
 @property (nonatomic, strong) UIView *info;
 
@@ -124,7 +124,8 @@
     //QUESTION: why is presentingVC here UINav?
     ((UINavigationController *)self.presentingViewController).navigationBarHidden = NO;
     
-    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
+//    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 
 }
 /*

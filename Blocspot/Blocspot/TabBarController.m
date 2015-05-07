@@ -23,7 +23,6 @@
         MapViewController *mapVC = [[MapViewController alloc] init];
         
         UIImage *mapViewTabBarIcon = [UIImage imageNamed:@"pin-map-24.png"];
-//        UIImage *mapViewTabBarIconSelected = [UIImage imageNamed:@"pin-map-32.png"];
         
         UITabBarItem *mapViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Map View" image:mapViewTabBarIcon selectedImage:nil];
         [mapVC setTabBarItem:mapViewBarItem];
@@ -31,7 +30,6 @@
         ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
         
         UIImage *listViewTabBarIcon = [UIImage imageNamed:@"list-view-24.png"];
-//        UIImage *listViewTabBarIconSelected = [UIImage imageNamed:@"pin-map-32.png"];
     
         UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:listViewTabBarIcon selectedImage:nil];
         [resultsVC setTabBarItem:listViewBarItem];
