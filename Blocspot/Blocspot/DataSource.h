@@ -12,6 +12,7 @@
 
 @class POI;
 @class Search;
+@class POICategory;
 
 @interface DataSource : NSObject
 
@@ -20,11 +21,17 @@
 @property (nonatomic, strong) NSMutableArray *searchHistory;
 @property (nonatomic, strong) NSArray *poiResults;
 @property (nonatomic, strong) NSArray *annotations; // QUESTION: should I store annotations here or with mapView?
+@property (nonatomic, strong) NSMutableArray *categories;
+@property (nonatomic, strong) NSMutableArray *favorites;
 
 - (void)cancelActiveSearch:(Search *)search;
 - (void)deleteSearchHistory:(NSMutableArray *)searchHistory;
-
 - (void)requestSearchHistory;
+- (void)addCategory:(POICategory *)category;
+- (void)addToFavorites:(POI *)poi;
+- (void)removeFromFavorites:(POI *)poi;
+- (void)clearFavorites;
+
 
 //- (void)requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
 

@@ -7,6 +7,7 @@
 //
 
 #import "POI.h"
+#import "DataSource.h"
 
 @implementation POI
 
@@ -21,6 +22,10 @@
     self.url = poiDict[@"url"];
 
     return self;
+}
+
+- (bool) isFavorited {
+    return [[DataSource sharedInstance].favorites containsObject:self];
 }
 
 @end

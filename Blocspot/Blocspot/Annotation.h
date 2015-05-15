@@ -19,5 +19,5 @@
 - (id)initWithLocation:(CLLocationCoordinate2D)coord;
 - (id)initWithPlacemark:(MKPlacemark *)placemark;
 - (id)initWithMapItem:(MKMapItem *)mapItem;
-
+- (void)favorited:(id)sender;
 @end

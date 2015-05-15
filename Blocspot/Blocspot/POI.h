@@ -23,5 +23,6 @@
 
 - (void)poi:(POI *)poi comment:(NSString *)comment; // poi:comment:
 - (instancetype) initWithDictionary:(NSDictionary *)poiDict;
+- (bool) isFavorited;
 
 @end

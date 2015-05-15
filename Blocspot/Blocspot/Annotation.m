@@ -36,5 +36,9 @@
     return self;
 }
 
+//- (void)favorited:(id)sender {
+//    NSLog(@"FAVORITED");
+//}
+
 
 @end

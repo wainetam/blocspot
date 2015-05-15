@@ -49,16 +49,6 @@
 //    self.searchBar.showsCancelButton = YES;
     
     [self.tableView registerClass:[ResultsTableViewCell class] forCellReuseIdentifier:@"resultCell"];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
-//    NSLog(@"contentOffsetY VDL2 %f", self.tableView.contentOffset.y);
-//    self.savedContentOffsetY = self.tableView.contentOffset.y;
-//    NSLog(@"contentOffsetY VDL3 %f", self.tableView.contentOffset.y);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -97,11 +87,9 @@
     ResultsTableViewCell *cell = (ResultsTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ResultViewController *resultModalVC = [[ResultViewController alloc] initWithTableViewCell:cell];
 
-    [self.tabBarController.navigationController pushViewController:resultModalVC animated:true];
+    [self.tabBarController.navigationController pushViewController:resultModalVC animated:NO];
     
     [tableView deselectRowAtIndexPath:indexPath animated:false];
-    
-//    self.navigationController.navigationBarHidden = YES;
     
 //    CATransition *transition = [CATransition animation];
 //    transition.duration = 0.4;
@@ -193,7 +181,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 65;
 //    POI *resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
     
 //    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];

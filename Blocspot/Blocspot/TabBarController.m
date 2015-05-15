@@ -29,12 +29,22 @@
     
         ResultsTableViewController *resultsVC = [[ResultsTableViewController alloc] init];
         
-        UIImage *listViewTabBarIcon = [UIImage imageNamed:@"list-view-24.png"];
+        UIImage *maplistViewTabBarIcon = [UIImage imageNamed:@"list-view-24.png"];
     
-        UITabBarItem *listViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:listViewTabBarIcon selectedImage:nil];
-        [resultsVC setTabBarItem:listViewBarItem];
+        UITabBarItem *maplistViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:maplistViewTabBarIcon selectedImage:nil];
+        [resultsVC setTabBarItem:maplistViewBarItem];
+        
+        ResultsTableViewController *favoritesVC = [[ResultsTableViewController alloc] init];
+        
+        UIImage *favListViewTabBarIcon = [UIImage imageNamed:@"heart-filled-24.png"];
+//         imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal
+        
+        UITabBarItem *favlistViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:favListViewTabBarIcon selectedImage:nil];
+        
+        [favoritesVC setTabBarItem:favlistViewBarItem];
+        
     
-        NSArray *tabArray = @[mapVC, resultsVC];
+        NSArray *tabArray = @[mapVC, resultsVC, favoritesVC];
         
         [self setViewControllers:tabArray];
         

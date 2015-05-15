@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class ResultsTableViewCell;
+
 @interface ResultViewController : UIViewController
 
-- (id)initWithTableViewCell:(UITableViewCell *)cell;
+- (id)initWithTableViewCell:(ResultsTableViewCell *)cell;
 
 @end

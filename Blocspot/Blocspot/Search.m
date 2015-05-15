@@ -79,6 +79,8 @@
 //                Annotation *annotation = [[Annotation alloc] initWithLocation:mapItem.placemark.location.coordinate];
 //                annotation.title = mapItem.name;
                 
+                
+                // QUESTION annotations indexed similarly to poiResults
                 [annotations addObject:annotation];
                 NSDictionary *mapItemDict = [self parseMapItemProperties:mapItem];
                 POI *poi = [[POI alloc] initWithDictionary:mapItemDict];

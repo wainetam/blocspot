@@ -80,9 +80,9 @@ static NSParagraphStyle *paragraphStyle;
         self.image = [[UIImageView alloc] init];
         self.visitedImage = [[UIImageView alloc] init];
         self.visitedImage.userInteractionEnabled = YES;
-        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapFired:)];
+//        self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableCellTapHandler:)];
         self.tapGestureRecognizer.delegate = self;
-        [self.visitedImage addGestureRecognizer:self.tapGestureRecognizer];
+//        [self.visitedImage addGestureRecognizer:self.tapGestureRecognizer];
         
         self.headline = [[UILabel alloc] init];
         self.headline.numberOfLines = 1;
@@ -96,9 +96,8 @@ static NSParagraphStyle *paragraphStyle;
         self.visited = NO;
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         
-        self.layoutMargins = UIEdgeInsetsZero; // makes divider between rows flush to edges
+//        self.layoutMargins = UIEdgeInsetsZero; // makes divider between rows flush to edges
         
-        // QUESTION how to change attributes of POI?
 //        
         for (UIView *view in @[self.headline, self.address]) {
             [self.contentView addSubview:view];
@@ -181,11 +180,11 @@ static NSParagraphStyle *paragraphStyle;
 
 - (void) createCommonConstraints {
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address);
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_headline]-10-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_headline]-8-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_headline][_address]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-5-[_headline][_address]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_address]-10-|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
     self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
                                                                  attribute:NSLayoutAttributeHeight
@@ -201,7 +200,7 @@ static NSParagraphStyle *paragraphStyle;
                                                                       toItem:nil
                                                                    attribute:NSLayoutAttributeNotAnAttribute
                                                                   multiplier:1
-                                                                    constant:50];
+                                                                    constant:20];
     
 //    self.visitedHeightConstraint = [NSLayoutConstraint constraintWithItem:_visited
 //                                                                  attribute:NSLayoutAttributeHeight
@@ -254,7 +253,7 @@ static NSParagraphStyle *paragraphStyle;
 
 #pragma mark - Visited Toggle
 
-- (void) tapFired:(UITapGestureRecognizer *)sender {
+- (void) tableCellTapHandler:(UITapGestureRecognizer *)sender {
     self.visited = !self.visited;
 //    [self.delegate cell:self didTapImageView:self.visitedImage];
 }

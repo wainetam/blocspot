@@ -30,6 +30,8 @@
 
 @end
 
+NSString *const FavoritedNotification = @"FavoritedNotification";
+
 @implementation MapViewController
 
 - (void)loadView {
@@ -274,6 +276,13 @@
         // Try to dequeue an existing pin view first.
         MKPinAnnotationView* pinView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotationView"];
         
+        [[NSNotificationCenter defaultCenter] addObserver:annotation selector:@selector(favorited:) name:FavoritedNotification object:nil];
+//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginWithEmail:) name:BENNET_TRY_LOGGING_IN_AS_USER object:nil];
+//            
+//        }];
+        UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-24.png"];
+        UIImage* heartImageFilled = [UIImage imageNamed:@"heart-filled-24.png"];
+        
         if (!pinView) {
             // If an existing pin view was not available, create one.
             pinView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
@@ -287,12 +296,14 @@
 //            [rightButton addTarget:self action:@selector(rightButtonCalloutHandler:) forControlEvents:UIControlEventTouchUpInside];
             pinView.rightCalloutAccessoryView = rightButton;
             
+            // QUESTION: easiest way to keep track of changing icons and state?
             // Add a custom image to the left side of the callout.
-            UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-24.png"];
+//            UIImage* heartImage = [UIImage imageNamed:@"heart-unfilled-24.png"];
+            
             UIButton *heartButton = [UIButton buttonWithType:UIButtonTypeCustom];
             heartButton.frame = CGRectMake(0, 0, 40, 40);
             [heartButton setImage:heartImage forState:UIControlStateNormal];
-            [heartButton setImage:heartImage forState:UIControlStateHighlighted];
+            [heartButton setImage:heartImageFilled forState:UIControlStateSelected];
 
 //            UIImageView *calloutImage = [[UIImageView alloc] initWithImage:heartImage];
             // how to add target to image (if want to make it a button)
@@ -300,6 +311,13 @@
             
         } else {
             pinView.annotation = annotation;
+        }
+        
+        
+        if ([self getPOIofAnnotation:annotation].isFavorited) {
+            [(MKAnnotationView *)pinView.leftCalloutAccessoryView setSelected:YES];
+        } else {
+            [(MKAnnotationView *)pinView.leftCalloutAccessoryView setSelected:NO];
         }
         
         return pinView;
@@ -311,19 +329,37 @@
 //    NSLog(@"hello from moreInfo");
 //}
 
+// QUESTION: do i need this? when do i use NSNotificationCenter?
+- (POI *)getPOIofAnnotation:(Annotation *)annotation {
+    NSUInteger annotationIndex = [[DataSource sharedInstance].annotations indexOfObject:annotation];
+    return [[DataSource sharedInstance].poiResults objectAtIndex:annotationIndex];
+}
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-//    NSLog(@"hello");
     if ([view.leftCalloutAccessoryView isEqual:control]) {
+        POI *poiAtIndex = [self getPOIofAnnotation:view.annotation];
+        if (control.selected) {
+            [control setSelected:NO];
+            [[DataSource sharedInstance] removeFromFavorites:poiAtIndex];
+        } else {
+            [control setSelected:YES];
+            [[DataSource sharedInstance] addToFavorites:poiAtIndex];
+        }
+//        NSNotificationCenter
+//        [[NSNotificationCenter defaultCenter] postNotificationName:FavoritedNotification object:view.annotation];
         NSLog(@"left button");
+
+        // add to favorites
+        
     }
     else if ([view.rightCalloutAccessoryView isEqual:control]){
+        
         NSLog(@"right button");
     }
     
 //    QUESTION how to distinguish between right and left; why only right registers
     
 }
-
 
 /*
 #pragma mark - Navigation
