@@ -12,5 +12,6 @@
 @interface ResultsTableViewController : UITableViewController <UISearchBarDelegate, ResultsTableViewCellDelegate>
 
 @property (nonatomic, strong) NSArray *results;
+//@property (nonatomic, strong) NSMutableArray *favorites;
 
 @end

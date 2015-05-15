@@ -30,7 +30,7 @@
 
 @end
 
-NSString *const FavoritedNotification = @"FavoritedNotification";
+NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
 
 @implementation MapViewController
 
@@ -276,7 +276,7 @@ NSString *const FavoritedNotification = @"FavoritedNotification";
         // Try to dequeue an existing pin view first.
         MKPinAnnotationView* pinView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomAnnotationView"];
         
-        [[NSNotificationCenter defaultCenter] addObserver:annotation selector:@selector(favorited:) name:FavoritedNotification object:nil];
+//        [[NSNotificationCenter defaultCenter] addObserver:annotation selector:@selector(favorited:) name:FavoritedNotification object:nil];
 //                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginWithEmail:) name:BENNET_TRY_LOGGING_IN_AS_USER object:nil];
 //            
 //        }];
@@ -345,10 +345,10 @@ NSString *const FavoritedNotification = @"FavoritedNotification";
             [control setSelected:YES];
             [[DataSource sharedInstance] addToFavorites:poiAtIndex];
         }
-//        NSNotificationCenter
-//        [[NSNotificationCenter defaultCenter] postNotificationName:FavoritedNotification object:view.annotation];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:EditedFavoritesNotification object:[DataSource sharedInstance]];
+        
         NSLog(@"left button");
-
         // add to favorites
         
     }

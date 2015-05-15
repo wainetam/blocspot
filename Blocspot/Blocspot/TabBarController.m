@@ -9,6 +9,7 @@
 #import "TabBarController.h"
 #import "MapViewController.h"
 #import "ResultsTableViewController.h"
+#import "FavoritesTableViewController.h"
 //#import "Search.h"
 
 @interface TabBarController ()
@@ -34,7 +35,7 @@
         UITabBarItem *maplistViewBarItem = [[UITabBarItem alloc] initWithTitle:@"List View" image:maplistViewTabBarIcon selectedImage:nil];
         [resultsVC setTabBarItem:maplistViewBarItem];
         
-        ResultsTableViewController *favoritesVC = [[ResultsTableViewController alloc] init];
+        FavoritesTableViewController *favoritesVC = [[FavoritesTableViewController alloc] init];
         
         UIImage *favListViewTabBarIcon = [UIImage imageNamed:@"heart-filled-24.png"];
 //         imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal
