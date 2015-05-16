@@ -7,10 +7,7 @@
 //
 
 #import "BSTableViewController.h"
-#import "POI.h"
 #import "DataSource.h"
-#import "User.h"
-#import "Search.h"
 #import "ResultsTableViewCell.h"
 #import "ResultViewController.h"
 

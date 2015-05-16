@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ResultsTableViewCell.h"
+#import "BSTableViewController.h"
 
-@interface ResultsTableViewController : UITableViewController <UISearchBarDelegate, ResultsTableViewCellDelegate>
-
-@property (nonatomic, strong) NSArray *results;
-//@property (nonatomic, strong) NSMutableArray *favorites;
+@interface ResultsTableViewController : BSTableViewController
 
 @end
