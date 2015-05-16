@@ -27,29 +27,14 @@
     if (self) {
         self.favorites = [NSMutableArray new];
         self.categories = [NSMutableDictionary dictionaryWithDictionary:@{
-            @"restaurants" : @[],
-            @"bars" : @[],
-            @"stores" : @[],
-            @"museums" : @[],
+            @"restaurant" : [NSMutableArray new],
+            @"bar" : [NSMutableArray new],
+            @"store" : [NSMutableArray new],
+            @"museum" : [NSMutableArray new],
         }];
     }
     
     return self;
-}
-
-- (void)addToFavorites:(POI *)poi {
-    if (![poi isFavorited]) {
-        [self.favorites addObject:poi];
-    } else {
-        // manage this case
-        NSLog(@"already added to favorites list");
-    }
-}
-
-- (void)removeFromFavorites:(POI *)poi {
-    if ([poi isFavorited]) {
-        [self.favorites removeObject:poi];
-    }
 }
 
 @end

@@ -340,10 +340,10 @@ NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
         POI *poiAtIndex = [self getPOIofAnnotation:view.annotation];
         if (control.selected) {
             [control setSelected:NO];
-            [[DataSource sharedInstance] removeFromFavorites:poiAtIndex];
+            [poiAtIndex removeFromFavorites];
         } else {
             [control setSelected:YES];
-            [[DataSource sharedInstance] addToFavorites:poiAtIndex];
+            [poiAtIndex addToFavorites];
         }
         
         [[NSNotificationCenter defaultCenter] postNotificationName:EditedFavoritesNotification object:[DataSource sharedInstance]];

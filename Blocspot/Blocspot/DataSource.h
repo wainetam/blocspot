@@ -12,7 +12,7 @@
 
 @class POI;
 @class Search;
-@class POICategory;
+@class BSCategory;
 
 @interface DataSource : NSObject
 
@@ -27,9 +27,7 @@
 - (void)cancelActiveSearch:(Search *)search;
 - (void)deleteSearchHistory:(NSMutableArray *)searchHistory;
 - (void)requestSearchHistory;
-- (void)addCategory:(POICategory *)category;
-- (void)addToFavorites:(POI *)poi;
-- (void)removeFromFavorites:(POI *)poi;
+- (void)addCategory:(BSCategory *)category;
 - (void)clearFavorites;
 
 

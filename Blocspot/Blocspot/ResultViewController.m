@@ -10,6 +10,8 @@
 #import "ResultsTableViewCell.h"
 #import "POI.h"
 #import "DataSource.h"
+#import "BSCategory.h"
+#import "BSCategoryButton.h"
 
 @interface ResultViewController ()
 
@@ -24,11 +26,12 @@
 @property (nonatomic, strong) UITextView *contactInfo;
 //@property (nonatomic, strong) UILabel *contactInfo;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) UIButton *assignToCategoryButton;
+@property (nonatomic, strong) BSCategoryButton *assignToCategoryButton;
 
 @property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *contactInfoHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *assignToCategoryButtonHeightConstraint;
 
 @end
 
@@ -78,11 +81,15 @@ static UIFont *lightFont;
     self.contactInfo.textColor = [UIColor blackColor];
 
     // addCategory button
-    self.assignToCategoryButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    [self.assignToCategoryButton addTarget:self action:@selector(assignToCategory:) forControlEvents:UIControlEventTouchUpInside];
+    BSCategory *restaurant = [BSCategory new];
+    restaurant.name = @"restaurant";
+    restaurant.color = [UIColor yellowColor];
     
+    self.assignToCategoryButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:self.poiResult];
+    [self.assignToCategoryButton setTitle:@"Add to Restaurant Category" forState:UIControlStateNormal];
     
-//QUESTION: UILabel vs TextView; also constraints are wrong
+    [self.assignToCategoryButton addTarget:self action:@selector(addCategoryTag:) forControlEvents:UIControlEventTouchUpInside];
+    
     self.contactInfo = [UITextView new];
 
     
@@ -210,24 +217,29 @@ static UIFont *lightFont;
 
 #pragma mark - Categories
 
-- (void) assignToCategory:(POI *)poi {
-    NSLog(@"assignToCategory clicked");
-    [[DataSource sharedInstance].categories setObject:poi forKey:@"restaurants"];
-    NSLog(@"added to restaurants Category");
-}
+//- (void) poi:(POI *)poi assignToCategory:(BSCategory *)category {
+//    if (![poi hasCategory:category]) {
+//        [[DataSource sharedInstance].categories[category.name] addObject:poi];
+//        [self addCategoryTag:category toView:self.view];
+//        
+//        // add to Favorites if haven't already
+//        if (![poi isFavorited]) {
+//            [poi addToFavorites];
+//        }
+//        
+//    } else {
+//        // already added to category X
+//    }
+//}
 
-- (void) addCategoryTagToView:(UIView *)view {
-    UILabel *restaurantTag = [[UILabel alloc] initWithFrame:CGRectMake(0, 300, 100, 20)];
+- (void) addCategoryTag:(BSCategoryButton *)sender {
+    [sender.poi assignToCategory:sender.category];
+    
+    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(0, 300, 100, 20)];
     // do you call layout subview
-    
-    [restaurantTag setText:@"Restaurant"];
-    restaurantTag.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:restaurantTag];
-    
-    // if not already a favorite, add it to favorites
-    
-    // sort by categories on favoritesTableView
-//    QUESTION: what's a good way to display on favorites -- a modal filter or something else
+    [categoryTag setText:sender.category.name];
+    categoryTag.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:categoryTag];
 }
 
 #pragma mark - Swipe Left to Close
@@ -262,12 +274,20 @@ static UIFont *lightFont;
 #pragma mark - Constraints
 
 - (void) createCommonConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo);
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _assignToCategoryButton);
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_headline]-20-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_assignToCategoryButton][_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
+    
+    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
+                                                                 attribute:NSLayoutAttributeHeight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:nil
+                                                                 attribute:NSLayoutAttributeNotAnAttribute
+                                                                multiplier:1
+                                                                  constant:20];
     
     self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
                                                                  attribute:NSLayoutAttributeHeight
