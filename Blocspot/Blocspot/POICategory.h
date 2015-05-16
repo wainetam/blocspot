@@ -14,6 +14,4 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIColor *color;
 
-
-
 @end

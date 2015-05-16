@@ -26,6 +26,12 @@
     
     if (self) {
         self.favorites = [NSMutableArray new];
+        self.categories = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"restaurants" : @[],
+            @"bars" : @[],
+            @"stores" : @[],
+            @"museums" : @[],
+        }];
     }
     
     return self;

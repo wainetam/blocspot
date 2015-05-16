@@ -9,6 +9,7 @@
 #import "ResultViewController.h"
 #import "ResultsTableViewCell.h"
 #import "POI.h"
+#import "DataSource.h"
 
 @interface ResultViewController ()
 
@@ -20,9 +21,10 @@
 @property (nonatomic, strong) UIView *info;
 @property (nonatomic, strong) UILabel *headline;
 @property (nonatomic, strong) UILabel *address;
-//@property (nonatomic, strong) UITextView *contactInfo;
-@property (nonatomic, strong) UILabel *contactInfo;
+@property (nonatomic, strong) UITextView *contactInfo;
+//@property (nonatomic, strong) UILabel *contactInfo;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) UIButton *assignToCategoryButton;
 
 @property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
@@ -71,16 +73,27 @@ static UIFont *lightFont;
     self.address = [UILabel new];
     self.address.attributedText = [self addressStringFrom:self.poiResult];
     self.address.numberOfLines = 4;
-    self.contactInfo = [UILabel new];
-//QUESTION: UILabel vs TextView; also constraints are wrong
-//    self.contactInfo = [UITextView new];
-//    [self.contactInfo setFrame:CGRectMake(0, 60, self.view.bounds.size.width, 200)];
-//    self.contactInfo.frame.size.height = 60;
-    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
-//    self.contactInfo.editable = NO;
-//    self.contactInfo.dataDetectorTypes = UIDataDetectorTypeAll;
+//    self.contactInfo = [UILabel new];
+    self.contactInfo = [UITextView new];
+    self.contactInfo.textColor = [UIColor blackColor];
+
+    // addCategory button
+    self.assignToCategoryButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    [self.assignToCategoryButton addTarget:self action:@selector(assignToCategory:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.contactInfo.numberOfLines = 2;
+    
+//QUESTION: UILabel vs TextView; also constraints are wrong
+    self.contactInfo = [UITextView new];
+
+    
+//    self.contactInfo.frame.size.height = 60;
+//    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
+//    self.contactInfo.editable = NO;
+    self.contactInfo.dataDetectorTypes = UIDataDetectorTypeAll;
+    self.contactInfo.backgroundColor = [UIColor whiteColor];
+    
+//    self.contactInfo.numberOfLines = 2;
+    
 //    self.url = [UIlabel new];
 //    self.url.attributedText = [self urlStringFrom:self.poiResult];
 //    self.phoneNumber.attributedText = [self phoneNumberStringFrom:self.poiResult];
@@ -98,22 +111,10 @@ static UIFont *lightFont;
 //    NSArray *mapItemValues = @[name, url, phoneNumber, location, addressDict];
 //    
 //    NSArray *mapItemKeys = @[@"name", @"url", @"phoneNumber", @"location", @"addressDict"];
-
-    
-    
-//    self.topView = [UIToolbar new];
-//    self.bottomView = [UIToolbar new];
-//    self.cropBox = [CropBox new];
-//    self.cameraToolbar = [[CameraToolbar alloc] initWithImageNames:@[@"rotate", @"road"]];
-//    self.cameraToolbar.delegate = self;
-//    self.topView.barTintColor = whiteBG; // barTintColor is like backgroundColor but it'll be translucent when rendered
-//    self.bottomView.barTintColor = whiteBG;
-//    self.topView.alpha = 0.5;
-//    self.bottomView.alpha = 0.5;
 }
 
 - (void) addViewsToView {
-    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo] mutableCopy];
+    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo, self.assignToCategoryButton] mutableCopy];
     for (UIView *view in views) {
         [self.view addSubview:view];
         
@@ -145,26 +146,11 @@ static UIFont *lightFont;
     
     self.view.frame = CGRectMake(0, yOffset, width, height - yOffset);
     
+//    self.assignToCategoryButton.frame = CGRectMake(0, 100, 100, 50);
+//    self.contactInfo.frame = CGRectMake(0, 60, self.view.bounds.size.width, 200);
+    
     UIColor *bgColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:1];
     self.view.backgroundColor = bgColor;
-    
-//    NSLog(@"resultView frame origin %f", self.view.frame.origin.y);
-    
-    
-    
-//    CGFloat width = CGRectGetWidth(self.view.bounds);
-//    self.topView.frame = CGRectMake(0, self.topLayoutGuide.length, width, 44);
-//    
-//    CGFloat yOriginOfBottomView = CGRectGetMaxY(self.topView.frame) + width;
-//    CGFloat heightOfBottomView = CGRectGetHeight(self.view.frame) - yOriginOfBottomView;
-//    self.bottomView.frame = CGRectMake(0, yOriginOfBottomView, width, heightOfBottomView);
-//    
-//    self.cropBox.frame = CGRectMake(0, CGRectGetMaxY(self.topView.frame), width, width);
-//    self.imagePreview.frame = self.view.bounds;
-//    self.captureVideoPreviewLayer.frame = self.imagePreview.bounds;
-//    
-//    CGFloat cameraToolbarHeight = 100;
-//    self.cameraToolbar.frame = CGRectMake(0, CGRectGetHeight(self.view.bounds) - cameraToolbarHeight, width, cameraToolbarHeight);
     
 }
 
@@ -222,6 +208,28 @@ static UIFont *lightFont;
 //    return mutableUsernameAndCaptionString;
 //}
 
+#pragma mark - Categories
+
+- (void) assignToCategory:(POI *)poi {
+    NSLog(@"assignToCategory clicked");
+    [[DataSource sharedInstance].categories setObject:poi forKey:@"restaurants"];
+    NSLog(@"added to restaurants Category");
+}
+
+- (void) addCategoryTagToView:(UIView *)view {
+    UILabel *restaurantTag = [[UILabel alloc] initWithFrame:CGRectMake(0, 300, 100, 20)];
+    // do you call layout subview
+    
+    [restaurantTag setText:@"Restaurant"];
+    restaurantTag.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:restaurantTag];
+    
+    // if not already a favorite, add it to favorites
+    
+    // sort by categories on favoritesTableView
+//    QUESTION: what's a good way to display on favorites -- a modal filter or something else
+}
+
 #pragma mark - Swipe Left to Close
                                            
 - (void) leftSwipeHandler:(UISwipeGestureRecognizer *)sender {
@@ -257,7 +265,7 @@ static UIFont *lightFont;
     NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo);
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_headline]-20-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_headline][_address]-5-[_contactInfo]|" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
