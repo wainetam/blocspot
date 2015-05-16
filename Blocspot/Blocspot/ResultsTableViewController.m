@@ -18,7 +18,6 @@
 - (id)init {
     if (self) {
         self = [super init];
-        self.results = [DataSource sharedInstance].poiResults;
         self.resultsKeyPath = @"poiResults";
     }
     
@@ -27,10 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.results = [DataSource sharedInstance].poiResults;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -38,6 +38,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
 - (void)dealloc {

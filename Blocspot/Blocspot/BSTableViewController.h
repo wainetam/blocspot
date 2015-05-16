@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) NSString *resultsKeyPath;
 
+- (void)refreshTableData:(id)sender;
+
 @end

@@ -20,8 +20,6 @@
 - (id)init {
     if (self) {
         self = [super init];
-        // set results property
-//        self.results = [DataSource sharedInstance].poiResults;
         // set keypath for results
 //        self.resultsKeyPath = @"poiResults";
     }
@@ -38,6 +36,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // set results property
+    //        self.results = [DataSource sharedInstance].poiResults;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -46,17 +47,21 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
 }
 
-- (void)dealloc { // removes observer upon dealloc
-    //    [[DataSource sharedInstance] removeObserver:self forKeyPath:@"poiResults"];
+- (void)dealloc {
     
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// call to refresh data
+- (void)refreshTableData:(id)sender {
+    [self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +140,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return [DataSource sharedInstance].poiResults.count;
+    return self.results.count;
     
 }
 
@@ -151,7 +156,7 @@
     
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
-    cell.resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
+    cell.resultItem = self.results[indexPath.row];
     
     
     return cell;
