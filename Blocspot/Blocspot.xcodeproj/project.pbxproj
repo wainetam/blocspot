@@ -14,6 +14,7 @@
 		B616E6A91ADB24C500EEC5D7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B616E6A81ADB24C400EEC5D7 /* MapViewController.m */; };
 		B620921D1AEF40A000BF02EE /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B620921C1AEF40A000BF02EE /* ResultViewController.m */; };
 		B645A1AB1AE7484D00D2C52D /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B645A1AA1AE7484D00D2C52D /* TabBarController.m */; };
+		B66D72081B08E262003AD68A /* BSCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B66D72071B08E262003AD68A /* BSCategoryViewController.m */; };
 		B67CFF2A1AD22D0F00151FEA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF291AD22D0F00151FEA /* main.m */; };
 		B67CFF2D1AD22D0F00151FEA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF2C1AD22D0F00151FEA /* AppDelegate.m */; };
 		B67CFF301AD22D0F00151FEA /* Blocspot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF2E1AD22D0F00151FEA /* Blocspot.xcdatamodeld */; };
@@ -57,6 +58,8 @@
 		B63534631AE5FDA00004E367 /* Blocspot-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Blocspot-Prefix.pch"; sourceTree = "<group>"; };
 		B645A1A91AE7484D00D2C52D /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		B645A1AA1AE7484D00D2C52D /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		B66D72061B08E262003AD68A /* BSCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCategoryViewController.h; sourceTree = "<group>"; };
+		B66D72071B08E262003AD68A /* BSCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCategoryViewController.m; sourceTree = "<group>"; };
 		B67CFF241AD22D0F00151FEA /* Blocspot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blocspot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67CFF281AD22D0F00151FEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B67CFF291AD22D0F00151FEA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				B60634BB1AFBB635004F26DE /* Images.xcassets */,
 				B6A5FF351B07F770008E43C0 /* BSCategoryButton.h */,
 				B6A5FF361B07F770008E43C0 /* BSCategoryButton.m */,
+				B66D72061B08E262003AD68A /* BSCategoryViewController.h */,
+				B66D72071B08E262003AD68A /* BSCategoryViewController.m */,
 				B6ADB4931AFA2DA100F2666D /* Annotation.h */,
 				B6ADB4941AFA2DA100F2666D /* Annotation.m */,
 				B67CFF2B1AD22D0F00151FEA /* AppDelegate.h */,
@@ -355,6 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B67CFF591AD426D800151FEA /* POI.m in Sources */,
+				B66D72081B08E262003AD68A /* BSCategoryViewController.m in Sources */,
 				B6A5FF311B07BB98008E43C0 /* BSTableViewController.m in Sources */,
 				B67CFF5F1AD426F200151FEA /* Search.m in Sources */,
 				B616E6A31ADAC38C00EEC5D7 /* ResultsTableViewController.m in Sources */,

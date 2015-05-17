@@ -89,6 +89,7 @@
             
             [DataSource sharedInstance].poiResults = self.poiResults; // fix
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultsNotification" object:[DataSource sharedInstance]];
             
             // add annotations
             [DataSource sharedInstance].annotations = nil;

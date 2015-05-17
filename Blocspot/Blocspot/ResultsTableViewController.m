@@ -19,6 +19,9 @@
     if (self) {
         self = [super init];
         self.resultsKeyPath = @"poiResults";
+//    QUESTION: // data on reloaded if go to listview first
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"EditedResultsNotification" object:[DataSource sharedInstance]];
+
     }
     
     return self;
@@ -30,6 +33,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.results = [DataSource sharedInstance].poiResults;
 }
 

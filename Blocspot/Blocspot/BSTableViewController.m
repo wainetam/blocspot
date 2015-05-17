@@ -84,8 +84,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
-    //    cell.resultItem = poi;
+//        POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
+//        cell.resultItem = poi;
     
     // TBD
     //    if (mediaItem.downloadState == MediaDownloadStateNeedsImage) {
@@ -156,8 +156,8 @@
     
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
+    // QUESTION only called after search results
     cell.resultItem = self.results[indexPath.row];
-    
     
     return cell;
 }
