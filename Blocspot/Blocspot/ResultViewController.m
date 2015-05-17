@@ -18,7 +18,6 @@
 
 //@property (nonatomic, strong) UIView *resultView;
 @property (nonatomic, strong) UISwipeGestureRecognizer *swipeLeftGestureRecognizer;
-@property (nonatomic, weak) POI *poiResult;
 @property (nonatomic, strong) UIView *image;
 @property (nonatomic, strong) UIView *map;
 @property (nonatomic, strong) UIView *info;
@@ -27,13 +26,12 @@
 @property (nonatomic, strong) UITextView *contactInfo;
 //@property (nonatomic, strong) UILabel *contactInfo;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) BSCategoryButton *assignToCategoryButton;
 @property (nonatomic, strong) UIButton *addToCategoryButton;
 
 @property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *contactInfoHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *assignToCategoryButtonHeightConstraint;
+//@property (nonatomic, strong) NSLayoutConstraint *assignToCategoryButtonHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonHeightConstraint;
 
 @end
@@ -82,16 +80,6 @@ static UIFont *lightFont;
 //    self.contactInfo = [UILabel new];
     self.contactInfo = [UITextView new];
     self.contactInfo.textColor = [UIColor blackColor];
-
-    // addCategory button
-    BSCategory *restaurant = [BSCategory new];
-    restaurant.name = @"restaurant";
-    restaurant.color = [UIColor yellowColor];
-    
-    self.assignToCategoryButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:self.poiResult];
-    [self.assignToCategoryButton setTitle:@"Add to Restaurant Category" forState:UIControlStateNormal];
-    
-    [self.assignToCategoryButton addTarget:self action:@selector(addCategoryTag:) forControlEvents:UIControlEventTouchUpInside];
     
     self.addToCategoryButton = [[UIButton alloc] init];
     [self.addToCategoryButton setTitle:@"Add to Category" forState:UIControlStateNormal];
@@ -129,7 +117,7 @@ static UIFont *lightFont;
 }
 
 - (void) addViewsToView {
-    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo, self.assignToCategoryButton, self.addToCategoryButton] mutableCopy];
+    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo, self.addToCategoryButton] mutableCopy];
     for (UIView *view in views) {
         [self.view addSubview:view];
         
@@ -225,6 +213,16 @@ static UIFont *lightFont;
 
 #pragma mark - Categories
 
+//- (void) addCategoryTag:(BSCategoryButton *)sender {
+//    [sender.poi assignToCategory:sender.category];
+//    
+//    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width / 2, 20)];
+//    // do you call layout subview
+//    [categoryTag setText:sender.category.name];
+//    categoryTag.backgroundColor = [UIColor whiteColor];
+//    [self.view addSubview:categoryTag];
+//}
+
 //- (void) poi:(POI *)poi assignToCategory:(BSCategory *)category {
 //    if (![poi hasCategory:category]) {
 //        [[DataSource sharedInstance].categories[category.name] addObject:poi];
@@ -246,16 +244,6 @@ static UIFont *lightFont;
         NSLog(@"modal presented...hopefully!");
         
     }];
-}
-
-- (void) addCategoryTag:(BSCategoryButton *)sender {
-    [sender.poi assignToCategory:sender.category];
-    
-    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(0, 300, 100, 20)];
-    // do you call layout subview
-    [categoryTag setText:sender.category.name];
-    categoryTag.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:categoryTag];
 }
 
 #pragma mark - Swipe Left to Close
@@ -290,10 +278,10 @@ static UIFont *lightFont;
 #pragma mark - Constraints
 
 - (void) createCommonConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _assignToCategoryButton, _addToCategoryButton);
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _addToCategoryButton);
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_headline]-20-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_addToCategoryButton][_assignToCategoryButton][_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_addToCategoryButton][_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
@@ -305,13 +293,13 @@ static UIFont *lightFont;
                                                                               multiplier:1
                                                                                 constant:20];
     
-    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:nil
-                                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                                multiplier:1
-                                                                  constant:20];
+//    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
+//                                                                 attribute:NSLayoutAttributeHeight
+//                                                                 relatedBy:NSLayoutRelationEqual
+//                                                                    toItem:nil
+//                                                                 attribute:NSLayoutAttributeNotAnAttribute
+//                                                                multiplier:1
+//                                                                  constant:20];
     
     self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
                                                                  attribute:NSLayoutAttributeHeight
@@ -335,7 +323,7 @@ static UIFont *lightFont;
                                                                multiplier:1
                                                                  constant:40];
     
-    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.assignToCategoryButtonHeightConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint]];
+    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint]];
     
 }
 

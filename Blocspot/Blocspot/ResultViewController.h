@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class ResultsTableViewCell;
+@class POI;
 
 @interface ResultViewController : UIViewController
+
+@property (nonatomic, weak) POI *poiResult;
 
 - (id)initWithTableViewCell:(ResultsTableViewCell *)cell;
 

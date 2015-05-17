@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-#import "BSCategoryButton.h"
 #import "BSCategory.h"
+#import "BSCategoryButton.h"
 #import "POI.h"
 
 @implementation BSCategoryButton

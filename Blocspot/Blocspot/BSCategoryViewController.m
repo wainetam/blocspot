@@ -6,13 +6,18 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-#import "BSCategoryViewController.h"
 #import "BSCategory.h"
+#import "BSCategoryButton.h"
+#import "BSCategoryViewController.h"
 #import "DataSource.h"
+#import "ResultViewController.h"
+#import "POI.h"
+
 
 @interface BSCategoryViewController ()
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapOutsideModal;
+//@property (nonatomic, weak) POI *poiResult;
 
 @end
 
@@ -54,16 +59,41 @@
     [self.tapOutsideModal setNumberOfTapsRequired:1];
     self.tapOutsideModal.cancelsTouchesInView = YES;
     
+    // addCategory button
+    BSCategory *restaurant = [BSCategory new];
+    restaurant.name = @"restaurant";
+    restaurant.color = [UIColor yellowColor];
+    
+    self.assignToCategoryButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    
+    [self.assignToCategoryButton setTitle:@"Add to Restaurant Category" forState:UIControlStateNormal];
+    
+    [self.assignToCategoryButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+
+    [self addViewsToView];
+    
     // Do any additional setup after loading the view.
+}
+
+- (void) addViewsToView {
+    NSMutableArray *views = [@[self.assignToCategoryButton] mutableCopy];
+    for (UIView *view in views) {
+        [self.view addSubview:view];
+        
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+    }
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
-    self.view.center = self.presentingViewController.view.center;
+
     // QUESTION: WHY is this centered (don't need the above line of code to be centered)
-    self.view.bounds = CGRectMake(0, 0, 250, 300);
+    self.view.bounds = self.view.window.bounds;
+    self.view.frame = CGRectMake(0, 0, 250, 300);
+//    self.view.center = self.presentingViewController.view.center;
     self.view.backgroundColor = [UIColor yellowColor];
+    
+    self.assignToCategoryButton.frame = CGRectMake(0, 50, 200, 20);
 }
 
 
@@ -86,6 +116,21 @@
                 [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
             }
         }
+    }
+}
+
+#pragma mark - Add to Category
+
+- (void) addCategoryTagHandler:(BSCategoryButton *)sender {
+    [sender.poi assignToCategory:sender.category];
+    
+    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
+    // do you call layout subview
+    [categoryTag setText:sender.category.name];
+    categoryTag.backgroundColor = [UIColor whiteColor];
+    
+    if ([self.presentingViewController isKindOfClass:(ResultViewController.class)]) {
+        [self.presentingViewController.view addSubview:categoryTag];
     }
 }
 

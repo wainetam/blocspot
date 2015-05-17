@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class BSCategory;
+@class BSCategoryButton;
 
 @interface BSCategoryViewController : UIViewController
 
 @property (nonatomic, weak) NSMutableArray *categories;
+@property (nonatomic, strong) BSCategoryButton *assignToCategoryButton;
 
 @end
