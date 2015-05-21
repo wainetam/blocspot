@@ -356,9 +356,6 @@ NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
         
         NSLog(@"right button");
     }
-    
-//    QUESTION how to distinguish between right and left; why only right registers
-    
 }
 
 /*

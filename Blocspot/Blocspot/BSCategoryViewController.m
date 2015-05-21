@@ -89,11 +89,11 @@
 
     // QUESTION: WHY is this centered (don't need the above line of code to be centered)
     self.view.bounds = self.view.window.bounds;
-    self.view.frame = CGRectMake(0, 0, 250, 300);
+    self.view.frame = CGRectMake(35, 80, 250, 300);
 //    self.view.center = self.presentingViewController.view.center;
     self.view.backgroundColor = [UIColor yellowColor];
     
-    self.assignToCategoryButton.frame = CGRectMake(0, 50, 200, 20);
+    self.assignToCategoryButton.frame = CGRectMake(0, 50, 250, 20);
 }
 
 
@@ -129,9 +129,16 @@
     [categoryTag setText:sender.category.name];
     categoryTag.backgroundColor = [UIColor whiteColor];
     
-    if ([self.presentingViewController isKindOfClass:(ResultViewController.class)]) {
+    // QUESTION: why does this controller not recognized?
+//    if ([self.presentingViewController is:(ResultViewController.class)]) {
         [self.presentingViewController.view addSubview:categoryTag];
-    }
+//    }
+    [self dismissViewControllerAnimated:YES completion:^{
+        return;
+    }];
+    
+    // QUESTION: go back on list view = crash
+    
 }
 
 /*
