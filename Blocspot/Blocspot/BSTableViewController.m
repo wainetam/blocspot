@@ -71,7 +71,7 @@
     
     [self.tabBarController.navigationController pushViewController:resultModalVC animated:NO];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:false];
+    [tableView deselectRowAtIndexPath:indexPath animated:true];
     
     //    CATransition *transition = [CATransition animation];
     //    transition.duration = 0.4;

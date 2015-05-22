@@ -67,6 +67,7 @@ static UIFont *lightFont;
     [self createConstraints];
     [self.view addGestureRecognizer:self.swipeLeftGestureRecognizer];
     // Do any additional setup after loading the view.
+//    self.navigationItem.leftBarButtonItem
 
 }
 
@@ -143,7 +144,7 @@ static UIFont *lightFont;
 //    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     
 //    CGFloat yOffset = heightOfNavBar + statusBarHeight;
-    CGFloat yOffset = self.topLayoutGuide.length;
+    CGFloat yOffset = 0;
     CGFloat height = self.view.bounds.size.height;
     CGFloat width = self.view.bounds.size.width;
     
@@ -152,9 +153,20 @@ static UIFont *lightFont;
 //    self.assignToCategoryButton.frame = CGRectMake(0, 100, 100, 50);
 //    self.contactInfo.frame = CGRectMake(0, 60, self.view.bounds.size.width, 200);
     
-    UIColor *bgColor = [UIColor colorWithRed:1.0 green:0 blue:0 alpha:1];
+    UIColor *bgColor = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:1];
     self.view.backgroundColor = bgColor;
-    
+//    
+//    CGFloat heightOfNavBar = self.tabBarController.navigationController.navigationBar.frame.size.height;
+//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//    
+//    self.tableView.contentInset = UIEdgeInsetsZero;
+//    
+//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+//    }
+//    
+//    self.tableView.layoutMargins = UIEdgeInsetsZero;
+//    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
 }
 
 - (NSAttributedString *)headlineStringFrom:(POI *)resultItem {
