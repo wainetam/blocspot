@@ -45,11 +45,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self.presentingViewController.views addGestureRecognizer:self.tapOutsideModal];
+    [[[[UIApplication sharedApplication] delegate] window] addGestureRecognizer:self.tapOutsideModal];
+//    [self.presentingViewController.view addGestureRecognizer:self.tapOutsideModal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    // without this, will still be attached to window == bad
+    [[[[UIApplication sharedApplication] delegate] window] removeGestureRecognizer:self.tapOutsideModal];
+//    [self.presentingViewController.view removeGestureRecognizer:self.tapOutsideModal];
 }
 
 - (void)viewDidLoad {
@@ -89,7 +93,7 @@
 
     // QUESTION: WHY is this centered (don't need the above line of code to be centered)
 //    self.view.bounds = self.view.window.bounds;
-//    self.view.frame = CGRectMake(35, 80, 250, 300);
+    self.view.frame = CGRectMake(35, 80, 250, 300);
 //    self.view.center = self.presentingViewController.view.center;
     self.view.backgroundColor = [UIColor yellowColor];
     
@@ -113,8 +117,7 @@
             // the tap was outside the VC's view
             NSLog(@"outside the modal");
             if (self.presentingViewController) {
-                
-                [self dismissViewControllerAnimated:NO completion:nil];
+                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 //                [self dismissViewControllerAnimated:NO completion:nil];
             }
         }
@@ -126,14 +129,14 @@
 - (void) addCategoryTagHandler:(BSCategoryButton *)sender {
     [sender.poi assignToCategory:sender.category];
     
-//    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
+    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
     // do you call layout subview
-//    [categoryTag setText:sender.category.name];
-//    categoryTag.backgroundColor = [UIColor whiteColor];
+    [categoryTag setText:sender.category.name];
+    categoryTag.backgroundColor = [UIColor whiteColor];
     
     // QUESTION: why does this controller not recognized?
 //    if ([self.presentingViewController is:(ResultViewController.class)]) {
-//        [self.presentingViewController.view addSubview:categoryTag];
+        [self.presentingViewController.view addSubview:categoryTag];
 //    }
     [self dismissViewControllerAnimated:YES completion:nil];
     
