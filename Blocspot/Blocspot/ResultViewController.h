@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BSCategoryViewController.h"
 
 @class ResultsTableViewCell;
 @class POI;
 
-@interface ResultViewController : UIViewController
+@interface ResultViewController : UIViewController <BSCategoryViewControllerDelegate>
 
 @property (nonatomic, weak) POI *poiResult;
 
 - (id)initWithTableViewCell:(ResultsTableViewCell *)cell;
+
+- (void)refreshView:(id)sender;
 
 @end

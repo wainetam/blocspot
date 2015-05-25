@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIColor *color;
 
+- (instancetype)initWithName:(NSString *)name withColor:(UIColor *)color;
+
 @end

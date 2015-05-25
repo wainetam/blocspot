@@ -72,15 +72,6 @@
     [self.tabBarController.navigationController pushViewController:resultModalVC animated:NO];
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
-    //    CATransition *transition = [CATransition animation];
-    //    transition.duration = 0.4;
-    //    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    //    transition.type = kCATransitionPush;
-    //    transition.subtype = kCATransitionFromRight;
-    //    [self.view.window.layer addAnimation:transition forKey:nil];
-    //    [self presentViewController:resultModalVC animated:NO completion:nil];
-    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

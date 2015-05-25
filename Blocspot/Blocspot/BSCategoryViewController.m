@@ -63,16 +63,42 @@
     [self.tapOutsideModal setNumberOfTapsRequired:1];
     self.tapOutsideModal.cancelsTouchesInView = YES;
     
-    // addCategory button
-    BSCategory *restaurant = [BSCategory new];
-    restaurant.name = @"restaurant";
-    restaurant.color = [UIColor yellowColor];
     
-    self.assignToCategoryButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    // create restaurant button
+    BSCategory *restaurant = [[BSCategory alloc] initWithName:@"restaurant" withColor:[UIColor yellowColor]];
     
-    [self.assignToCategoryButton setTitle:@"Add to Restaurant Category" forState:UIControlStateNormal];
+    self.assignToRestaurantButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:self.poiResult];
     
-    [self.assignToCategoryButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.assignToRestaurantButton setTitle:restaurant.name forState:UIControlStateNormal];
+    
+    [self.assignToRestaurantButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // create bar button
+    BSCategory *bar = [[BSCategory alloc] initWithName:@"bar" withColor:[UIColor blueColor]];
+    
+    self.assignToBarButton = [[BSCategoryButton alloc] initWithCategory:bar andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    
+    [self.assignToBarButton setTitle:bar.name forState:UIControlStateNormal];
+    
+    [self.assignToBarButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // create museum button
+    BSCategory *museum = [[BSCategory alloc] initWithName:@"museum" withColor:[UIColor redColor]];
+    
+    self.assignToMuseumButton = [[BSCategoryButton alloc] initWithCategory:museum andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    
+    [self.assignToMuseumButton setTitle:museum.name forState:UIControlStateNormal];
+    
+    [self.assignToMuseumButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // create store button
+    BSCategory *store = [[BSCategory alloc] initWithName:@"store" withColor:[UIColor greenColor]];
+    
+    self.assignToStoreButton = [[BSCategoryButton alloc] initWithCategory:store andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    
+    [self.assignToStoreButton setTitle:store.name forState:UIControlStateNormal];
+    
+    [self.assignToStoreButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
 
     [self addViewsToView];
     
@@ -80,7 +106,7 @@
 }
 
 - (void) addViewsToView {
-    NSMutableArray *views = [@[self.assignToCategoryButton] mutableCopy];
+    NSMutableArray *views = [@[self.assignToRestaurantButton, self.assignToBarButton, self.assignToMuseumButton, self.assignToStoreButton] mutableCopy];
     for (UIView *view in views) {
         [self.view addSubview:view];
         
@@ -97,7 +123,10 @@
 //    self.view.center = self.presentingViewController.view.center;
     self.view.backgroundColor = [UIColor yellowColor];
     
-    self.assignToCategoryButton.frame = CGRectMake(0, 50, 250, 20);
+    self.assignToRestaurantButton.frame = CGRectMake(0, 50, 250, 20);
+    self.assignToBarButton.frame = CGRectMake(0, 75, 250, 20);
+    self.assignToMuseumButton.frame = CGRectMake(0, 100, 250, 20);
+    self.assignToStoreButton.frame = CGRectMake(0, 125, 250, 20);
 }
 
 
@@ -118,6 +147,7 @@
             NSLog(@"outside the modal");
             if (self.presentingViewController) {
                 [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                
 //                [self dismissViewControllerAnimated:NO completion:nil];
             }
         }
@@ -129,20 +159,22 @@
 - (void) addCategoryTagHandler:(BSCategoryButton *)sender {
     [sender.poi assignToCategory:sender.category];
     
-    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
-    // do you call layout subview
-    [categoryTag setText:sender.category.name];
-    categoryTag.backgroundColor = [UIColor whiteColor];
+//    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
+//    // do you call layout subview
+//    [categoryTag setText:sender.category.name];
+//    categoryTag.backgroundColor = [UIColor whiteColor];
     
-    // QUESTION: why does this controller not recognized?
-//    if ([self.presentingViewController is:(ResultViewController.class)]) {
-        [self.presentingViewController.view addSubview:categoryTag];
-//    }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    // add delegate to result view controller
     
-    // QUESTION: go back on list view = crash
+    
+//    [self.presentingViewController.view addSubview:categoryTag];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate categoryViewControllerDismissed:sender];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultViewNotification" object:self];
+    }];
     
 }
+
 
 /*
 #pragma mark - Navigation

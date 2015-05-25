@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) float distanceTo;
 @property (nonatomic, strong) NSString *note;
-@property (nonatomic, strong) NSString *category;
+@property (nonatomic, strong) BSCategory *category;
 @property (nonatomic, assign) bool visited;
 @property (nonatomic, strong) NSDictionary *addressDict;
 @property (nonatomic, strong) NSString *phoneNumber;

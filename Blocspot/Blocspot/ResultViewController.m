@@ -27,12 +27,14 @@
 //@property (nonatomic, strong) UILabel *contactInfo;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIButton *addToCategoryButton;
+@property (nonatomic, strong) UILabel *categoryTag;
 
 @property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *contactInfoHeightConstraint;
 //@property (nonatomic, strong) NSLayoutConstraint *assignToCategoryButtonHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *categoryTagHeightConstraint;
 
 @end
 
@@ -49,6 +51,8 @@ static UIFont *lightFont;
 //        self.headline = cell.resultItem.headline;
         self.swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(leftSwipeHandler:)];
         self.swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:@"EditedResultViewNotification" object:self.presentedViewController];
     }
 
     return self;
@@ -64,7 +68,6 @@ static UIFont *lightFont;
     [super viewDidLoad];
     [self createViews];
     [self addViewsToView];
-    [self createConstraints];
     [self.view addGestureRecognizer:self.swipeLeftGestureRecognizer];
     // Do any additional setup after loading the view.
 //    self.navigationItem.leftBarButtonItem
@@ -88,7 +91,8 @@ static UIFont *lightFont;
     [self.addToCategoryButton addTarget:self action:@selector(selectCategoryHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     self.contactInfo = [UITextView new];
-
+    
+    self.categoryTag = [UILabel new];
     
 //    self.contactInfo.frame.size.height = 60;
 //    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
@@ -118,7 +122,7 @@ static UIFont *lightFont;
 }
 
 - (void) addViewsToView {
-    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo, self.addToCategoryButton] mutableCopy];
+    NSMutableArray *views = [@[self.headline, self.address, self.contactInfo, self.addToCategoryButton, self.categoryTag] mutableCopy];
     for (UIView *view in views) {
         [self.view addSubview:view];
         
@@ -133,6 +137,10 @@ static UIFont *lightFont;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)refreshView:(id)sender {
+    [self.view setNeedsDisplay];
 }
 
 #pragma mark - Layout
@@ -155,7 +163,16 @@ static UIFont *lightFont;
     
     UIColor *bgColor = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:1];
     self.view.backgroundColor = bgColor;
-//    
+    
+    self.categoryTag.frame = CGRectMake(20, 400, self.view.bounds.size.width, 20);
+    // do you call layout subview
+    
+    [self.categoryTag setText:self.poiResult.category.name];
+    self.categoryTag.backgroundColor = [UIColor whiteColor];
+    
+    [self createConstraints];
+    
+//
 //    CGFloat heightOfNavBar = self.tabBarController.navigationController.navigationBar.frame.size.height;
 //    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
 //    
@@ -252,6 +269,8 @@ static UIFont *lightFont;
 
 - (void) selectCategoryHandler:(id)sender {
     BSCategoryViewController *categorizeModalVC = [[BSCategoryViewController alloc] init];
+    categorizeModalVC.delegate = self;
+    categorizeModalVC.poiResult = self.poiResult;
     [self presentViewController:categorizeModalVC animated:YES completion:^{
         NSLog(@"modal presented...hopefully!");
         
@@ -290,10 +309,10 @@ static UIFont *lightFont;
 #pragma mark - Constraints
 
 - (void) createCommonConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _addToCategoryButton);
+    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _addToCategoryButton, _categoryTag);
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_headline]-20-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
 
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_addToCategoryButton][_headline][_address][_contactInfo]" options:kNilOptions metrics:nil views:viewDictionary]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_headline][_address][_contactInfo][_addToCategoryButton][_categoryTag]" options:kNilOptions metrics:nil views:viewDictionary]];
     
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
     
@@ -334,8 +353,16 @@ static UIFont *lightFont;
                                                                 attribute:NSLayoutAttributeNotAnAttribute
                                                                multiplier:1
                                                                  constant:40];
+    self.categoryTagHeightConstraint = [NSLayoutConstraint constraintWithItem:_categoryTag
+                                                                    attribute:NSLayoutAttributeHeight
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:nil
+                                                                    attribute:NSLayoutAttributeNotAnAttribute
+                                                                   multiplier:1
+                                                                     constant:40];
+
     
-    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint]];
+    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint, self.categoryTagHeightConstraint]];
     
 }
 
@@ -348,6 +375,24 @@ static UIFont *lightFont;
     //    }
     
     [self createCommonConstraints];
+}
+
+#pragma mark - BSCategoryViewControllerDelegate
+
+- (void) categoryViewControllerDismissed:(BSCategoryButton *)sender {
+    [self presentAlertAfterAddingCategory:sender.category];
+}
+
+- (void) presentAlertAfterAddingCategory:(BSCategory *)category {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Categorized!"]
+                                                                   message:[NSString stringWithFormat:@"Added to %@ category", [category.name capitalizedString]]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

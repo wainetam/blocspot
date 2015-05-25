@@ -10,4 +10,14 @@
 
 @implementation BSCategory
 
+- (id)initWithName:(NSString *)name withColor:(UIColor *)color {
+    self = [super init];
+    
+    if (self) {
+        self.name = name;
+        self.color = color;
+    }
+    return self;
+}
+
 @end

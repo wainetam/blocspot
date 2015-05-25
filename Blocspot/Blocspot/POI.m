@@ -10,6 +10,8 @@
 #import "DataSource.h"
 #import "BSCategory.h"
 
+//NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
+
 @implementation POI
 
 - (instancetype) initWithDictionary:(NSDictionary *)poiDict {
@@ -36,6 +38,8 @@
 - (void) addToFavorites {
     if (![self isFavorited]) {
         [[DataSource sharedInstance].favorites addObject:self];
+        // QUESTION: how to create constants
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance]];
     } else {
         // manage this case
         NSLog(@"already added to favorites list");
@@ -52,7 +56,10 @@
     if (![self hasCategory:category]) {
         if ([DataSource sharedInstance].categories[category.name]) {
             [[DataSource sharedInstance].categories[category.name] addObject:self];
+            self.category = category; // add category to POI itself
+            
             // add to Favorites if haven't already
+
             if (![self isFavorited]) {
                 [self addToFavorites];
             }

@@ -16,6 +16,8 @@
 #import "Annotation.h"
 
 
+//NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
+
 @interface MapViewController ()
 
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -29,8 +31,6 @@
 @property (nonatomic, strong) id delegate; // may refactor later if subclass Search
 
 @end
-
-NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
 
 @implementation MapViewController
 
@@ -346,7 +346,7 @@ NSString *const EditedFavoritesNotification = @"EditedFavoritesNotification";
             [poiAtIndex addToFavorites];
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:EditedFavoritesNotification object:[DataSource sharedInstance]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance]];
         
         NSLog(@"left button");
         // add to favorites
