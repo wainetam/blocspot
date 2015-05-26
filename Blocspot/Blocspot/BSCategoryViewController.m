@@ -115,18 +115,24 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
+    
+    //QUESTION: why do they all get reset to 0,0 (lose its original frame)
 
-    // QUESTION: WHY is this centered (don't need the above line of code to be centered)
-//    self.view.bounds = self.view.window.bounds;
+//    self.view.bounds = [[[[UIApplication sharedApplication] delegate] window] bounds];
     self.view.frame = CGRectMake(35, 80, 250, 300);
 //    self.view.center = self.presentingViewController.view.center;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.8];
     
-    self.assignToRestaurantButton.frame = CGRectMake(0, 50, 250, 20);
-    self.assignToBarButton.frame = CGRectMake(0, 75, 250, 20);
-    self.assignToMuseumButton.frame = CGRectMake(0, 100, 250, 20);
-    self.assignToStoreButton.frame = CGRectMake(0, 125, 250, 20);
-//QUESTION: why do they all get reset to 0,0
+//    self.assignToRestaurantButton.bounds = self.view.frame;
+    self.assignToRestaurantButton.frame = CGRectMake(35, 50, 150, 30);
+//    self.assignToRestaurantButton.center = self.view.center;
+//    self.assignToBarButton.bounds = self.view.frame;
+    self.assignToBarButton.frame = CGRectMake(35, 90, 150, 30);
+//    self.assignToBarButton.center = self.view.center;
+    self.assignToMuseumButton.frame = CGRectMake(35, 130, 150, 30);
+//    self.assignToMuseumButton.center = self.view.center;
+    self.assignToStoreButton.frame = CGRectMake(35, 170, 150, 30);
+//    self.assignToStoreButton.center = self.view.center;
 }
 
 

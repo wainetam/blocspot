@@ -19,7 +19,10 @@
         self.category = category;
         self.poi = poi;
         [self setTitleColor:color forState:UIControlStateNormal];
+        [self setTintColor:color];
+        [self setTitleEdgeInsets:UIEdgeInsetsZero];
         [self.layer setBorderWidth:2.0];
+        [self.layer setCornerRadius:5.0];
         [self.layer setBorderColor:[[UIColor blackColor] CGColor]];
     }
     

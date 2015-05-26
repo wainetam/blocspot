@@ -163,16 +163,23 @@ static UIFont *lightFont;
     
     self.view.frame = CGRectMake(0, yOffset, width, height - yOffset);
     
-//    self.assignToCategoryButton.frame = CGRectMake(0, 100, 100, 50);
-//    self.contactInfo.frame = CGRectMake(0, 60, self.view.bounds.size.width, 200);
+    [self.addToCategoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.addToCategoryButton setBackgroundColor:[UIColor whiteColor]];
+    [self.addToCategoryButton.layer setBorderWidth:2.0];
+    [self.addToCategoryButton.layer setCornerRadius:5.0];
+
+    if (self.poiResult.category != nil) {
+        self.view.backgroundColor = self.poiResult.category.color;
+    } else {
+        self.view.backgroundColor = [UIColor whiteColor];
+    }
     
-    UIColor *bgColor = [UIColor colorWithRed:0.5 green:0 blue:0 alpha:1];
-    self.view.backgroundColor = bgColor;
     
     self.categoryTag.frame = CGRectMake(20, 400, self.view.bounds.size.width, 20);
     // do you call layout subview
     
     [self.categoryTag setText:self.poiResult.category.name];
+
 //    self.categoryTag.backgroundColor = [UIColor whiteColor];
     self.categoryTag.backgroundColor = self.poiResult.category.color;
     
