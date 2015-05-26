@@ -16,6 +16,6 @@
 @property (nonatomic, strong) BSCategory *category;
 @property (nonatomic, weak) POI *poi;
 
-- (id) initWithCategory:(BSCategory *)category andPOI:(POI *)poi;
+- (id) initWithCategory:(BSCategory *)category withPOI:(POI *)poi withTextColor:(UIColor *) color;
 
 @end

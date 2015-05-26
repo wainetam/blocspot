@@ -53,7 +53,7 @@
 }
 
 - (void) assignToCategory:(BSCategory *)category {
-    if (![self hasCategory:category]) {
+    if (![self hasCategory:category]) { // no category assigned to poi
         if ([DataSource sharedInstance].categories[category.name]) {
             [[DataSource sharedInstance].categories[category.name] addObject:self];
             self.category = category; // add category to POI itself
@@ -67,8 +67,10 @@
             NSLog(@"No such category exists");
         }
         
-    } else {
-        // already added to category X
+    } else { // already added to category X
+        BSCategory *origCategory = self.category;
+        [[DataSource sharedInstance].categories[origCategory.name] removeObject:self];
+        self.category = category;
     }
 }
 

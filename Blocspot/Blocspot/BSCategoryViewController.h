@@ -16,7 +16,7 @@
 @protocol BSCategoryViewControllerDelegate <NSObject>
 
 @required
-- (void) categoryViewControllerDismissed:(id)sender;
+- (void) didAddCategoryTag:(id)sender;
 
 @end
 

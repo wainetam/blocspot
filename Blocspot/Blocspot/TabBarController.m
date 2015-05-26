@@ -93,6 +93,13 @@
     self.selectedIndex = 1; // go to list view!
 }
 
+#pragma mark - EditFavoriteDelegate
+
+- (void)didCompleteEditFavorite:(id)sender {
+    self.selectedIndex = 2; // go to favorite view!
+}
+
+
 /*
 #pragma mark - Navigation
 

@@ -12,12 +12,15 @@
 
 @implementation BSCategoryButton
 
-- (id) initWithCategory:(BSCategory *)category andPOI:(POI *)poi {
+- (id) initWithCategory:(BSCategory *)category withPOI:(POI *)poi withTextColor:(UIColor *) color {
     self = [super init];
     
     if(self) {
         self.category = category;
         self.poi = poi;
+        [self setTitleColor:color forState:UIControlStateNormal];
+        [self.layer setBorderWidth:2.0];
+        [self.layer setBorderColor:[[UIColor blackColor] CGColor]];
     }
     
     return self;

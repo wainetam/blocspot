@@ -63,11 +63,10 @@
     [self.tapOutsideModal setNumberOfTapsRequired:1];
     self.tapOutsideModal.cancelsTouchesInView = YES;
     
-    
     // create restaurant button
     BSCategory *restaurant = [[BSCategory alloc] initWithName:@"restaurant" withColor:[UIColor yellowColor]];
     
-    self.assignToRestaurantButton = [[BSCategoryButton alloc] initWithCategory:restaurant andPOI:self.poiResult];
+    self.assignToRestaurantButton = [[BSCategoryButton alloc] initWithCategory:restaurant withPOI:self.poiResult withTextColor:[UIColor yellowColor]];
     
     [self.assignToRestaurantButton setTitle:restaurant.name forState:UIControlStateNormal];
     
@@ -76,7 +75,7 @@
     // create bar button
     BSCategory *bar = [[BSCategory alloc] initWithName:@"bar" withColor:[UIColor blueColor]];
     
-    self.assignToBarButton = [[BSCategoryButton alloc] initWithCategory:bar andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    self.assignToBarButton = [[BSCategoryButton alloc] initWithCategory:bar withPOI:self.poiResult withTextColor:[UIColor blueColor]];
     
     [self.assignToBarButton setTitle:bar.name forState:UIControlStateNormal];
     
@@ -85,7 +84,7 @@
     // create museum button
     BSCategory *museum = [[BSCategory alloc] initWithName:@"museum" withColor:[UIColor redColor]];
     
-    self.assignToMuseumButton = [[BSCategoryButton alloc] initWithCategory:museum andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    self.assignToMuseumButton = [[BSCategoryButton alloc] initWithCategory:museum withPOI:self.poiResult withTextColor:[UIColor redColor]];
     
     [self.assignToMuseumButton setTitle:museum.name forState:UIControlStateNormal];
     
@@ -94,7 +93,7 @@
     // create store button
     BSCategory *store = [[BSCategory alloc] initWithName:@"store" withColor:[UIColor greenColor]];
     
-    self.assignToStoreButton = [[BSCategoryButton alloc] initWithCategory:store andPOI:((ResultViewController *)self.parentViewController).poiResult];
+    self.assignToStoreButton = [[BSCategoryButton alloc] initWithCategory:store withPOI:self.poiResult withTextColor:[UIColor greenColor]];
     
     [self.assignToStoreButton setTitle:store.name forState:UIControlStateNormal];
     
@@ -121,12 +120,13 @@
 //    self.view.bounds = self.view.window.bounds;
     self.view.frame = CGRectMake(35, 80, 250, 300);
 //    self.view.center = self.presentingViewController.view.center;
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.assignToRestaurantButton.frame = CGRectMake(0, 50, 250, 20);
     self.assignToBarButton.frame = CGRectMake(0, 75, 250, 20);
     self.assignToMuseumButton.frame = CGRectMake(0, 100, 250, 20);
     self.assignToStoreButton.frame = CGRectMake(0, 125, 250, 20);
+//QUESTION: why do they all get reset to 0,0
 }
 
 
@@ -169,7 +169,7 @@
     
 //    [self.presentingViewController.view addSubview:categoryTag];
     [self dismissViewControllerAnimated:YES completion:^{
-        [self.delegate categoryViewControllerDismissed:sender];
+        [self.delegate didAddCategoryTag:sender];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultViewNotification" object:self];
     }];
     

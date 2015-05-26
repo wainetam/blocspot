@@ -13,6 +13,7 @@
 #import "BSCategory.h"
 #import "BSCategoryButton.h"
 #import "BSCategoryViewController.h"
+#import "TabBarController.h"
 
 @interface ResultViewController ()
 
@@ -53,6 +54,7 @@ static UIFont *lightFont;
         self.swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:@"EditedResultViewNotification" object:self.presentedViewController];
+        self.tabBarDelegate = (TabBarController *)self.tabBarController;
     }
 
     return self;
@@ -85,14 +87,17 @@ static UIFont *lightFont;
     self.contactInfo = [UITextView new];
     self.contactInfo.textColor = [UIColor blackColor];
     
+    self.categoryTag = [UILabel new];
+    
     self.addToCategoryButton = [[UIButton alloc] init];
+    
     [self.addToCategoryButton setTitle:@"Add to Category" forState:UIControlStateNormal];
     
     [self.addToCategoryButton addTarget:self action:@selector(selectCategoryHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     self.contactInfo = [UITextView new];
     
-    self.categoryTag = [UILabel new];
+    
     
 //    self.contactInfo.frame.size.height = 60;
 //    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
@@ -168,7 +173,12 @@ static UIFont *lightFont;
     // do you call layout subview
     
     [self.categoryTag setText:self.poiResult.category.name];
-    self.categoryTag.backgroundColor = [UIColor whiteColor];
+//    self.categoryTag.backgroundColor = [UIColor whiteColor];
+    self.categoryTag.backgroundColor = self.poiResult.category.color;
+    
+    if (self.categoryTag.text != nil) {
+        [self.addToCategoryButton setTitle:@"Edit Category" forState:UIControlStateNormal];
+    }
     
     [self createConstraints];
     
@@ -272,7 +282,7 @@ static UIFont *lightFont;
     categorizeModalVC.delegate = self;
     categorizeModalVC.poiResult = self.poiResult;
     [self presentViewController:categorizeModalVC animated:YES completion:^{
-        NSLog(@"modal presented...hopefully!");
+//        NSLog(@"modal presented...");
         
     }];
 }
@@ -379,7 +389,7 @@ static UIFont *lightFont;
 
 #pragma mark - BSCategoryViewControllerDelegate
 
-- (void) categoryViewControllerDismissed:(BSCategoryButton *)sender {
+- (void) didAddCategoryTag:(BSCategoryButton *)sender {
     [self presentAlertAfterAddingCategory:sender.category];
 }
 
@@ -392,7 +402,14 @@ static UIFont *lightFont;
                                                           handler:^(UIAlertAction * action) {}];
     
     [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [self presentViewController:alert animated:YES completion:^{
+
+        [(UINavigationController *)self.parentViewController popToRootViewControllerAnimated:NO];
+//        QUESTION need to switch to tabitem after popping
+        
+//        ((TabBarController *)self.tabBarController).selectedIndex = 2;
+//        [self.tabBarDelegate didCompleteEditFavorite:nil];
+    }];
 }
 
 @end
