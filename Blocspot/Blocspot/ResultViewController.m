@@ -33,8 +33,8 @@
 @property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *contactInfoHeightConstraint;
-//@property (nonatomic, strong) NSLayoutConstraint *assignToCategoryButtonHeightConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonWidthConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *categoryTagHeightConstraint;
 
 @end
@@ -339,7 +339,15 @@ static UIFont *lightFont;
                                                                                   toItem:nil
                                                                                attribute:NSLayoutAttributeNotAnAttribute
                                                                               multiplier:1
-                                                                                constant:20];
+                                                                                constant:30];
+    
+    self.addToCategoryButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:_addToCategoryButton
+                                                                            attribute:NSLayoutAttributeWidth
+                                                                            relatedBy:NSLayoutRelationEqual
+                                                                               toItem:nil
+                                                                            attribute:NSLayoutAttributeNotAnAttribute
+                                                                           multiplier:1
+                                                                             constant:150];
     
 //    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
 //                                                                 attribute:NSLayoutAttributeHeight
@@ -379,7 +387,7 @@ static UIFont *lightFont;
                                                                      constant:40];
 
     
-    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint, self.categoryTagHeightConstraint]];
+    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.addToCategoryButtonWidthConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint, self.categoryTagHeightConstraint]];
     
 }
 
@@ -402,7 +410,7 @@ static UIFont *lightFont;
 
 - (void) presentAlertAfterAddingCategory:(BSCategory *)category {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Categorized!"]
-                                                                   message:[NSString stringWithFormat:@"Added to %@ category", [category.name capitalizedString]]
+                                                                   message:[NSString stringWithFormat:@"Added to %@ category and your Favorites.", [category.name capitalizedString]]
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault

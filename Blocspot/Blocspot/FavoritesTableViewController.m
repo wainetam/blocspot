@@ -28,12 +28,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // enable edit mode of favorites
+//    self.tableView.editing = true;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     self.results = [DataSource sharedInstance].favorites;
+
+//    if (self.results.count > 0) {
+//        ((UINavigationController *)self).navigationItem.rightBarButtonItem = self.filterButton;
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

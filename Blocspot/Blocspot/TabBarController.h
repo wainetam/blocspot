@@ -15,6 +15,7 @@
 
 @interface TabBarController : UITabBarController <UITabBarControllerDelegate, SearchDelegate, EditFavoriteDelegate>
 
+@property (nonatomic, strong) UIBarButtonItem *filterButton; // for favorites section
 //- (void)didCompleteSearch;
 
 @end

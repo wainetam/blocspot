@@ -56,6 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = self;
     
 //    MapViewController *mapVC = [[MapViewController alloc] init];
 //    
@@ -85,6 +86,32 @@
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     NSUInteger indexOfTab = [tabBarController.viewControllers indexOfObject:viewController];
     NSLog(@"Tab index = %lu", indexOfTab);
+    
+    if (indexOfTab == 2 && ((FavoritesTableViewController *)viewController).results.count > 0) { // favorites
+        [self createFilterButton];
+    }
+}
+
+#pragma mark - Filter Button
+
+- (void)createFilterButton {
+    UIImage *filterImage = [UIImage imageNamed:@"filter-24.png"];
+    
+    self.filterButton = [[UIBarButtonItem alloc] initWithImage:filterImage style:UIBarButtonItemStyleDone target:self action:@selector(filterBy:)];
+    
+    self.navigationItem.rightBarButtonItem = self.filterButton;
+    //    [[self navigationController] setNavigationBarHidden:NO];
+    //    ((UIViewController *) self).navigationController.navigationItem.rightBarButtonItem = self.filterButton;
+    //    self.navigationController.navigationItem.rightBarButtonItem = self.filterButton;
+    
+    //    QUESTION why can't set rightbarbuttonitem
+    //    ((UIViewController *) self).navigationItem.rightBarButtonItem = self.filterButton;
+    //    [[self navigationItem] setRightBarButtonItem:self.filterButton];
+}
+
+- (void)filterBy:(id)sender {
+    NSLog(@"filtering");
+    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
 }
 
 #pragma mark - SearchDelegate
