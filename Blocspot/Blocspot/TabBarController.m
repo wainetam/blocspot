@@ -10,6 +10,8 @@
 #import "MapViewController.h"
 #import "ResultsTableViewController.h"
 #import "FavoritesTableViewController.h"
+#import "BSCategoryButton.h"
+#import "BSCategory.h"
 //#import "Search.h"
 
 @interface TabBarController ()
@@ -125,9 +127,9 @@
 
 #pragma mark - FilterDelegate
 
-- (void) didSelectCategoryFilter:(id)sender {
+- (void) didSelectCategoryFilter:(BSCategoryButton *)sender {
     [self.filterButton setEnabled:YES];
-    if (sender.category.name = @"restaurant") {
+    if ([((BSCategory *)sender.category).name isEqualToString:@"restaurant"]) {
         // filter by restaurants
     }
     NSLog(@"filtering in FavoritesTableViewController");
@@ -136,7 +138,7 @@
 - (void)filterResultsByCategory:(BSCategory *)category {
 //    QUESTION // how to filter?
     // hopefully favorites view controller
-    POI *results = self.presentedViewController.results;
+    POI *results = ((FavoritesTableViewController *)self.presentedViewController).results;
 //    for (POI *poi in results) {
 //        if (poi.category equals category) {
 //            

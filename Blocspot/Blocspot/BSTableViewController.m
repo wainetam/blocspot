@@ -75,6 +75,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
 //        POI *poi = [DataSource sharedInstance].poiResults[indexPath.row];
 //        cell.resultItem = poi;
     

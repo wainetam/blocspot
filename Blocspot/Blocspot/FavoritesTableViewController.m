@@ -49,6 +49,25 @@
     [super viewWillDisappear:animated];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(ResultsTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([cell.resultItem isFavorited]) {
+        [self setImageForTableCell:cell byCategory:cell.resultItem.category];
+    }
+}
+
+- (void)setImageForTableCell:(ResultsTableViewCell *)cell byCategory:(BSCategory *)category {
+            // QUESTION: create constant for category names
+    if ([category.name isEqualToString: @"restaurant"]) {
+        [cell.imageView setImage:[UIImage imageNamed:@"food-24.png"]];
+    } else if ([category.name isEqualToString: @"museum"]) {
+        [cell.imageView setImage:[UIImage imageNamed:@"art-24.png"]];
+    } else if ([category.name isEqualToString: @"other"]) {
+        [cell.imageView setImage:[UIImage imageNamed:@"other-24.png"]];
+    } else if ([category.name isEqualToString: @"bar"]) {
+        [cell.imageView setImage:[UIImage imageNamed:@"wine-24.png"]];
+    }
+}
+
 - (void)dealloc {
 }
 

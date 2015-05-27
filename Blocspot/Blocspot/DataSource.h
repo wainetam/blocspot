@@ -10,9 +10,10 @@
 #import <AFNetworking/AFNetworking.h>
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
-@class POI;
+#import "BSCategory.h"
+#import "POI.h"
+
 @class Search;
-@class BSCategory;
 
 @interface DataSource : NSObject
 
