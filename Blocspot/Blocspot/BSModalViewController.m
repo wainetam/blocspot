@@ -45,6 +45,12 @@
     [[[[UIApplication sharedApplication] delegate] window] addGestureRecognizer:self.tapOutsideModal];
 }
 
+- (void)viewWillLayoutSubviews {
+    self.view.frame = CGRectMake(35, 80, 250, 300);
+    self.view.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.8];
+
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     // without this, will still be attached to window == bad

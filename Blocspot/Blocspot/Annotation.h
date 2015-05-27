@@ -10,7 +10,6 @@
 
 //@interface Annotation : MKPointAnnotation
 @interface Annotation : MKPointAnnotation {
-//    CLLocationCoordinate2D coordinate; // QUESTION what is this syntax?
 }
 
 

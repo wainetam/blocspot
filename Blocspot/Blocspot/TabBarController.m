@@ -97,21 +97,18 @@
 - (void)createFilterButton {
     UIImage *filterImage = [UIImage imageNamed:@"filter-24.png"];
     
-    self.filterButton = [[UIBarButtonItem alloc] initWithImage:filterImage style:UIBarButtonItemStyleDone target:self action:@selector(filterBy:)];
+    self.filterButton = [[UIBarButtonItem alloc] initWithImage:filterImage style:UIBarButtonItemStyleDone target:self action:@selector(showFilterModal:)];
     
     self.navigationItem.rightBarButtonItem = self.filterButton;
-    //    [[self navigationController] setNavigationBarHidden:NO];
-    //    ((UIViewController *) self).navigationController.navigationItem.rightBarButtonItem = self.filterButton;
-    //    self.navigationController.navigationItem.rightBarButtonItem = self.filterButton;
-    
-    //    QUESTION why can't set rightbarbuttonitem
-    //    ((UIViewController *) self).navigationItem.rightBarButtonItem = self.filterButton;
-    //    [[self navigationItem] setRightBarButtonItem:self.filterButton];
 }
 
-- (void)filterBy:(id)sender {
-    NSLog(@"filtering");
-//    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
+- (void)showFilterModal:(id)sender {
+    BSCategoryFilterViewController* filterVC = [[BSCategoryFilterViewController alloc] init];
+    
+    [self presentViewController:filterVC animated:YES completion:^{
+        [self.filterButton setEnabled:NO];
+        NSLog(@"filter modal should appear");
+    }];
 }
 
 #pragma mark - SearchDelegate
@@ -124,6 +121,27 @@
 
 - (void)didCompleteEditFavorite:(id)sender {
     self.selectedIndex = 2; // go to favorite view!
+}
+
+#pragma mark - FilterDelegate
+
+- (void) didSelectCategoryFilter:(id)sender {
+    [self.filterButton setEnabled:YES];
+    if (sender.category.name = @"restaurant") {
+        // filter by restaurants
+    }
+    NSLog(@"filtering in FavoritesTableViewController");
+}
+
+- (void)filterResultsByCategory:(BSCategory *)category {
+//    QUESTION // how to filter?
+    // hopefully favorites view controller
+    POI *results = self.presentedViewController.results;
+//    for (POI *poi in results) {
+//        if (poi.category equals category) {
+//            
+//        }
+//    }
 }
 
 

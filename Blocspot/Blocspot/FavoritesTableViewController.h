@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BSTableViewController.h"
+#import "BSCategoryFilterViewController.h"
 
 @interface FavoritesTableViewController : BSTableViewController
-
 @end

@@ -26,8 +26,6 @@
     self = [super init];
     
     if (self) {
-        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-        self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         self.categories = (NSMutableArray *)[[DataSource sharedInstance].categories allKeys];
     }
     
@@ -53,8 +51,21 @@
     [[[[UIApplication sharedApplication] delegate] window] removeGestureRecognizer:self.tapOutsideModal];
 }
 
+//- (NSArray *)createButtonsWithCategoryNames:(NSArray *)names withColors:(NSArray *)colors withResult:(id)result {
+//    NSMutableArray *buttonArray = [[NSMutableArray alloc] init];
+//    for (int i = 0; i < names.count; i++) {
+//        [BSCategory alloc] initWithName:names[i] withColor:colors[i];
+//        BSCategoryButton *newButton = [[BSCategoryButton alloc] initWithCategory:categories[i] withPOI:(POI *)result withTextColor:colors[i]];
+//        [buttonArray addObject:newButton];
+//    }
+//    
+//    return [buttonArray copy];
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    NSArray *categoryButtons = [self createButtonsWithCategories:<#(NSArray *)#> withColors:<#(NSArray *)#> withResult:<#(id)#>]
 
     // create restaurant button
     BSCategory *restaurant = [[BSCategory alloc] initWithName:@"restaurant" withColor:[UIColor yellowColor]];
@@ -112,20 +123,11 @@
     //QUESTION: why do they all get reset to 0,0 (lose its original frame)
 
 //    self.view.bounds = [[[[UIApplication sharedApplication] delegate] window] bounds];
-    self.view.frame = CGRectMake(35, 80, 250, 300);
-//    self.view.center = self.presentingViewController.view.center;
-    self.view.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.8];
     
-//    self.assignToRestaurantButton.bounds = self.view.frame;
     self.assignToRestaurantButton.frame = CGRectMake(35, 50, 150, 30);
-//    self.assignToRestaurantButton.center = self.view.center;
-//    self.assignToBarButton.bounds = self.view.frame;
     self.assignToBarButton.frame = CGRectMake(35, 90, 150, 30);
-//    self.assignToBarButton.center = self.view.center;
     self.assignToMuseumButton.frame = CGRectMake(35, 130, 150, 30);
-//    self.assignToMuseumButton.center = self.view.center;
     self.assignToStoreButton.frame = CGRectMake(35, 170, 150, 30);
-//    self.assignToStoreButton.center = self.view.center;
 }
 
 
