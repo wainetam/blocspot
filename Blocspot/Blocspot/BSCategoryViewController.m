@@ -17,7 +17,6 @@
 @interface BSCategoryViewController ()
 
 @property (nonatomic, strong) UITapGestureRecognizer *tapOutsideModal;
-//@property (nonatomic, weak) POI *poiResult;
 
 @end
 
@@ -46,23 +45,17 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[[[UIApplication sharedApplication] delegate] window] addGestureRecognizer:self.tapOutsideModal];
-//    [self.presentingViewController.view addGestureRecognizer:self.tapOutsideModal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     // without this, will still be attached to window == bad
     [[[[UIApplication sharedApplication] delegate] window] removeGestureRecognizer:self.tapOutsideModal];
-//    [self.presentingViewController.view removeGestureRecognizer:self.tapOutsideModal];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.tapOutsideModal = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOutsideModalHandler:)];
-    [self.tapOutsideModal setNumberOfTapsRequired:1];
-    self.tapOutsideModal.cancelsTouchesInView = YES;
-    
+
     // create restaurant button
     BSCategory *restaurant = [[BSCategory alloc] initWithName:@"restaurant" withColor:[UIColor yellowColor]];
     
@@ -139,25 +132,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Tap Gestures
-
-- (void)tapOutsideModalHandler:(UITapGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded) {
-        CGPoint location = [sender locationInView:nil]; // passing nil gives us coordinates in the window
-        CGPoint locationInVC = [self.presentingViewController.view convertPoint:location fromView:self.view.window];
-        
-        if ([self.view pointInside:locationInVC withEvent:nil] == NO) {
-            // the tap was outside the VC's view
-            NSLog(@"outside the modal");
-            if (self.presentingViewController) {
-                [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                
-//                [self dismissViewControllerAnimated:NO completion:nil];
-            }
-        }
-    }
 }
 
 #pragma mark - Add to Category

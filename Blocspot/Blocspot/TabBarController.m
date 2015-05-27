@@ -111,7 +111,7 @@
 
 - (void)filterBy:(id)sender {
     NSLog(@"filtering");
-    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
+//    [self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>]
 }
 
 #pragma mark - SearchDelegate

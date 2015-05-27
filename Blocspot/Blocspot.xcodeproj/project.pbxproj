@@ -24,6 +24,8 @@
 		B67CFF591AD426D800151FEA /* POI.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF581AD426D800151FEA /* POI.m */; };
 		B67CFF5C1AD426E600151FEA /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF5B1AD426E600151FEA /* User.m */; };
 		B67CFF5F1AD426F200151FEA /* Search.m in Sources */ = {isa = PBXBuildFile; fileRef = B67CFF5E1AD426F200151FEA /* Search.m */; };
+		B68F1AB91B1586C8003DF2BE /* BSCategoryFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68F1AB81B1586C8003DF2BE /* BSCategoryFilterViewController.m */; };
+		B68F1ABF1B158C20003DF2BE /* BSModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B68F1ABE1B158C20003DF2BE /* BSModalViewController.m */; };
 		B6A5FF311B07BB98008E43C0 /* BSTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5FF301B07BB98008E43C0 /* BSTableViewController.m */; };
 		B6A5FF341B07E802008E43C0 /* BSCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5FF331B07E802008E43C0 /* BSCategory.m */; };
 		B6A5FF371B07F770008E43C0 /* BSCategoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B6A5FF361B07F770008E43C0 /* BSCategoryButton.m */; };
@@ -78,6 +80,10 @@
 		B67CFF5B1AD426E600151FEA /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		B67CFF5D1AD426F200151FEA /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
 		B67CFF5E1AD426F200151FEA /* Search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Search.m; sourceTree = "<group>"; };
+		B68F1AB71B1586C8003DF2BE /* BSCategoryFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCategoryFilterViewController.h; sourceTree = "<group>"; };
+		B68F1AB81B1586C8003DF2BE /* BSCategoryFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCategoryFilterViewController.m; sourceTree = "<group>"; };
+		B68F1ABD1B158C20003DF2BE /* BSModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSModalViewController.h; sourceTree = "<group>"; };
+		B68F1ABE1B158C20003DF2BE /* BSModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSModalViewController.m; sourceTree = "<group>"; };
 		B6A5FF2F1B07BB98008E43C0 /* BSTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTableViewController.h; sourceTree = "<group>"; };
 		B6A5FF301B07BB98008E43C0 /* BSTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTableViewController.m; sourceTree = "<group>"; };
 		B6A5FF321B07E802008E43C0 /* BSCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCategory.h; sourceTree = "<group>"; };
@@ -158,6 +164,10 @@
 				B6A5FF361B07F770008E43C0 /* BSCategoryButton.m */,
 				B66D72061B08E262003AD68A /* BSCategoryViewController.h */,
 				B66D72071B08E262003AD68A /* BSCategoryViewController.m */,
+				B68F1AB71B1586C8003DF2BE /* BSCategoryFilterViewController.h */,
+				B68F1AB81B1586C8003DF2BE /* BSCategoryFilterViewController.m */,
+				B68F1ABD1B158C20003DF2BE /* BSModalViewController.h */,
+				B68F1ABE1B158C20003DF2BE /* BSModalViewController.m */,
 				B6ADB4931AFA2DA100F2666D /* Annotation.h */,
 				B6ADB4941AFA2DA100F2666D /* Annotation.m */,
 				B67CFF2B1AD22D0F00151FEA /* AppDelegate.h */,
@@ -362,6 +372,7 @@
 				B67CFF591AD426D800151FEA /* POI.m in Sources */,
 				B66D72081B08E262003AD68A /* BSCategoryViewController.m in Sources */,
 				B6A5FF311B07BB98008E43C0 /* BSTableViewController.m in Sources */,
+				B68F1ABF1B158C20003DF2BE /* BSModalViewController.m in Sources */,
 				B67CFF5F1AD426F200151FEA /* Search.m in Sources */,
 				B616E6A31ADAC38C00EEC5D7 /* ResultsTableViewController.m in Sources */,
 				B67CFF5C1AD426E600151FEA /* User.m in Sources */,
@@ -369,6 +380,7 @@
 				B6ADB4951AFA2DA100F2666D /* Annotation.m in Sources */,
 				B6CBA2A71B05E7A400810A35 /* FavoritesTableViewController.m in Sources */,
 				B6A5FF371B07F770008E43C0 /* BSCategoryButton.m in Sources */,
+				B68F1AB91B1586C8003DF2BE /* BSCategoryFilterViewController.m in Sources */,
 				B616E6A61ADAC55300EEC5D7 /* ResultsTableViewCell.m in Sources */,
 				B645A1AB1AE7484D00D2C52D /* TabBarController.m in Sources */,
 				B6A5FF341B07E802008E43C0 /* BSCategory.m in Sources */,

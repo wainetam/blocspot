@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BSModalViewController.h"
 
 @class BSCategory;
 @class BSCategoryButton;
@@ -20,7 +21,7 @@
 
 @end
 
-@interface BSCategoryViewController : UIViewController
+@interface BSCategoryViewController : BSModalViewController
 
 @property (nonatomic, weak) NSMutableArray *categories;
 @property (nonatomic, weak) POI *poiResult;
