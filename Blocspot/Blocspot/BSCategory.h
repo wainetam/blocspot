@@ -13,6 +13,9 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIColor *color;
+//@property (nonatomic, strong) NSDictionary *classification;
+
++ (UIImage *)imageLookupByCategoryName:(NSString *)name;
 
 - (instancetype)initWithName:(NSString *)name withColor:(UIColor *)color;
 

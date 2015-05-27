@@ -10,6 +10,20 @@
 
 @implementation BSCategory
 
++ (UIImage *)imageLookupByCategoryName:(NSString *)name {
+    if ([name isEqualToString: @"restaurant"]) {
+        return [UIImage imageNamed:@"food-24.png"];
+    } else if ([name isEqualToString: @"museum"]) {
+        return [UIImage imageNamed:@"art-24.png"];
+    } else if ([name isEqualToString: @"store"]) {
+        return [UIImage imageNamed:@"shopping-24.png"];
+    } else if ([name isEqualToString: @"bar"]) {
+        return [UIImage imageNamed:@"wine-24.png"];
+    } else {
+        return nil;
+    }
+}
+
 - (id)initWithName:(NSString *)name withColor:(UIColor *)color {
     self = [super init];
     

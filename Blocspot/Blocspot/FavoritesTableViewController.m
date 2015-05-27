@@ -56,16 +56,10 @@
 }
 
 - (void)setImageForTableCell:(ResultsTableViewCell *)cell byCategory:(BSCategory *)category {
-            // QUESTION: create constant for category names
-    if ([category.name isEqualToString: @"restaurant"]) {
-        [cell.imageView setImage:[UIImage imageNamed:@"food-24.png"]];
-    } else if ([category.name isEqualToString: @"museum"]) {
-        [cell.imageView setImage:[UIImage imageNamed:@"art-24.png"]];
-    } else if ([category.name isEqualToString: @"other"]) {
-        [cell.imageView setImage:[UIImage imageNamed:@"other-24.png"]];
-    } else if ([category.name isEqualToString: @"bar"]) {
-        [cell.imageView setImage:[UIImage imageNamed:@"wine-24.png"]];
-    }
+    // QUESTION: create constant for category names
+    UIImage *rowImage = [BSCategory imageLookupByCategoryName:category.name];
+//    [cell.imageView setImage:rowImage];
+    cell.accessoryView = [[UIImageView alloc] initWithImage:rowImage];
 }
 
 - (void)dealloc {
