@@ -124,10 +124,21 @@
 
 //    self.view.bounds = [[[[UIApplication sharedApplication] delegate] window] bounds];
     
-    self.assignToRestaurantButton.frame = CGRectMake(35, 50, 150, 30);
-    self.assignToBarButton.frame = CGRectMake(35, 90, 150, 30);
-    self.assignToMuseumButton.frame = CGRectMake(35, 130, 150, 30);
-    self.assignToStoreButton.frame = CGRectMake(35, 170, 150, 30);
+//    self.assignToRestaurantButton.frame = CGRectMake(0, 0, 150, 30);
+//    self.assignToRestaurantButton.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, 100);// for center
+    UIView* superView = self.assignToRestaurantButton.superview;
+    UIView* superSuperView = self.assignToRestaurantButton.superview.superview;
+    UIView* superSuperSuperView = self.assignToRestaurantButton.superview.superview.superview;
+    
+    CGFloat viewWidthCenter = self.view.frame.size.width/2;
+    CGFloat width = 150;
+    CGFloat padding = 10;
+    CGFloat height = 30;
+
+    self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - width/2, 50, width, height);
+    self.assignToBarButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToRestaurantButton.frame) + padding, width, height);
+    self.assignToMuseumButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToBarButton.frame) + padding, width, height);
+    self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + padding, width, height);
 }
 
 

@@ -11,6 +11,7 @@
 #import "BSCategoryButton.h"
 #import "DataSource.h"
 #import "TabBarController.h"
+#import "FavoritesTableViewController.h"
 
 
 @interface BSCategoryFilterViewController ()
@@ -24,7 +25,7 @@
     
     if (self) {
         self.categories = (NSMutableArray *)[[DataSource sharedInstance].categories allKeys];
-        self.delegate = self.presentingViewController;
+        self.delegate = (FavoritesTableViewController *)self.presentingViewController;
         // QUESTION how to assign delegate if none exists?
     }
     

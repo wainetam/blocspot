@@ -46,7 +46,10 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    self.view.frame = CGRectMake(35, 80, 250, 300);
+    [super viewWillLayoutSubviews];
+    self.view.frame = CGRectMake(0, 0, 250, 300);
+    self.view.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, 240);// for center
+
     self.view.backgroundColor = [UIColor colorWithWhite:0.7 alpha:0.8];
 
 }

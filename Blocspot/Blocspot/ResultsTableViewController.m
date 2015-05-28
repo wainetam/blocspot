@@ -27,13 +27,16 @@
     return self;
 }
 
+- (NSArray*) results{
+    return [DataSource sharedInstance].poiResults;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.results = [DataSource sharedInstance].poiResults;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -11,9 +11,10 @@
 
 @interface BSTableViewController : UITableViewController <UISearchBarDelegate, ResultsTableViewCellDelegate>
 
-@property (nonatomic, strong) NSArray *results;
+//@property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) NSString *resultsKeyPath;
 
 - (void)refreshTableData:(id)sender;
+- (NSArray*) results;
 
 @end

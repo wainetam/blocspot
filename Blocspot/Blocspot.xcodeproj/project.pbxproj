@@ -159,6 +159,7 @@
 		B67CFF261AD22D0F00151FEA /* Blocspot */ = {
 			isa = PBXGroup;
 			children = (
+				B6BD9F821B16AA560018E364 /* Models */,
 				B60634BB1AFBB635004F26DE /* Images.xcassets */,
 				B6A5FF351B07F770008E43C0 /* BSCategoryButton.h */,
 				B6A5FF361B07F770008E43C0 /* BSCategoryButton.m */,
@@ -176,14 +177,6 @@
 				B6C9276C1AFEFEDC00B7F386 /* CustomAnnotationView.m */,
 				B67CFF541AD3786000151FEA /* DataSource.h */,
 				B67CFF551AD3786000151FEA /* DataSource.m */,
-				B67CFF571AD426D800151FEA /* POI.h */,
-				B67CFF581AD426D800151FEA /* POI.m */,
-				B6A5FF321B07E802008E43C0 /* BSCategory.h */,
-				B6A5FF331B07E802008E43C0 /* BSCategory.m */,
-				B67CFF5A1AD426E600151FEA /* User.h */,
-				B67CFF5B1AD426E600151FEA /* User.m */,
-				B67CFF5D1AD426F200151FEA /* Search.h */,
-				B67CFF5E1AD426F200151FEA /* Search.m */,
 				B616E6A41ADAC55300EEC5D7 /* ResultsTableViewCell.h */,
 				B616E6A51ADAC55300EEC5D7 /* ResultsTableViewCell.m */,
 				B6A5FF2F1B07BB98008E43C0 /* BSTableViewController.h */,
@@ -229,6 +222,21 @@
 				B67CFF451AD22D1000151FEA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6BD9F821B16AA560018E364 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B67CFF571AD426D800151FEA /* POI.h */,
+				B67CFF581AD426D800151FEA /* POI.m */,
+				B6A5FF321B07E802008E43C0 /* BSCategory.h */,
+				B6A5FF331B07E802008E43C0 /* BSCategory.m */,
+				B67CFF5A1AD426E600151FEA /* User.h */,
+				B67CFF5B1AD426E600151FEA /* User.m */,
+				B67CFF5D1AD426F200151FEA /* Search.h */,
+				B67CFF5E1AD426F200151FEA /* Search.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

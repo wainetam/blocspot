@@ -44,6 +44,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.parentViewController.title = self.tabBarController.tabBar.selectedItem.title;
+//    [self.tableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,6 +126,10 @@
 
 #pragma mark - Table view data source
 
+- (NSArray*)results{ // overwrite when subclass to get access to results property
+    return @[];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 1;
@@ -132,7 +137,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return self.results.count;
+    return [self results].count;
     
 }
 

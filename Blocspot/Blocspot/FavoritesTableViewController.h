@@ -11,4 +11,6 @@
 #import "BSCategoryFilterViewController.h"
 
 @interface FavoritesTableViewController : BSTableViewController
+@property (nonatomic, strong) NSMutableArray* filteredFavoritesArray;
+
 @end
