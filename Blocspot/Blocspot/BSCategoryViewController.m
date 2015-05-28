@@ -13,10 +13,7 @@
 #import "ResultViewController.h"
 #import "POI.h"
 
-
 @interface BSCategoryViewController ()
-
-@property (nonatomic, strong) UITapGestureRecognizer *tapOutsideModal;
 
 @end
 
@@ -42,13 +39,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[[[UIApplication sharedApplication] delegate] window] addGestureRecognizer:self.tapOutsideModal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    // without this, will still be attached to window == bad
-    [[[[UIApplication sharedApplication] delegate] window] removeGestureRecognizer:self.tapOutsideModal];
 }
 
 //- (NSArray *)createButtonsWithCategoryNames:(NSArray *)names withColors:(NSArray *)colors withResult:(id)result {
@@ -102,8 +96,6 @@
     [self.assignToStoreButton setTitle:store.name forState:UIControlStateNormal];
     
     [self.assignToStoreButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self addViewsToView];
     
     // Do any additional setup after loading the view.
 }
@@ -111,34 +103,31 @@
 - (void) addViewsToView {
     NSMutableArray *views = [@[self.assignToRestaurantButton, self.assignToBarButton, self.assignToMuseumButton, self.assignToStoreButton] mutableCopy];
     for (UIView *view in views) {
-        [self.view addSubview:view];
         
-        view.translatesAutoresizingMaskIntoConstraints = NO;
+//        view.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:view];
     }
 }
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    //QUESTION: why do they all get reset to 0,0 (lose its original frame)
-
-//    self.view.bounds = [[[[UIApplication sharedApplication] delegate] window] bounds];
+    CGFloat viewWidth = [[UIScreen mainScreen] bounds].size.width;
+//    CGFloat viewHeight = [[UIScreen mainScreen] bounds].size.height;
+//    self.view.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+//    self.view.bounds = [[UIScreen mainScreen] bounds];
     
-//    self.assignToRestaurantButton.frame = CGRectMake(0, 0, 150, 30);
-//    self.assignToRestaurantButton.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, 100);// for center
-    UIView* superView = self.assignToRestaurantButton.superview;
-    UIView* superSuperView = self.assignToRestaurantButton.superview.superview;
-    UIView* superSuperSuperView = self.assignToRestaurantButton.superview.superview.superview;
+    CGFloat viewWidthCenter = viewWidth / 2.0;
+    CGFloat buttonWidth = 200.0;
+    CGFloat buttonPadding = 10.0;
+    CGFloat buttonHeight = 40.0;
     
-    CGFloat viewWidthCenter = self.view.frame.size.width/2;
-    CGFloat width = 150;
-    CGFloat padding = 10;
-    CGFloat height = 30;
-
-    self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - width/2, 50, width, height);
-    self.assignToBarButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToRestaurantButton.frame) + padding, width, height);
-    self.assignToMuseumButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToBarButton.frame) + padding, width, height);
-    self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - width/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + padding, width, height);
+    self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, 50, buttonWidth, buttonHeight);
+    self.assignToBarButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToRestaurantButton.frame) + buttonPadding, buttonWidth, buttonHeight);
+    self.assignToMuseumButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToBarButton.frame) + buttonPadding, buttonWidth, buttonHeight);
+    self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + buttonPadding, buttonWidth, buttonHeight);
+    
+    [self addViewsToView];
 }
 
 

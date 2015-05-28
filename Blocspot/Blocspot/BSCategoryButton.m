@@ -22,8 +22,8 @@
         [self setTintColor:color];
         [self setTitleEdgeInsets:UIEdgeInsetsZero];
         [self.layer setBorderWidth:2.0];
-        [self.layer setCornerRadius:5.0];
-        [self.layer setBorderColor:[[UIColor blackColor] CGColor]];
+        [self.layer setCornerRadius:4.0];
+        [self.layer setBorderColor:[color CGColor]];
     }
     
     return self;

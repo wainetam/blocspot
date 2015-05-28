@@ -18,6 +18,9 @@
 
 @required
 - (void) didAddCategoryTag:(id)sender;
+@end
+
+@protocol BSCategoryFilterViewControllerDelegate <NSObject>
 
 @end
 

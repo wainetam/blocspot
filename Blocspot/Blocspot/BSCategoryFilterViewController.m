@@ -87,10 +87,10 @@
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    self.assignToRestaurantButton.frame = CGRectMake(35, 50, 150, 30);
-    self.assignToBarButton.frame = CGRectMake(35, 90, 150, 30);
-    self.assignToMuseumButton.frame = CGRectMake(35, 130, 150, 30);
-    self.assignToStoreButton.frame = CGRectMake(35, 170, 150, 30);
+    self.assignToRestaurantButton.frame = CGRectMake(35, 50, 200, 40);
+    self.assignToBarButton.frame = CGRectMake(35, 90, 200, 40);
+    self.assignToMuseumButton.frame = CGRectMake(35, 130, 200, 40);
+    self.assignToStoreButton.frame = CGRectMake(35, 170, 200, 40);
     
 }
 

@@ -7,12 +7,14 @@
 //
 
 #import "ResultViewController.h"
+#import "ResultsTableViewController.h"
 #import "ResultsTableViewCell.h"
 #import "POI.h"
 #import "DataSource.h"
 #import "BSCategory.h"
 #import "BSCategoryButton.h"
 #import "BSCategoryViewController.h"
+#import "BSCategoryFilterViewController.h"
 #import "TabBarController.h"
 
 @interface ResultViewController ()
@@ -76,6 +78,16 @@ static UIFont *lightFont;
 
 }
 
+- (UIButton *)createButtonWithTitle:(NSString *)title {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:title forState:UIControlStateNormal];
+    button.tintColor = [UIColor blackColor];
+    button.layer.borderColor = [[UIColor blackColor] CGColor];
+    button.layer.borderWidth = 2.0f;
+    button.layer.cornerRadius = 4.0f;
+    return button;
+}
+
 - (void) createViews {
     self.image = [UIView new];
     self.headline = [UILabel new];
@@ -89,10 +101,7 @@ static UIFont *lightFont;
     
     self.categoryTag = [UILabel new];
     
-    self.addToCategoryButton = [[UIButton alloc] init];
-    
-    [self.addToCategoryButton setTitle:@"Add to Category" forState:UIControlStateNormal];
-    
+    self.addToCategoryButton = [self createButtonWithTitle:@"Add to Category"];
     [self.addToCategoryButton addTarget:self action:@selector(selectCategoryHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     self.contactInfo = [UITextView new];
@@ -163,17 +172,20 @@ static UIFont *lightFont;
     
     self.view.frame = CGRectMake(0, yOffset, width, height - yOffset);
     
-    [self.addToCategoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.addToCategoryButton setBackgroundColor:[UIColor whiteColor]];
-    [self.addToCategoryButton.layer setBorderWidth:2.0];
-    [self.addToCategoryButton.layer setCornerRadius:5.0];
+    
+    self.addToCategoryButton.frame = CGRectMake(0, 0, 200, 50);
+    self.addToCategoryButton.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, 340.0);// for center
+    
+//    [self.addToCategoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    [self.addToCategoryButton setBackgroundColor:[UIColor whiteColor]];
+//    [self.addToCategoryButton.layer setBorderWidth:2.0];
+//    [self.addToCategoryButton.layer setCornerRadius:5.0];
 
     if (self.poiResult.category != nil) {
         self.view.backgroundColor = self.poiResult.category.color;
     } else {
         self.view.backgroundColor = [UIColor whiteColor];
     }
-    
     
     self.categoryTag.frame = CGRectMake(20, 400, self.view.bounds.size.width, 20);
     // do you call layout subview
@@ -285,13 +297,21 @@ static UIFont *lightFont;
 //}
 
 - (void) selectCategoryHandler:(id)sender {
-    BSCategoryViewController *categorizeModalVC = [[BSCategoryViewController alloc] init];
-    categorizeModalVC.delegate = self;
-    categorizeModalVC.poiResult = self.poiResult;
-    [self presentViewController:categorizeModalVC animated:YES completion:^{
-//        NSLog(@"modal presented...");
+    NSLog(@"Sender of modal: %@", sender);
+    //    QUESTION -- need to set for favorites
+//    if ([self.parentViewController isKindOfClass:ResultsTableViewController.class]) {
+        BSCategoryViewController *categorizeModalVC = [[BSCategoryViewController alloc] init];
+        categorizeModalVC.delegate = self;
+        categorizeModalVC.poiResult = self.poiResult;
+        [self presentViewController:categorizeModalVC animated:YES completion:^{
+            NSLog(@"modal presented...");
+//    } else {
+//        BSCategoryFilterViewController *categorizeModalVC = [[BSCategoryFilterViewController alloc] init];
+
+//
         
-    }];
+        }];
+//    }
 }
 
 #pragma mark - Swipe Left to Close
@@ -339,7 +359,7 @@ static UIFont *lightFont;
                                                                                   toItem:nil
                                                                                attribute:NSLayoutAttributeNotAnAttribute
                                                                               multiplier:1
-                                                                                constant:30];
+                                                                                constant:40];
     
     self.addToCategoryButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:_addToCategoryButton
                                                                             attribute:NSLayoutAttributeWidth
@@ -347,7 +367,7 @@ static UIFont *lightFont;
                                                                                toItem:nil
                                                                             attribute:NSLayoutAttributeNotAnAttribute
                                                                            multiplier:1
-                                                                             constant:150];
+                                                                             constant:200];
     
 //    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
 //                                                                 attribute:NSLayoutAttributeHeight
