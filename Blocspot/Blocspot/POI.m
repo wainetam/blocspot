@@ -52,6 +52,12 @@
     }
 }
 
+- (void) removeFromCategory:(BSCategory *)category {
+    if ([self hasCategory:category]) {
+        [[DataSource sharedInstance].categories[category.name] removeObject:self];
+    }
+}
+
 - (void) assignToCategory:(BSCategory *)category {
     if (![self hasCategory:category]) { // no category assigned to poi
         if ([DataSource sharedInstance].categories[category.name]) {

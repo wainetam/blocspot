@@ -167,6 +167,10 @@
     //    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
 #pragma mark - TableViewRowDelegate
 
 - (void)redirectToTableRow:(int)index {

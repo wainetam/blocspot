@@ -94,6 +94,31 @@
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        POI* poiToRemove = [((NSMutableArray *)[self results]) objectAtIndex:[indexPath row]];
+        BSCategory* categoryToRemovePoiFrom = poiToRemove.category;
+        
+        [poiToRemove removeFromCategory:categoryToRemovePoiFrom];
+        poiToRemove.category = nil; // also remove from poi instance itself
+        [((NSMutableArray *)[self results]) removeObjectAtIndex:[indexPath row]];
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultsNotification" object:[DataSource sharedInstance]];
+    }
+}
+
 - (void)setImageForTableCell:(ResultsTableViewCell *)cell byCategory:(BSCategory *)category {
     // QUESTION: create constant for category names
     UIImage *rowImage = [[BSCategory imageLookupByCategoryName:category.name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];

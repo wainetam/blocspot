@@ -32,13 +32,6 @@
 @property (nonatomic, strong) UIButton *addToCategoryButton;
 @property (nonatomic, strong) UILabel *categoryTag;
 
-@property (nonatomic, strong) NSLayoutConstraint *headlineHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *addressHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *contactInfoHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *addToCategoryButtonWidthConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *categoryTagHeightConstraint;
-
 @end
 
 static UIFont *lightFont;
@@ -92,11 +85,12 @@ static UIFont *lightFont;
     self.image = [UIView new];
     self.headline = [UILabel new];
     self.headline.attributedText = [self headlineStringFrom:self.poiResult];
+    [self.headline sizeToFit];
+//    self.headline.numberOfLines = 2;
     self.address = [UILabel new];
     self.address.attributedText = [self addressStringFrom:self.poiResult];
     self.address.numberOfLines = 4;
-//    self.contactInfo = [UILabel new];
-    self.contactInfo = [UITextView new];
+    self.contactInfo = [UILabel new];
     self.contactInfo.textColor = [UIColor blackColor];
     
     self.categoryTag = [UILabel new];
@@ -183,9 +177,9 @@ static UIFont *lightFont;
     CGFloat indentTextMarginX = 35.0;
     CGFloat addressHeight = 90.0;
     CGFloat contactInfoHeight = 50.0;
-    self.headline.frame = CGRectMake(indentTextMarginX, headlineMarginY, viewWidth, headlineHeight);
-    self.address.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.headline.frame) + textMarginY, viewWidth, addressHeight);
-    self.contactInfo.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.address.frame) + textMarginY, viewWidth, contactInfoHeight);
+    self.headline.frame = CGRectMake(indentTextMarginX, headlineMarginY, viewWidth - indentTextMarginX, headlineHeight);
+    self.address.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.headline.frame) + textMarginY, viewWidth - indentTextMarginX, addressHeight);
+    self.contactInfo.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.address.frame) + textMarginY, viewWidth - indentTextMarginX, contactInfoHeight);
     
     CGFloat buttonWidth = 200.0;
     CGFloat buttonHeight = 50.0;
@@ -208,8 +202,6 @@ static UIFont *lightFont;
     if (self.categoryTag.text != nil) {
         [self.addToCategoryButton setTitle:@"Edit Category" forState:UIControlStateNormal];
     }
-    
-//    [self createConstraints];
 }
 
 - (NSAttributedString *)headlineStringFrom:(POI *)resultItem {
@@ -329,94 +321,6 @@ static UIFont *lightFont;
     [self.navigationController popViewControllerAnimated:YES];
 //    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-#pragma mark - Constraints
-
-- (void) createCommonConstraints {
-    NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_headline, _address, _contactInfo, _addToCategoryButton, _categoryTag);
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[_headline]-20-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewDictionary]];
-
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-64-[_headline][_address][_contactInfo][_addToCategoryButton][_categoryTag]" options:kNilOptions metrics:nil views:viewDictionary]];
-    
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-8-[_address]-8-|" options:kNilOptions metrics:nil views:viewDictionary]];
-    
-    self.addToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_addToCategoryButton
-                                                                               attribute:NSLayoutAttributeHeight
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:nil
-                                                                               attribute:NSLayoutAttributeNotAnAttribute
-                                                                              multiplier:1
-                                                                                constant:40];
-    
-    self.addToCategoryButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:_addToCategoryButton
-                                                                            attribute:NSLayoutAttributeWidth
-                                                                            relatedBy:NSLayoutRelationEqual
-                                                                               toItem:nil
-                                                                            attribute:NSLayoutAttributeNotAnAttribute
-                                                                           multiplier:1
-                                                                             constant:200];
-    
-//    self.assignToCategoryButtonHeightConstraint = [NSLayoutConstraint constraintWithItem:_assignToCategoryButton
-//                                                                 attribute:NSLayoutAttributeHeight
-//                                                                 relatedBy:NSLayoutRelationEqual
-//                                                                    toItem:nil
-//                                                                 attribute:NSLayoutAttributeNotAnAttribute
-//                                                                multiplier:1
-//                                                                  constant:20];
-    
-    self.headlineHeightConstraint = [NSLayoutConstraint constraintWithItem:_headline
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:nil
-                                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                                multiplier:1
-                                                                  constant:20];
-    self.addressHeightConstraint = [NSLayoutConstraint constraintWithItem:_address
-                                                                 attribute:NSLayoutAttributeHeight
-                                                                 relatedBy:NSLayoutRelationEqual
-                                                                    toItem:nil
-                                                                 attribute:NSLayoutAttributeNotAnAttribute
-                                                                multiplier:1
-                                                                  constant:60];
-    self.contactInfoHeightConstraint = [NSLayoutConstraint constraintWithItem:_contactInfo
-                                                                attribute:NSLayoutAttributeHeight
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:nil
-                                                                attribute:NSLayoutAttributeNotAnAttribute
-                                                               multiplier:1
-                                                                 constant:40];
-    self.categoryTagHeightConstraint = [NSLayoutConstraint constraintWithItem:_categoryTag
-                                                                    attribute:NSLayoutAttributeHeight
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:nil
-                                                                    attribute:NSLayoutAttributeNotAnAttribute
-                                                                   multiplier:1
-                                                                     constant:40];
-
-    
-    [self.view addConstraints:@[self.addToCategoryButtonHeightConstraint, self.addToCategoryButtonWidthConstraint, self.headlineHeightConstraint, self.addressHeightConstraint, self.contactInfoHeightConstraint, self.categoryTagHeightConstraint]];
-    
-}
-
-
-- (void) createConstraints {
-    //    if (isPhone) {
-    //        [self createPhoneConstraints];
-    //    } else {
-    //        [self createPadConstraints];
-    //    }
-    
-//    [self createCommonConstraints];
 }
 
 #pragma mark - BSCategoryViewControllerDelegate
