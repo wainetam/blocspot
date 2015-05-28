@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
-#import "BSModalViewController.h"
+#import "BSCategoryViewController.h"
 
 @class BSCategoryButton;
 @class TabBarController;
@@ -17,14 +17,7 @@
 
 @end
 
-@interface BSCategoryFilterViewController : BSModalViewController
-
-@property (nonatomic, weak) NSMutableArray *categories;
-
-@property (nonatomic, strong) BSCategoryButton *assignToRestaurantButton;
-@property (nonatomic, strong) BSCategoryButton *assignToBarButton;
-@property (nonatomic, strong) BSCategoryButton *assignToMuseumButton;
-@property (nonatomic, strong) BSCategoryButton *assignToStoreButton;
+@interface BSCategoryFilterViewController : BSCategoryViewController
 
 @property (nonatomic, strong) id delegate;
 
