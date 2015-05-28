@@ -33,6 +33,7 @@
     [[DataSource sharedInstance] addObserver:self forKeyPath:self.resultsKeyPath options:0 context:nil];
     
     [self.tableView registerClass:[ResultsTableViewCell class] forCellReuseIdentifier:@"resultCell"];
+//    self.tableView.delegate 
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -164,6 +165,13 @@
     //    POI *resultItem = [DataSource sharedInstance].poiResults[indexPath.row];
     
     //    return [ResultsTableViewCell heightForResultItem:resultItem width:CGRectGetWidth(self.view.frame)];
+}
+
+#pragma mark - TableViewRowDelegate
+
+- (void)redirectToTableRow:(int)index {
+    if ([self.tableView.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)])
+        [self.tableView.delegate tableView:self.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
 }
 
 #pragma mark - Handling key-value notifications

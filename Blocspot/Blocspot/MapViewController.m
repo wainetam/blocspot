@@ -29,6 +29,7 @@
 @property (nonatomic) MKCoordinateRegion boundingRegion;
 //@property (nonatomic, strong) ResultsTableViewController *tableVC;
 @property (nonatomic, strong) id delegate; // may refactor later if subclass Search
+@property (nonatomic, strong) id tableRowDelegate;
 
 @end
 
@@ -39,6 +40,7 @@
     
 //    self.tableVC = [[ResultsTableViewController alloc] init];
     self.delegate = self.tabBarController;
+    self.tableRowDelegate = (ResultsTableViewController *)self.tabBarController.viewControllers[1];
 }
 
 - (void)viewDidLoad {
@@ -336,8 +338,10 @@
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    POI *poiAtIndex = [self getPOIofAnnotation:view.annotation];
+    NSUInteger annotationIndex = [[DataSource sharedInstance].annotations indexOfObject:view.annotation];
     if ([view.leftCalloutAccessoryView isEqual:control]) {
-        POI *poiAtIndex = [self getPOIofAnnotation:view.annotation];
+//        POI *poiAtIndex = [self getPOIofAnnotation:view.annotation];
         if (control.selected) {
             [control setSelected:NO];
             [poiAtIndex removeFromFavorites];
@@ -353,10 +357,14 @@
         
     }
     else if ([view.rightCalloutAccessoryView isEqual:control]){
-        
         NSLog(@"right button");
+        ((TabBarController *)self.delegate).selectedIndex = 1;
+        [self.tableRowDelegate redirectToTableRow:(int)annotationIndex];
+        
+//        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:poiAtIndex inSection:1] animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
 }
+
 
 /*
 #pragma mark - Navigation

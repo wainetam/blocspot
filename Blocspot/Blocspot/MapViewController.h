@@ -10,6 +10,12 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
+@protocol TableViewRowDelegate <NSObject>
+
+- (void) redirectToTableRow:(int)sender;
+
+@end
+
 @interface MapViewController : UIViewController <UISearchBarDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
 @end

@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ResultsTableViewCell.h"
+#import "MapViewController.h"
 
-@interface BSTableViewController : UITableViewController <UISearchBarDelegate, ResultsTableViewCellDelegate>
+@interface BSTableViewController : UITableViewController <UISearchBarDelegate, ResultsTableViewCellDelegate, TableViewRowDelegate>
 
 //@property (nonatomic, strong) NSArray *results;
 @property (nonatomic, strong) NSString *resultsKeyPath;
