@@ -39,7 +39,7 @@
     if (![self isFavorited]) {
         [[DataSource sharedInstance].favorites addObject:self];
         // QUESTION: how to create constants
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
     } else {
         // manage this case
         NSLog(@"already added to favorites list");
@@ -67,11 +67,13 @@
             NSLog(@"No such category exists");
         }
         
-    } else { // already added to category X
+    } else { // already added to category X and changing categories
         BSCategory *origCategory = self.category;
         [[DataSource sharedInstance].categories[origCategory.name] removeObject:self];
         self.category = category;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
 }
 
 

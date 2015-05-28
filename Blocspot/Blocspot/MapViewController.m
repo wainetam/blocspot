@@ -346,7 +346,7 @@
             [poiAtIndex addToFavorites];
         }
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
         
         NSLog(@"left button");
         // add to favorites

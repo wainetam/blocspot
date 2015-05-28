@@ -20,7 +20,7 @@
         self = [super init];
         
         self.resultsKeyPath = @"poiResults";
-        //    QUESTION: // data on reloaded if go to listview first
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"EditedResultsNotification" object:[DataSource sharedInstance]];
     }
     

@@ -154,7 +154,7 @@
     // Configure the cell...
     cell.delegate = self; // set the cell's delegate
     // QUESTION only called after search results
-    cell.resultItem = self.results[indexPath.row];
+    cell.resultItem = [self results][indexPath.row];
     
     return cell;
 }

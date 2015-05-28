@@ -21,7 +21,7 @@
         self = [super init];
         self.resultsKeyPath = @"favorites";
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"EditedFavoritesNotification" object:[DataSource sharedInstance]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
     }
     
     return self;
@@ -29,13 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // enable edit mode of favorites
-//    self.tableView.editing = true;
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-//    self.searchController.delegate = self;
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.searchBar.delegate = self;
-    self.definesPresentationContext = YES;
 }
 
 - (NSArray*) results{
@@ -44,8 +37,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    [self.tableView reloadData];
     
-    self.filteredFavoritesArray = [NSMutableArray arrayWithCapacity:[[self results] count]];
+//    self.filteredFavoritesArray = [NSMutableArray arrayWithCapacity:[[self results] count]];
     
 
 //    if ([self results].count > 0) {
@@ -64,13 +58,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     // Check to see whether the normal table or search results table is being displayed
-    if (tableView == self.searchController.view) {
-        return [self.filteredFavoritesArray count];
-    } else {
+//    if (tableView == self.searchController.view) {
+//        return [self.filteredFavoritesArray count];
+//    } else {
         return [self results].count;
-    }
+//    }
 }
-
 
 - (ResultsTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -86,11 +79,11 @@
     cell.delegate = self; // set the cell's delegate
     
     // Check to see whether the normal table or search results table is being displayed
-    if (tableView == self.searchController.view) {
-        cell.resultItem = self.filteredFavoritesArray[indexPath.row];
-    } else {
+//    if (tableView == self.searchController.view) {
+//        cell.resultItem = self.filteredFavoritesArray[indexPath.row];
+//    } else {
         cell.resultItem = [self results][indexPath.row];
-    }
+//    }
     
     return cell;
 }
