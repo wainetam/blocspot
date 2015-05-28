@@ -96,9 +96,11 @@
 
 - (void)setImageForTableCell:(ResultsTableViewCell *)cell byCategory:(BSCategory *)category {
     // QUESTION: create constant for category names
-    UIImage *rowImage = [BSCategory imageLookupByCategoryName:category.name];
-//    [cell.imageView setImage:rowImage];
-    cell.accessoryView = [[UIImageView alloc] initWithImage:rowImage];
+    UIImage *rowImage = [[BSCategory imageLookupByCategoryName:category.name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    UIImageView *rowImageView = [[UIImageView alloc] initWithImage:rowImage];
+    rowImageView.frame = CGRectMake(0, 0, 35, 35);
+    [rowImageView setTintColor:category.color];
+    cell.accessoryView = rowImageView;
 }
 
 - (void)dealloc {

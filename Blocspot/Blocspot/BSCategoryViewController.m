@@ -120,9 +120,10 @@
     CGFloat viewWidthCenter = viewWidth / 2.0;
     CGFloat buttonWidth = 200.0;
     CGFloat buttonPadding = 10.0;
-    CGFloat buttonHeight = 40.0;
+    CGFloat buttonHeight = 50.0;
+    CGFloat topButtonMaxY = 150.0;
     
-    self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, 50, buttonWidth, buttonHeight);
+    self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, topButtonMaxY, buttonWidth, buttonHeight);
     self.assignToBarButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToRestaurantButton.frame) + buttonPadding, buttonWidth, buttonHeight);
     self.assignToMuseumButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToBarButton.frame) + buttonPadding, buttonWidth, buttonHeight);
     self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + buttonPadding, buttonWidth, buttonHeight);

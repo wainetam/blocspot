@@ -26,8 +26,8 @@
 @property (nonatomic, strong) UIView *info;
 @property (nonatomic, strong) UILabel *headline;
 @property (nonatomic, strong) UILabel *address;
-@property (nonatomic, strong) UITextView *contactInfo;
-//@property (nonatomic, strong) UILabel *contactInfo;
+//@property (nonatomic, strong) UITextView *contactInfo;
+@property (nonatomic, strong) UILabel *contactInfo;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) UIButton *addToCategoryButton;
 @property (nonatomic, strong) UILabel *categoryTag;
@@ -104,17 +104,15 @@ static UIFont *lightFont;
     self.addToCategoryButton = [self createButtonWithTitle:@"Add to Category"];
     [self.addToCategoryButton addTarget:self action:@selector(selectCategoryHandler:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.contactInfo = [UITextView new];
-    
-    
+    self.contactInfo = [UILabel new];
     
 //    self.contactInfo.frame.size.height = 60;
-//    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
+    self.contactInfo.attributedText = [self contactInfoStringFrom:self.poiResult];
 //    self.contactInfo.editable = NO;
-    self.contactInfo.dataDetectorTypes = UIDataDetectorTypeAll;
-    self.contactInfo.backgroundColor = [UIColor whiteColor];
+//    self.contactInfo.dataDetectorTypes = UIDataDetectorTypeAll;
+//    self.contactInfo.backgroundColor = [UIColor whiteColor];
     
-//    self.contactInfo.numberOfLines = 2;
+    self.contactInfo.numberOfLines = 2;
     
 //    self.url = [UIlabel new];
 //    self.url.attributedText = [self urlStringFrom:self.poiResult];
@@ -140,7 +138,7 @@ static UIFont *lightFont;
     for (UIView *view in views) {
         [self.view addSubview:view];
         
-        view.translatesAutoresizingMaskIntoConstraints = NO;
+//        view.translatesAutoresizingMaskIntoConstraints = NO;
     }
 }
 
@@ -162,61 +160,60 @@ static UIFont *lightFont;
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-//    CGFloat heightOfNavBar = self.topLayoutGuide.length;
-//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGFloat heightOfNavBar = self.topLayoutGuide.length;
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     
-//    CGFloat yOffset = heightOfNavBar + statusBarHeight;
-    CGFloat yOffset = 0;
-    CGFloat height = self.view.bounds.size.height;
-    CGFloat width = self.view.bounds.size.width;
+    CGFloat yOffset = heightOfNavBar + statusBarHeight;
     
-    self.view.frame = CGRectMake(0, yOffset, width, height - yOffset);
-    
-    
-    self.addToCategoryButton.frame = CGRectMake(0, 0, 200, 50);
-    self.addToCategoryButton.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, 340.0);// for center
-    
-//    [self.addToCategoryButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    [self.addToCategoryButton setBackgroundColor:[UIColor whiteColor]];
-//    [self.addToCategoryButton.layer setBorderWidth:2.0];
-//    [self.addToCategoryButton.layer setCornerRadius:5.0];
-
     if (self.poiResult.category != nil) {
         self.view.backgroundColor = self.poiResult.category.color;
     } else {
         self.view.backgroundColor = [UIColor whiteColor];
     }
     
-    self.categoryTag.frame = CGRectMake(20, 400, self.view.bounds.size.width, 20);
-    // do you call layout subview
+    CGFloat viewHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat viewWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat viewCenterX = viewWidth / 2.0;
+    
+    self.view.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+    
+    CGFloat headlineHeight = 40.0;
+    CGFloat headlineMarginY = yOffset + 10.0;
+    CGFloat textMarginY = 10.0;
+    CGFloat indentTextMarginX = 35.0;
+    CGFloat addressHeight = 90.0;
+    CGFloat contactInfoHeight = 50.0;
+    self.headline.frame = CGRectMake(indentTextMarginX, headlineMarginY, viewWidth, headlineHeight);
+    self.address.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.headline.frame) + textMarginY, viewWidth, addressHeight);
+    self.contactInfo.frame = CGRectMake(indentTextMarginX, CGRectGetMaxY(self.address.frame) + textMarginY, viewWidth, contactInfoHeight);
+    
+    CGFloat buttonWidth = 200.0;
+    CGFloat buttonHeight = 50.0;
+    CGFloat addToCategoryButtonMaxY = CGRectGetMaxY(self.contactInfo.frame) + 50.0;
+    
+    CGFloat tagHeight = 30.0;
+    
+    self.addToCategoryButton.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
+    self.addToCategoryButton.center = CGPointMake(viewCenterX, addToCategoryButtonMaxY);
+    
+    CGFloat buttonMarginY = 30.0;
+    self.categoryTag.frame = CGRectMake(0, 0, buttonWidth / 2, tagHeight);
+    self.categoryTag.center = CGPointMake(viewCenterX, CGRectGetMaxY(self.addToCategoryButton.frame) + buttonMarginY);
     
     [self.categoryTag setText:self.poiResult.category.name];
 
-//    self.categoryTag.backgroundColor = [UIColor whiteColor];
-    self.categoryTag.backgroundColor = self.poiResult.category.color;
+//    self.categoryTag.backgroundColor = self.poiResult.category.color;
+    self.categoryTag.backgroundColor = [UIColor whiteColor];
     
     if (self.categoryTag.text != nil) {
         [self.addToCategoryButton setTitle:@"Edit Category" forState:UIControlStateNormal];
     }
     
-    [self createConstraints];
-    
-//
-//    CGFloat heightOfNavBar = self.tabBarController.navigationController.navigationBar.frame.size.height;
-//    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-//    
-//    self.tableView.contentInset = UIEdgeInsetsZero;
-//    
-//    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-//        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-//    }
-//    
-//    self.tableView.layoutMargins = UIEdgeInsetsZero;
-//    self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
+//    [self createConstraints];
 }
 
 - (NSAttributedString *)headlineStringFrom:(POI *)resultItem {
-    CGFloat headlineFontSize = 18;
+    CGFloat headlineFontSize = 28;
     
     NSString *baseString = [NSString stringWithFormat:@"%@", resultItem.name];
     
@@ -230,7 +227,7 @@ static UIFont *lightFont;
 }
 
 - (NSAttributedString *)addressStringFrom:(POI *)resultItem {
-    CGFloat headlineFontSize = 16;
+    CGFloat headlineFontSize = 18;
     
     NSArray *lines = [resultItem.addressDict objectForKey:@"FormattedAddressLines"];
     NSString *addressString = [lines componentsJoinedByString:@"\n"];
@@ -244,7 +241,7 @@ static UIFont *lightFont;
 }
 
 - (NSAttributedString *)contactInfoStringFrom:(POI *)resultItem {
-    CGFloat headlineFontSize = 16;
+    CGFloat headlineFontSize = 18;
 
     NSString *urlString = [NSString stringWithFormat:@"%@\n%@", resultItem.phoneNumber, resultItem.url];
     
@@ -419,7 +416,7 @@ static UIFont *lightFont;
     //        [self createPadConstraints];
     //    }
     
-    [self createCommonConstraints];
+//    [self createCommonConstraints];
 }
 
 #pragma mark - BSCategoryViewControllerDelegate
@@ -430,7 +427,7 @@ static UIFont *lightFont;
 
 - (void) presentAlertAfterAddingCategory:(BSCategory *)category {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Categorized!"]
-                                                                   message:[NSString stringWithFormat:@"Added to %@ category and your Favorites.", [category.name capitalizedString]]
+                                                                   message:[NSString stringWithFormat:@"Moved to %@ category and your Favorites.", [category.name capitalizedString]]
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault

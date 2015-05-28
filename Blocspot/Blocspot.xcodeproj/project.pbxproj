@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		123E776A5557843C3588AB40 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DA75CCA703F4820C0F6B9FF /* libPods.a */; };
-		B60634BC1AFBB635004F26DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B60634BB1AFBB635004F26DE /* Images.xcassets */; };
 		B616E6A31ADAC38C00EEC5D7 /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B616E6A21ADAC38C00EEC5D7 /* ResultsTableViewController.m */; };
 		B616E6A61ADAC55300EEC5D7 /* ResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B616E6A51ADAC55300EEC5D7 /* ResultsTableViewCell.m */; };
 		B616E6A91ADB24C500EEC5D7 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B616E6A81ADB24C400EEC5D7 /* MapViewController.m */; };
@@ -32,6 +31,7 @@
 		B6ADB4951AFA2DA100F2666D /* Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B6ADB4941AFA2DA100F2666D /* Annotation.m */; };
 		B6C9276D1AFEFEDC00B7F386 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C9276C1AFEFEDC00B7F386 /* CustomAnnotationView.m */; };
 		B6CBA2A71B05E7A400810A35 /* FavoritesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6CBA2A61B05E7A400810A35 /* FavoritesTableViewController.m */; };
+		B6D942191B17BE5F00A7FB76 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D942181B17BE5F00A7FB76 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,7 +48,6 @@
 		0DA75CCA703F4820C0F6B9FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ABDEA9126646839DF36C8F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		7C9E65C0DBC431A86CAB1F16 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		B60634BB1AFBB635004F26DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B616E6A11ADAC38C00EEC5D7 /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
 		B616E6A21ADAC38C00EEC5D7 /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		B616E6A41ADAC55300EEC5D7 /* ResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewCell.h; sourceTree = "<group>"; };
@@ -96,6 +95,7 @@
 		B6C9276C1AFEFEDC00B7F386 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		B6CBA2A51B05E7A400810A35 /* FavoritesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesTableViewController.h; sourceTree = "<group>"; };
 		B6CBA2A61B05E7A400810A35 /* FavoritesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesTableViewController.m; sourceTree = "<group>"; };
+		B6D942181B17BE5F00A7FB76 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +159,8 @@
 		B67CFF261AD22D0F00151FEA /* Blocspot */ = {
 			isa = PBXGroup;
 			children = (
+				B6D942181B17BE5F00A7FB76 /* Images.xcassets */,
 				B6BD9F821B16AA560018E364 /* Models */,
-				B60634BB1AFBB635004F26DE /* Images.xcassets */,
 				B6A5FF351B07F770008E43C0 /* BSCategoryButton.h */,
 				B6A5FF361B07F770008E43C0 /* BSCategoryButton.m */,
 				B66D72061B08E262003AD68A /* BSCategoryViewController.h */,
@@ -326,7 +326,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B60634BC1AFBB635004F26DE /* Images.xcassets in Resources */,
+				B6D942191B17BE5F00A7FB76 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
