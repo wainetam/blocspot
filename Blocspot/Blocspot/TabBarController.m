@@ -106,7 +106,7 @@
 
 - (void)showFilterModal:(id)sender {
     BSCategoryFilterViewController* filterVC = [[BSCategoryFilterViewController alloc] init];
-    
+    filterVC.delegate = self;
     [self presentViewController:filterVC animated:YES completion:^{
         [self.filterButton setEnabled:NO];
         NSLog(@"filter modal should appear");
@@ -125,7 +125,7 @@
     self.selectedIndex = 2; // go to favorite view!
 }
 
-#pragma mark - FilterDelegate
+#pragma mark - CategoryFilterDelegate
 
 - (void) didSelectCategoryFilter:(BSCategoryButton *)sender {
     [self.filterButton setEnabled:YES];

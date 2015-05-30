@@ -24,7 +24,7 @@
     self = [super init];
     
     if (self) {
-        self.delegate = (FavoritesTableViewController *)self.presentingViewController;
+//        self.delegate = (FavoritesTableViewController *)self.presentingViewController;
         // QUESTION how to assign delegate if none exists?
     }
     
@@ -40,10 +40,18 @@
     
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)cancelModal:(id)sender {
+//    [((TabBarController *)((FavoritesTableViewController *)self.presentingViewController).tabBarController).filterButton setEnabled:YES];
+    
+    [super cancelModal:sender];
+    
+    [((TabBarController *)self.delegate).filterButton setEnabled:YES];
+
 }
 
 - (void)filterByHandler:(id)sender {
@@ -51,6 +59,17 @@
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [self.delegate didSelectCategoryFilter:sender];
         //        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultViewNotification" object:self];
+    }];
+}
+
+#pragma mark - CategoryButtonHandler
+
+- (void) categoryButtonHandler:(BSCategoryButton *)sender {
+    [[DataSource sharedInstance] sortResults: [DataSource sharedInstance].favorites byCategory:sender.category completion:^{
+        [self dismissViewControllerAnimated:YES completion:^{
+
+//            [((FavoritesTableViewController *)self.presentingViewController).tableView reloadData];
+        }];
     }];
 }
 

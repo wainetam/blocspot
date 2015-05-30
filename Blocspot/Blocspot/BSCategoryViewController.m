@@ -45,17 +45,6 @@
     [super viewWillDisappear:animated];
 }
 
-//- (NSArray *)createButtonsWithCategoryNames:(NSArray *)names withColors:(NSArray *)colors withResult:(id)result {
-//    NSMutableArray *buttonArray = [[NSMutableArray alloc] init];
-//    for (int i = 0; i < names.count; i++) {
-//        [BSCategory alloc] initWithName:names[i] withColor:colors[i];
-//        BSCategoryButton *newButton = [[BSCategoryButton alloc] initWithCategory:categories[i] withPOI:(POI *)result withTextColor:colors[i]];
-//        [buttonArray addObject:newButton];
-//    }
-//    
-//    return [buttonArray copy];
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -68,7 +57,7 @@
     
     [self.assignToRestaurantButton setTitle:restaurant.name forState:UIControlStateNormal];
     
-    [self.assignToRestaurantButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.assignToRestaurantButton addTarget:self action:@selector(categoryButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     // create bar button
     BSCategory *bar = [[BSCategory alloc] initWithName:@"bar" withColor:[UIColor blueColor]];
@@ -77,7 +66,7 @@
     
     [self.assignToBarButton setTitle:bar.name forState:UIControlStateNormal];
     
-    [self.assignToBarButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.assignToBarButton addTarget:self action:@selector(categoryButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     // create museum button
     BSCategory *museum = [[BSCategory alloc] initWithName:@"museum" withColor:[UIColor redColor]];
@@ -86,7 +75,7 @@
     
     [self.assignToMuseumButton setTitle:museum.name forState:UIControlStateNormal];
     
-    [self.assignToMuseumButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.assignToMuseumButton addTarget:self action:@selector(categoryButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     // create store button
     BSCategory *store = [[BSCategory alloc] initWithName:@"store" withColor:[UIColor greenColor]];
@@ -95,7 +84,7 @@
     
     [self.assignToStoreButton setTitle:store.name forState:UIControlStateNormal];
     
-    [self.assignToStoreButton addTarget:self action:@selector(addCategoryTagHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.assignToStoreButton addTarget:self action:@selector(categoryButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
     
     // Do any additional setup after loading the view.
 }
@@ -137,36 +126,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Add to Category
+#pragma mark - CategoryButtonHandler
 
-- (void) addCategoryTagHandler:(BSCategoryButton *)sender {
+- (void) categoryButtonHandler:(BSCategoryButton *)sender {
     [sender.poi assignToCategory:sender.category];
     
-//    UILabel *categoryTag = [[UILabel alloc] initWithFrame:CGRectMake(20, 400, self.view.bounds.size.width, 20)];
-//    // do you call layout subview
-//    [categoryTag setText:sender.category.name];
-//    categoryTag.backgroundColor = [UIColor whiteColor];
-    
-    // add delegate to result view controller
-    
-    
-//    [self.presentingViewController.view addSubview:categoryTag];
     [self dismissViewControllerAnimated:YES completion:^{
         [self.delegate didAddCategoryTag:sender];
 //        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultViewNotification" object:self];
     }];
     
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

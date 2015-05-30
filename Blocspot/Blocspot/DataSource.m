@@ -37,4 +37,20 @@
     return self;
 }
 
+- (void)sortResults:(NSArray *)results byCategory:(BSCategory *)category completion:(void(^)(void))completion {
+    NSMutableArray *sortedResults = [[NSMutableArray alloc] init];
+    for (POI* poi in results) {
+        if (poi.category.name == category.name) {
+            [sortedResults addObject:poi];
+        }
+    }
+    self.sortedResults = [sortedResults copy];
+    self.favoritesSortedByCategory = YES;
+}
+
+- (void)revertSortedResults:(NSArray *)sortedResults {
+    self.sortedResults = @[];
+    self.favoritesSortedByCategory = NO;
+}
+
 @end

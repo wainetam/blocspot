@@ -24,16 +24,16 @@
 @property (nonatomic, strong) NSArray *annotations; // QUESTION: should I store annotations here or with mapView?
 @property (nonatomic, strong) NSMutableDictionary *categories;
 @property (nonatomic, strong) NSMutableArray *favorites;
+@property (nonatomic) BOOL favoritesSortedByCategory;
+@property (nonatomic, strong) NSArray* sortedResults;
 
 - (void)cancelActiveSearch:(Search *)search;
 - (void)deleteSearchHistory:(NSMutableArray *)searchHistory;
 - (void)requestSearchHistory;
 - (void)addCategory:(BSCategory *)category;
 - (void)clearFavorites;
-
-
-//- (void)requestNewItemsWithCompletionHandler:(NewItemCompletionBlock)completionHandler;
-
+- (void)sortResults:(NSArray *)results byCategory:(BSCategory *)category completion:(void(^)(void)) completion;
+- (void)revertSortedResults:(NSArray *)sortedResults;
 
 
 @end

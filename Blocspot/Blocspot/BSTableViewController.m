@@ -30,7 +30,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[DataSource sharedInstance] addObserver:self forKeyPath:self.resultsKeyPath options:0 context:nil];
+    if (self.resultsKeyPath) {
+        [[DataSource sharedInstance] addObserver:self forKeyPath:self.resultsKeyPath options:0 context:nil];
+    }
+    
+    
+    if (self.secondResultsKeyPath) {
+        [[DataSource sharedInstance] addObserver:self forKeyPath:self.secondResultsKeyPath options:0 context:nil];
+    }
     
     [self.tableView registerClass:[ResultsTableViewCell class] forCellReuseIdentifier:@"resultCell"];
 //    self.tableView.delegate 
@@ -122,6 +129,7 @@
     self.tableView.layoutMargins = UIEdgeInsetsZero;
     self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
     
+    
     self.tableView.frame = CGRectMake(0, yOffset, width, height - yOffset);
 }
 
@@ -181,7 +189,7 @@
 #pragma mark - Handling key-value notifications
 // all KVO notifications are sent to this method -- here, just have one key to observe (poiResults)
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (object == [DataSource sharedInstance] && [keyPath isEqualToString:self.resultsKeyPath]) {
+    if (object == [DataSource sharedInstance] && ([keyPath isEqualToString:self.resultsKeyPath] || [keyPath isEqualToString:self.secondResultsKeyPath])) {
         // we know poiResults has changed. Let's see what kind of change it is
         int kindOfChange = [change[NSKeyValueChangeKindKey] intValue];
         

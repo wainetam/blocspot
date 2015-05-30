@@ -20,8 +20,11 @@
     if (self) {
         self = [super init];
         self.resultsKeyPath = @"favorites";
+        self.secondResultsKeyPath = @"sortedResults";
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTableData:) name:@"SortedFavoritesNotification" object:[DataSource sharedInstance].sortedResults];
     }
     
     return self;
@@ -32,12 +35,16 @@
 }
 
 - (NSArray*) results{
-    return [DataSource sharedInstance].favorites;
+    if ([DataSource sharedInstance].favoritesSortedByCategory == YES) {
+        return [DataSource sharedInstance].sortedResults;
+    } else {
+        return [DataSource sharedInstance].favorites;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
     
 //    self.filteredFavoritesArray = [NSMutableArray arrayWithCapacity:[[self results] count]];
     
@@ -116,6 +123,9 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object:[DataSource sharedInstance].favorites];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultsNotification" object:[DataSource sharedInstance]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SortedFavoritesNotification" object:[DataSource sharedInstance].sortedResults];
+        
+        
     }
 }
 

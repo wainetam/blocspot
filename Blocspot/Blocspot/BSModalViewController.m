@@ -20,7 +20,7 @@
     self = [super init];
     
     if (self) {
-        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        self.modalPresentationStyle = UIModalPresentationOverFullScreen;
         self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     }
     
@@ -75,6 +75,7 @@
     
     // for each subview
 //    self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+    // QUESTTION why does cancel button disappear in Filter Modal?
     
     [self.view addSubview:self.cancelButton];
 }

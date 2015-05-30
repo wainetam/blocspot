@@ -11,7 +11,7 @@
 @class BSCategoryButton;
 @class TabBarController;
 
-@protocol FilterDelegate <NSObject>
+@protocol CategoryFilterDelegate <NSObject>
 
 - (void) didSelectCategoryFilter:(id)sender;
 
@@ -19,6 +19,6 @@
 
 @interface BSCategoryFilterViewController : BSCategoryViewController
 
-@property (nonatomic, strong) id delegate;
+@property (nonatomic, strong) id delegate; // QUESTION what does dynamic mean?
 
 @end

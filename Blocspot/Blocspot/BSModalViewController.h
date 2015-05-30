@@ -10,4 +10,6 @@
 
 @interface BSModalViewController : UIViewController
 
+- (void)cancelModal:(id)sender;
+
 @end
