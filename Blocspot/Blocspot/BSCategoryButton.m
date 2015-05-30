@@ -20,10 +20,11 @@
         self.poi = poi;
         [self setTitleColor:color forState:UIControlStateNormal];
         [self setTintColor:color];
-        [self setTitleEdgeInsets:UIEdgeInsetsZero];
-        [self.layer setBorderWidth:2.0];
-        [self.layer setCornerRadius:4.0];
         [self.layer setBorderColor:[color CGColor]];
+        
+//        [BSCategoryButton setWidth:200.0];
+//        self.padding = 10.0;
+//        self.height = 50.0;
     }
     
     return self;

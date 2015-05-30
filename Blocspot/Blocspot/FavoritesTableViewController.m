@@ -44,7 +44,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     
 //    self.filteredFavoritesArray = [NSMutableArray arrayWithCapacity:[[self results] count]];
     

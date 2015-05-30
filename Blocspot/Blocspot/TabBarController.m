@@ -42,7 +42,7 @@
         UIImage *favListViewTabBarIcon = [UIImage imageNamed:@"heart-filled-24.png"];
 //         imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal
         
-        UITabBarItem *favlistViewBarItem = [[UITabBarItem alloc] initWithTitle:@"Favorites" image:favListViewTabBarIcon selectedImage:nil];
+        UITabBarItem *favlistViewBarItem = [[UITabBarItem alloc] initWithTitle:@"All Favorites" image:favListViewTabBarIcon selectedImage:nil];
         
         [favoritesVC setTabBarItem:favlistViewBarItem];
         
@@ -125,25 +125,21 @@
     self.selectedIndex = 2; // go to favorite view!
 }
 
-#pragma mark - CategoryFilterDelegate
+#pragma mark - FilterDelegate
 
-- (void) didSelectCategoryFilter:(BSCategoryButton *)sender {
+- (void)didFilterByCategory:(BSCategory *)category {
     [self.filterButton setEnabled:YES];
-    if ([((BSCategory *)sender.category).name isEqualToString:@"restaurant"]) {
-        // filter by restaurants
-    }
-    NSLog(@"filtering in FavoritesTableViewController");
+    [((FavoritesTableViewController *)self.selectedViewController).tableView reloadData];
+    NSString *currentTitle = @"Favorites";
+    NSString *newTitle = [currentTitle stringByAppendingString:@": "];
+    NSString *filteredByCategoryName = [[category.name capitalizedString] stringByAppendingString:@"s"];
+    self.title = [newTitle stringByAppendingString:filteredByCategoryName];
 }
 
-- (void)filterResultsByCategory:(BSCategory *)category {
-//    QUESTION // how to filter?
-    // hopefully favorites view controller
-    POI *results = ((FavoritesTableViewController *)self.presentedViewController).results;
-//    for (POI *poi in results) {
-//        if (poi.category equals category) {
-//            
-//        }
-//    }
+- (void)didClearFilter {
+    [((FavoritesTableViewController *)self.selectedViewController).tableView reloadData];
+    [self.filterButton setEnabled:YES];
+    self.title = @"All Favorites";
 }
 
 

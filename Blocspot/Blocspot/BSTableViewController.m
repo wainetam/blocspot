@@ -189,7 +189,8 @@
 #pragma mark - Handling key-value notifications
 // all KVO notifications are sent to this method -- here, just have one key to observe (poiResults)
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if (object == [DataSource sharedInstance] && ([keyPath isEqualToString:self.resultsKeyPath] || [keyPath isEqualToString:self.secondResultsKeyPath])) {
+    if (object == [DataSource sharedInstance] && ([keyPath isEqualToString:self.resultsKeyPath])) {
+//         || [keyPath isEqualToString:self.secondResultsKeyPath]
         // we know poiResults has changed. Let's see what kind of change it is
         int kindOfChange = [change[NSKeyValueChangeKindKey] intValue];
         

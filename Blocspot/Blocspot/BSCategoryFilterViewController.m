@@ -33,11 +33,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // create clear filter button
+    
+    self.clearFilterButton = [[BSButton alloc] init];
+    [self.clearFilterButton setTitle:@"Clear Filters" forState:UIControlStateNormal];
+    
+    [self.clearFilterButton addTarget:self action:@selector(clearFilterHandler:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
+//    self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + buttonPadding, buttonWidth, buttonHeight);
+    self.clearFilterButton.frame = self.assignToStoreButton.frame;
+    UIButton *lastButton = self.assignToStoreButton;
+//    QUESTION setButton characteristics in button object
+    self.clearFilterButton.frame = CGRectMake(lastButton.frame.origin.x, CGRectGetMaxY(lastButton.frame) + 10, lastButton.frame.size.width, lastButton.frame.size.height);
+    
+    [self.view addSubview:self.clearFilterButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,7 +61,6 @@
 }
 
 - (void)cancelModal:(id)sender {
-//    [((TabBarController *)((FavoritesTableViewController *)self.presentingViewController).tabBarController).filterButton setEnabled:YES];
     
     [super cancelModal:sender];
     
@@ -54,22 +68,24 @@
 
 }
 
-- (void)filterByHandler:(id)sender {
-    
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        [self.delegate didSelectCategoryFilter:sender];
-        //        [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedResultViewNotification" object:self];
-    }];
-}
-
 #pragma mark - CategoryButtonHandler
 
 - (void) categoryButtonHandler:(BSCategoryButton *)sender {
     [[DataSource sharedInstance] sortResults: [DataSource sharedInstance].favorites byCategory:sender.category completion:^{
+        NSLog(@"Completed filter");
         [self dismissViewControllerAnimated:YES completion:^{
-
-//            [((FavoritesTableViewController *)self.presentingViewController).tableView reloadData];
+            [self.delegate didFilterByCategory:sender.category];
         }];
+    }];
+}
+
+#pragma mark - ClearFilterHandler
+
+- (void) clearFilterHandler:(BSButton *)sender {
+    [[DataSource sharedInstance] revertSortedResults:[DataSource sharedInstance].sortedResults];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate didClearFilter];
     }];
 }
 

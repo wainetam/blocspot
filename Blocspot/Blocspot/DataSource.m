@@ -46,6 +46,8 @@
     }
     self.sortedResults = [sortedResults copy];
     self.favoritesSortedByCategory = YES;
+    
+    completion();
 }
 
 - (void)revertSortedResults:(NSArray *)sortedResults {

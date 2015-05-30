@@ -8,17 +8,20 @@
 
 #import "BSCategoryViewController.h"
 
+@class BSButton;
 @class BSCategoryButton;
 @class TabBarController;
 
-@protocol CategoryFilterDelegate <NSObject>
+@protocol FilterDelegate <NSObject>
 
-- (void) didSelectCategoryFilter:(id)sender;
+- (void) didFilterByCategory:(BSCategory*)category;
+- (void) didClearFilter;
 
 @end
 
 @interface BSCategoryFilterViewController : BSCategoryViewController
 
 @property (nonatomic, strong) id delegate; // QUESTION what does dynamic mean?
+@property (nonatomic, strong) BSButton *clearFilterButton;
 
 @end

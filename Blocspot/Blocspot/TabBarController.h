@@ -14,7 +14,7 @@
 //@class Search;
 //QUESTION why need to import Search.h vs just the class to be able to recognize the SearchDelegate
 
-@interface TabBarController : UITabBarController <UITabBarControllerDelegate, SearchDelegate, EditFavoriteDelegate, CategoryFilterDelegate>
+@interface TabBarController : UITabBarController <UITabBarControllerDelegate, SearchDelegate, EditFavoriteDelegate>
 
 @property (nonatomic, strong) UIBarButtonItem *filterButton; // for favorites section
 //- (void)didCompleteSearch;
