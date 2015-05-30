@@ -91,6 +91,8 @@
     
     if (indexOfTab == 2 && [((FavoritesTableViewController *)viewController) results].count > 0) { // favorites
         [self createFilterButton];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
     }
 }
 
