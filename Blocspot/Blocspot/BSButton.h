@@ -10,4 +10,8 @@
 
 @interface BSButton : UIButton
 
++(CGFloat)width;
++(CGFloat)padding;
++(CGFloat)height;
+
 @end

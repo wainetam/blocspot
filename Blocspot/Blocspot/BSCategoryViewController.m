@@ -107,9 +107,9 @@
 //    self.view.bounds = [[UIScreen mainScreen] bounds];
     
     CGFloat viewWidthCenter = viewWidth / 2.0;
-    CGFloat buttonWidth = 200.0;
-    CGFloat buttonPadding = 10.0;
-    CGFloat buttonHeight = 50.0;
+    CGFloat buttonWidth = [BSCategoryButton width];
+    CGFloat buttonPadding = [BSCategoryButton padding];
+    CGFloat buttonHeight = [BSCategoryButton height];
     CGFloat topButtonMaxY = 150.0;
     
     self.assignToRestaurantButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, topButtonMaxY, buttonWidth, buttonHeight);

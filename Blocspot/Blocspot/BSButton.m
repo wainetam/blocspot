@@ -8,7 +8,23 @@
 
 #import "BSButton.h"
 
+static CGFloat width = 200.0;
+static CGFloat padding = 10.0;
+static CGFloat height = 50.0;
+
 @implementation BSButton
+
++ (CGFloat) width {
+    return width;
+}
+
++ (CGFloat) padding {
+    return padding;
+}
+
++ (CGFloat) height {
+    return height;
+}
 
 - (id) init {
     self = [super init];

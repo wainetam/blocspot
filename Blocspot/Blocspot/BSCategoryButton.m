@@ -21,10 +21,6 @@
         [self setTitleColor:color forState:UIControlStateNormal];
         [self setTintColor:color];
         [self.layer setBorderColor:[color CGColor]];
-        
-//        [BSCategoryButton setWidth:200.0];
-//        self.padding = 10.0;
-//        self.height = 50.0;
     }
     
     return self;

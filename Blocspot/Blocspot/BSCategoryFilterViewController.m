@@ -24,8 +24,7 @@
     self = [super init];
     
     if (self) {
-//        self.delegate = (FavoritesTableViewController *)self.presentingViewController;
-        // QUESTION how to assign delegate if none exists?
+
     }
     
     return self;
@@ -33,8 +32,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // create clear filter button
     
     self.clearFilterButton = [[BSButton alloc] init];
     [self.clearFilterButton setTitle:@"Clear Filters" forState:UIControlStateNormal];
@@ -46,11 +43,9 @@
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-//    self.assignToStoreButton.frame = CGRectMake(viewWidthCenter - buttonWidth/2, CGRectGetMaxY(self.assignToMuseumButton.frame) + buttonPadding, buttonWidth, buttonHeight);
     self.clearFilterButton.frame = self.assignToStoreButton.frame;
     UIButton *lastButton = self.assignToStoreButton;
-//    QUESTION setButton characteristics in button object
-    self.clearFilterButton.frame = CGRectMake(lastButton.frame.origin.x, CGRectGetMaxY(lastButton.frame) + 10, lastButton.frame.size.width, lastButton.frame.size.height);
+    self.clearFilterButton.frame = CGRectMake(lastButton.frame.origin.x, CGRectGetMaxY(lastButton.frame) + 10, [BSButton width], [BSButton height]);
     
     [self.view addSubview:self.clearFilterButton];
 }
