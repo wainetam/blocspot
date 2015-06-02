@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Bloc. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MapViewController.h"
 #import "TabBarController.h"
 #import "POI.h"
@@ -159,7 +160,7 @@
     CGFloat heightSearchBar = 44;
     
     self.mapView.frame = CGRectMake(0, self.topLayoutGuide.length + heightSearchBar, width, height - self.topLayoutGuide.length - heightSearchBar);
-    NSLog(@"top layout guide length %f", self.topLayoutGuide.length);
+//    NSLog(@"top layout guide length %f", self.topLayoutGuide.length);
     self.searchBar.frame = CGRectMake(0, self.topLayoutGuide.length, width, heightSearchBar);
 }
 
@@ -228,10 +229,20 @@
     // remember for later the user's current location
     
     self.userLocation = self.locationManager.location.coordinate;
+    CLLocation *userLocationCL = [[CLLocation alloc] init];
+    userLocationCL = self.locationManager.location;
+    
+    for (POI* favorite in [DataSource sharedInstance].favorites) {
+        if ([favorite.location distanceFromLocation:userLocationCL] < 400 && ![[DataSource sharedInstance] favorite:favorite isInLastFavoriteLocalNotificationArray:10]) {
+            [[DataSource sharedInstance].lastFavoriteLocalNotifications addObject:favorite];
+            [[AppDelegate sharedAppDelegate] createNearFavoritePOINotification:favorite];   
+        }
+    }
     
     [self zoomToCurrentLocation:self.locationManager.location inMapView:self.mapView];
-    [self.locationManager stopUpdatingLocation];
-    self.locationManager.delegate = nil;         // we might be called again here, even though we
+//    [self.locationManager stopUpdatingLocation];
+//    self.locationManager.delegate = nil;
+    // we might be called again here, even though we
     // called "stopUpdatingLocation", remove us as the delegate to be sure
 }
 

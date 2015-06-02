@@ -10,6 +10,8 @@
 //#import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
 
+@class POI;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -21,6 +23,9 @@
 //- (void)saveContext;
 //- (NSURL *)applicationDocumentsDirectory;
 
++ (AppDelegate *)sharedAppDelegate;
+
+- (void)createNearFavoritePOINotification:(POI*)favorite;
 
 @end
 

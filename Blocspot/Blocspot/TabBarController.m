@@ -87,7 +87,7 @@
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     NSUInteger indexOfTab = [tabBarController.viewControllers indexOfObject:viewController];
-    NSLog(@"Tab index = %lu", indexOfTab);
+//    NSLog(@"Tab index = %lu", indexOfTab);
     
     if (indexOfTab == 2 && [((FavoritesTableViewController *)viewController) results].count > 0) { // favorites
         [self createFilterButton];

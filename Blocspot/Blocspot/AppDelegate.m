@@ -19,6 +19,9 @@
 
 @implementation AppDelegate
 
++ (AppDelegate *) sharedAppDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -52,7 +55,7 @@
 //    
 //    
 //    [tabBarVC setViewControllers:tabArray];
-    
+    [self registerForLocalNotifications];
     
     [navVC setViewControllers:@[tabBarVC] animated:YES];
     self.window.rootViewController = navVC;
@@ -60,6 +63,31 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)registerForLocalNotifications {
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+}
+
+- (void)createNearFavoritePOINotification:(POI*)favorite {
+    //Create a new local notification
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    //Set the title of the notification
+    notification.alertTitle = [[NSString alloc] initWithFormat:@"You are near %@!", favorite.name];
+    //Set the text of the notification
+    notification.alertBody = [[NSString alloc] initWithFormat:@"Less than 1/4 mile away from %@.", favorite.name];
+//    notification.alertLaunchImage = nil;
+    //Schedule the notification to be delivered 20 seconds after execution
+    notification.fireDate = [NSDate dateWithTimeInterval:10 sinceDate:[NSDate date]];
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    
+    // schedule delivery
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -32,6 +32,7 @@
             @"store" : [NSMutableArray new],
             @"museum" : [NSMutableArray new],
         }];
+        self.lastFavoriteLocalNotifications = [NSMutableArray new];
     }
     
     return self;
@@ -53,6 +54,20 @@
 - (void)revertSortedResults:(NSArray *)sortedResults {
     self.sortedResults = @[];
     self.favoritesSortedByCategory = NO;
+}
+
+- (bool)favorite:(POI *)favorite isInLastFavoriteLocalNotificationArray:(int)count {
+    
+    NSRange range = NSMakeRange(0,0);
+    NSArray *lastFavoriteNotificationsArrayByCount = nil;
+    
+    if (self.lastFavoriteLocalNotifications) {
+        range = NSMakeRange(0, MIN([self.lastFavoriteLocalNotifications count], count));
+        lastFavoriteNotificationsArrayByCount = [self.lastFavoriteLocalNotifications subarrayWithRange:range];
+    }
+    
+    
+    return lastFavoriteNotificationsArrayByCount != nil && [lastFavoriteNotificationsArrayByCount containsObject:favorite];
 }
 
 @end

@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSMutableArray *favorites;
 @property (nonatomic) BOOL favoritesSortedByCategory;
 @property (nonatomic, strong) NSArray* sortedResults;
+@property (nonatomic, strong) NSMutableArray *lastFavoriteLocalNotifications;
 
 - (void)cancelActiveSearch:(Search *)search;
 - (void)deleteSearchHistory:(NSMutableArray *)searchHistory;
@@ -34,6 +35,7 @@
 - (void)clearFavorites;
 - (void)sortResults:(NSArray *)results byCategory:(BSCategory *)category completion:(void(^)(void)) completion;
 - (void)revertSortedResults:(NSArray *)sortedResults;
+- (bool)favorite:(POI *)favorite isInLastFavoriteLocalNotificationArray:(int)count;
 
 
 @end
