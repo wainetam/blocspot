@@ -33,9 +33,57 @@
             @"museum" : [NSMutableArray new],
         }];
         self.lastFavoriteLocalNotifications = [NSMutableArray new];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(favorites))];
+            NSArray *storedFavorites = [NSKeyedUnarchiver unarchiveObjectWithFile:fullPath];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (storedFavorites.count > 0) { // if there are cachedItems
+                    NSMutableArray *mutableMediaItems = [storedFavorites mutableCopy];
+                    
+                    [self.favorites removeAllObjects];
+                    [self.favorites addObjectsFromArray:storedFavorites];
+//                    self.favorites = mutableMediaItems;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"EditedFavoritesNotification" object: [DataSource sharedInstance].favorites];
+                    
+                    // refresh app if there is cached content already; user will not have to pull-to-refresh when app launched
+                    
+                }
+            });
+            
+        });
     }
     
     return self;
+}
+
+#pragma mark - Archiving
+- (NSString *) pathForFilename:(NSString *) filename {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths firstObject];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:filename];
+    return dataPath;
+}
+
+- (void) saveToDisk{
+    
+    // write the changes to disk
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSUInteger numberOfItemsToSave = MIN(self.favorites.count, 50);
+        NSArray *favoritesToSave = [self.favorites subarrayWithRange:NSMakeRange(0, numberOfItemsToSave)];
+        
+        NSString *fullPath = [self pathForFilename:NSStringFromSelector(@selector(favorites))];
+        NSData *favoriteItemData = [NSKeyedArchiver archivedDataWithRootObject:favoritesToSave];
+        
+        NSError *dataError;
+        BOOL wroteSuccessfully = [favoriteItemData writeToFile:fullPath options:NSDataWritingAtomic | NSDataWritingFileProtectionCompleteUnlessOpen error:&dataError];
+        
+        if (!wroteSuccessfully) {
+            NSLog(@"Couldn't write file: %@", dataError);
+        }
+    });
+    
 }
 
 - (void)sortResults:(NSArray *)results byCategory:(BSCategory *)category completion:(void(^)(void))completion {

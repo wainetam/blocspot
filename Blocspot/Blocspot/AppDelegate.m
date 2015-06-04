@@ -90,6 +90,34 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
+- (void)createNearFavoriteNotificationAction {
+    UIMutableUserNotificationAction *acceptAction =
+    [[UIMutableUserNotificationAction alloc] init];
+    
+    // Define an ID string to be passed back to your app when you handle the action
+    acceptAction.identifier = @"ACCEPT_IDENTIFIER";
+    
+    // Localized string displayed in the action button
+    acceptAction.title = @"Accept";
+    
+    // If you need to show UI, choose foreground
+    acceptAction.activationMode = UIUserNotificationActivationModeBackground;
+    
+    // Destructive actions display in red
+    acceptAction.destructive = NO;
+    
+    // Set whether the action requires the user to authenticate
+    acceptAction.authenticationRequired = NO;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification: (UILocalNotification *)notification {
+//    You might implement this method in your delegate if you want to be notified that a local notification occurred. 
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)(void))completionHandler {
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

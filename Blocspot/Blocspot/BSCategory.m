@@ -24,6 +24,25 @@
     }
 }
 
+#pragma mark - NSCoding
+
+- (instancetype) initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    
+    if (self) {
+        self.name = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(name))];
+        self.color = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(color))];
+    }
+    
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.name forKey:NSStringFromSelector(@selector(name))];
+    [aCoder encodeObject:self.color forKey:NSStringFromSelector(@selector(color))];
+    
+}
+
 - (id)initWithName:(NSString *)name withColor:(UIColor *)color {
     self = [super init];
     

@@ -11,7 +11,7 @@
 
 @class BSCategory;
 
-@interface POI : NSObject
+@interface POI : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) float distanceTo;

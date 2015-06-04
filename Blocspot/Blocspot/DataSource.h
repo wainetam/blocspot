@@ -36,6 +36,6 @@
 - (void)sortResults:(NSArray *)results byCategory:(BSCategory *)category completion:(void(^)(void)) completion;
 - (void)revertSortedResults:(NSArray *)sortedResults;
 - (bool)favorite:(POI *)favorite isInLastFavoriteLocalNotificationArray:(int)count;
-
+- (void) saveToDisk;
 
 @end
